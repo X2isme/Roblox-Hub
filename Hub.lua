@@ -57,3 +57,18 @@ end
         game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Loot", "one", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, 2)
     end)
 end
+
+    if game.PlaceId == 413053960 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Stats")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Mon)
+        MAN = Mon/2
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -MAN, "Steel")
+        wait(0.3)
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
+    end)
+end
