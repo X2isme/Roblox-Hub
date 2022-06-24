@@ -174,3 +174,13 @@ if game.PlaceId == 4301313353 then
         game.ReplicatedStorage.updateCollector:FireServer(Monrder)
     end)
 end
+
+if game.PlaceId == 4301321281 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Money", "Press Enter After Value, Money Put In Money Collector", function(Monrder)
+        game.ReplicatedStorage.updateCollector:FireServer(Monrder)
+    end)
+end
