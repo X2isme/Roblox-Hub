@@ -58,7 +58,7 @@ end
     end)
 end
 
-    if game.PlaceId == 413053960 then
+    if game.PlaceId == 60654525 then
         -- MAIN
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Stats")
