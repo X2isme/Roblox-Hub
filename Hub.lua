@@ -61,7 +61,7 @@ end
     if game.PlaceId == 60654525 then
         -- MAIN
     local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Stats")
+    local MainSection = Main:NewSection("Main")
 
     MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Moen)
         MAeN = Moen/2
@@ -76,7 +76,7 @@ end
 if game.PlaceId == 4839647441 then
         -- MAIN
     local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Stats")
+    local MainSection = Main:NewSection("Main")
 
     MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(Monr)
         game.ReplicatedStorage.updateCollector:FireServer(Monr)
@@ -85,9 +85,10 @@ end
 if game.PlaceId == 5775214331 then
         -- MAIN
     local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Stats")
+    local MainSection = Main:NewSection("Main")
+    local MainSection = Main:NewSection("VERY GLITCHY, REJOIN TO CHANGE MULTIPLE TIMES!")
 
-    MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(MonD)
+    MainSection:NewTextBox("Add Money", "Press Enter After Value, makes stone work whatever u want", function(MonD)
         local meta = getrawmetatable(game)
         local old = meta.__namecall
         setreadonly(meta,false)
