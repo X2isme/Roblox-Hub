@@ -102,3 +102,13 @@ if game.PlaceId == 5775214331 then
         end
     end)
 end
+if game.PlaceId == 2110185000 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    local MainSection = Main:NewSection("use knife each time you do this!!!")
+
+    MainSection:NewTextBox("Money Hack", "Press Enter After Value, then sell", function(Monr)
+        game.ReplicatedStorage.updateCollector:FireServer(Monr)
+    end)
+end
