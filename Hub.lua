@@ -63,12 +63,12 @@ end
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Stats")
 
-    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Mon)
-        MAN = Mon/2
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -MAN, "Steel")
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Moen)
+        MAeN = Moen/2
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -MAeN, "Steel")
         wait(0.3)
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
     end)
 end
