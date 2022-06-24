@@ -155,3 +155,18 @@ if game.PlaceId == 2110185000 then
         end
     end)
 end
+if game.PlaceId == 2599583795 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Money", "Press Enter After Value", function(Monrde)
+        local Remote = game.ReplicatedStorage.Storage.RemoteServices.TycoonService['Smelt']
+
+        local Arguments = {
+        [1] = Monrde
+        }
+
+        Remote:InvokeServer(unpack(Arguments))
+    end)
+end
