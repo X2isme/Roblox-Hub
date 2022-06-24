@@ -164,3 +164,13 @@ if game.PlaceId == 2599583795 then
         game.ReplicatedStorage.Storage.RemoteServices.TycoonService.Smelt:FireServer(Monrde)
     end)
 end
+
+if game.PlaceId == 4301313353 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Money", "Press Enter After Value, Money Put In Money Collector", function(Monrder)
+        game.ReplicatedStorage.updateCollector:FireServer(Monrder)
+    end)
+end
