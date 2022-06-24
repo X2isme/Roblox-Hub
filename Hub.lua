@@ -72,3 +72,32 @@ end
         game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
     end)
 end
+
+if game.PlaceId == 4839647441 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Stats")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(Monr)
+        game.ReplicatedStorage.updateCollector:FireServer(Monr)
+    end)
+end
+if game.PlaceId == 5775214331 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Stats")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(MonD)
+        local meta = getrawmetatable(game)
+        local old = meta.__namecall
+        setreadonly(meta,false)
+        function meta:__namecall(...)
+        local args = {...}
+        if self == game.ReplicatedStorage.Events.DropSell then
+        args[1] = MonD
+        return old(self,unpack(args))
+        end
+        return old(self,...)
+        end
+    end)
+end
