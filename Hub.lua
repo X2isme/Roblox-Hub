@@ -86,7 +86,7 @@ if game.PlaceId == 5775214331 then
         -- MAIN
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
-    local MainSection = Main:NewSection("VERY GLITCHY, REJOIN TO CHANGE MULTIPLE TIMES!")
+    local MainSection = Main:NewSection("GLITCHY, REJOIN TO CHANGE MULTIPLE TIMES!")
 
     MainSection:NewTextBox("Add Money", "Press Enter After Value, makes stone work whatever u want", function(MonD)
         local meta = getrawmetatable(game)
