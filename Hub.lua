@@ -107,7 +107,6 @@ if game.PlaceId == 2110185000 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     local MainSection = Main:NewSection("use knife each time you do this!!!")
-    local MainSection = Main:NewSection("Dont make the amount more than like 200k please!!")
 
     MainSection:NewTextBox("Money Hack", "Press Enter After Value, then sell", function(Monw)
         moewn = Monw/5
