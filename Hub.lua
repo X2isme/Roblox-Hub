@@ -107,8 +107,52 @@ if game.PlaceId == 2110185000 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     local MainSection = Main:NewSection("use knife each time you do this!!!")
+    local MainSection = Main:NewSection("Dont make the amount more than like 200k please!!")
 
-    MainSection:NewTextBox("Money Hack", "Press Enter After Value, then sell", function(Monr)
-        game.ReplicatedStorage.updateCollector:FireServer(Monr)
+    MainSection:NewTextBox("Money Hack", "Press Enter After Value, then sell", function(Monw)
+        moewn = Monw/5
+        on = 1
+        function codeW()
+        local plrN = game.Players.LocalPlayer.Name
+        for i,Base in pairs(game.Workspace.Fields[plrN].LastField:GetChildren()) do
+        if Base.Name == "BASE" and on == 1 then
+        for x,Crop in pairs(Base:GetChildren()) do
+        local A_1 = game:GetService("Workspace").Fields[plrN].LastField.BASE[Crop.Name]
+        local A_2 = game:GetService("Workspace")[plrN].Knife
+        local A_3 = moewn
+        local Event = game:GetService("ReplicatedStorage").ToolEvents.Rem
+        Event:FireServer(A_1, A_2, A_3)
+        wait()
+        end
+        end
+        end
+        end
+        function codeB()
+        local plrN = game.Players.LocalPlayer.Name
+        for i,Base in pairs(game.Workspace.Fields[plrN].LastField:GetChildren()) do
+        if Base.Name == "BASE" and on == 1 then
+        for x,Crop in pairs(Base:GetChildren()) do
+        local A_1 = game:GetService("Workspace").Fields[plrN].LastField.BASE[Crop.Name]
+        local A_2 = game:GetService("Players")[plrN].Backpack.Knife
+        local A_3 = moewn
+        local Event = game:GetService("ReplicatedStorage").ToolEvents.Rem
+        Event:FireServer(A_1, A_2, A_3)
+        wait()
+        end
+        end
+        end
+        end
+
+        local good,bad = pcall(codeW)
+        if good then 
+            codeW()
+        else
+            local good,bad = pcall(codeB)
+            if good then
+                codeB()
+            else 
+                wait()
+            end
+        end
     end)
 end
