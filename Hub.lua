@@ -224,7 +224,7 @@ if game.PlaceId == 9461798258 then
     end)
 end
 
-if game.PlaceId == 9461798258 then
+if game.PlaceId == 9438506890 then
         -- MAIN
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
