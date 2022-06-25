@@ -229,7 +229,17 @@ if game.PlaceId == 9438506890 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Merr)
-        game.ReplicatedStorage.Remotes.BuyFood:FireServer(-Merr)
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Maern)
+        game.ReplicatedStorage.Remotes.BuyFood:FireServer(-Maern)
+    end)
+end
+
+if game.PlaceId == 6668183009 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Money", "Press Enter After Value, Money Put In Money Collector", function(Monera)
+        game.ReplicatedStorage.Shop:FireServer("Buy", "J", -Monera)
     end)
 end
