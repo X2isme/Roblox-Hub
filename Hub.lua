@@ -223,3 +223,13 @@ if game.PlaceId == 9461798258 then
          end
     end)
 end
+
+if game.PlaceId == 9461798258 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Maern)
+        game.ReplicatedStorage.Remotes.BuyFood:FireServer(-Maern)
+    end)
+end
