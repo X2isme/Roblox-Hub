@@ -184,3 +184,42 @@ if game.PlaceId == 4301321281 then
         game.ReplicatedStorage.updateCollector:FireServer(Monrder)
     end)
 end
+
+if game.PlaceId == 9461798258 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Inf Money", "Press then you will get money", function()
+        while task.wait() do
+            local event = game:GetService("ReplicatedStorage").cleanPoop
+            event:FireServer()
+            local event = game:GetService("ReplicatedStorage").SaveGame
+            event:FireServer()
+            end
+    end)
+
+    MainSection:NewButton("Inf Mad", "Press then you will get mad", function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage").Upgrades.maid
+         }
+         
+         game:GetService("ReplicatedStorage").buyUpgrade:FireServer(unpack(args))
+    end)
+
+    MainSection:NewButton("Inf Cookies", "Press then you will get cookies", function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage").Items.food
+         }
+         
+         game:GetService("ReplicatedStorage").buyTool:FireServer(unpack(args))
+         for i,v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
+           if v:IsA("Tool")  then
+            wait()
+            v.Parent = game.Players.LocalPlayer.Character
+            wait()
+            v.Parent = game.Workspace
+         end
+         end
+    end)
+end
