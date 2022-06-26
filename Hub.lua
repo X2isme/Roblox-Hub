@@ -250,7 +250,7 @@ if game.PlaceId == 6668183009 then
     local MainSection = Main:NewSection("Main")
 
     MainSection:NewButton("SEE PAINTINGS WORTH", "Press F9 and look at warnings", function()
-       local DevConsole = game:GetService("CoreGui"):WaitForChild("DevConsoleMaster")
+            local DevConsole = game:GetService("CoreGui"):WaitForChild("DevConsoleMaster")
 local Window = DevConsole.DevConsoleWindow
 local UI = Window.DevConsoleUI
 local MainView = UI:WaitForChild("MainView")
@@ -299,6 +299,6 @@ for i,v in pairs(game:GetService("ReplicatedStorage").PlayerInfo:GetDescendants(
         CPrint(v.Value, Color3.fromRGB(0,255,109))
         wait()
     end
-end 
+end
     end)
 end
