@@ -249,9 +249,8 @@ if game.PlaceId == 6668183009 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("SEE PAINTINGS WORTH", "Press F9 and look at warnings", function()
-            
-            local DevConsole = game:GetService("CoreGui"):WaitForChild("DevConsoleMaster")
+    MiscSection:NewButton("SEE PAINTINGS WORTH", "Press F9 and look at warnings", function()
+       local DevConsole = game:GetService("CoreGui"):WaitForChild("DevConsoleMaster")
 local Window = DevConsole.DevConsoleWindow
 local UI = Window.DevConsoleUI
 local MainView = UI:WaitForChild("MainView")
@@ -300,6 +299,16 @@ for i,v in pairs(game:GetService("ReplicatedStorage").PlayerInfo:GetDescendants(
         CPrint(v.Value, Color3.fromRGB(0,255,109))
         wait()
     end
+end 
+    end)
 end
+
+if game.PlaceId == 9711536246 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Coins", "Press Enter After Value", function(KiaCoin)
+        game.ReplicatedStorage.PointManager.AddValue:FireServer("Coin", KiaCoin)
     end)
 end
