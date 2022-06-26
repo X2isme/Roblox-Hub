@@ -249,7 +249,7 @@ if game.PlaceId == 6668183009 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MiscSection:NewButton("SEE PAINTINGS WORTH", "Press F9 and look at warnings", function()
+    MainSection:NewButton("SEE PAINTINGS WORTH", "Press F9 and look at warnings", function()
        local DevConsole = game:GetService("CoreGui"):WaitForChild("DevConsoleMaster")
 local Window = DevConsole.DevConsoleWindow
 local UI = Window.DevConsoleUI
