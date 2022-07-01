@@ -321,7 +321,7 @@ if game.PlaceId == 7034960857 then
     MainSection:NewTextBox("Add Coins", "Press Enter After Value", function(Coin)
         local args = {
             [1] = "JJ-DX-01-BBL-18",
-            [2] = -coin
+            [2] = -Coin
         }
 
         game:GetService("ReplicatedStorage").Remotes.BuyDragonEvent:FireServer(unpack(args))
