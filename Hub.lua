@@ -20,27 +20,27 @@ end
     local Main = Window:NewTab("Main")
     local StatSection = Main:NewSection("Stats")
 
-    StatSection:NewTextBox("Set Strength", "TextboPress Enter After ValuexInfo", function(STR)
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Strength", "one", STR, 2)
+    StatSection:NewTextBox("Set Strength", "TextboPress Enter After ValuexInfo", function(STRENGTH)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Strength", "one", STRENGTH, 2)
     end)
 
-    StatSection:NewTextBox("Set Loot", "Press Enter After Value", function(LOO)
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Loot", "one", LOO, 2)
+    StatSection:NewTextBox("Set Loot", "Press Enter After Value", function(LOOT)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Loot", "one", LOOT, 2)
     end)
 
-    StatSection:NewTextBox("Set Health", "Press Enter After Value", function(HEA)
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Health", "one", HEA, 2)
+    StatSection:NewTextBox("Set Health", "Press Enter After Value", function(HEALTH)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Health", "one", HEALTH, 2)
     end)
 
     local MoneySection = Main:NewSection("Money")
 
-    MoneySection:NewTextBox("Add Money", "Press Enter After Value", function(Mon)
-        MAN = Mon/2
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", "Gold", -MAN, "Iron")
+    MoneySection:NewTextBox("Add Money", "Press Enter After Value", function(Money)
+        Cash = Money/2
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", "Gold", -Cash, "Iron")
         wait(0.3)
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", MAN, "Iron")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", MAN, "Iron")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", MAN, "Iron")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", Cash, "Iron")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", Cash, "Iron")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", "Gold", Cash, "Iron")
     end)
 
     local MiscSection = Main:NewSection("Misc")
@@ -63,13 +63,13 @@ end
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Moen)
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Money)
         MAeN = Moen/2
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -MAeN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -Money, "Steel")
         wait(0.3)
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MAeN, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
     end)
 end
 
@@ -78,8 +78,8 @@ if game.PlaceId == 4839647441 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(Monr)
-        game.ReplicatedStorage.updateCollector:FireServer(Monr)
+    MainSection:NewTextBox("Add Money", "Press Enter After Value, put money in money collector", function(Money)
+        game.ReplicatedStorage.updateCollector:FireServer(Money)
     end)
 end
 if game.PlaceId == 5775214331 then
@@ -88,14 +88,14 @@ if game.PlaceId == 5775214331 then
     local MainSection = Main:NewSection("Main")
     local MainSection = Main:NewSection("GLITCHY, REJOIN TO CHANGE MULTIPLE TIMES!")
 
-    MainSection:NewTextBox("Money Hack", "Press Enter After Value, makes stone work whatever u want", function(MonD)
+    MainSection:NewTextBox("Money Hack", "Press Enter After Value, makes stone work whatever u want", function(Money)
         local meta = getrawmetatable(game)
         local old = meta.__namecall
         setreadonly(meta,false)
         function meta:__namecall(...)
         local args = {...}
         if self == game.ReplicatedStorage.Events.DropSell then
-        args[1] = MonD
+        args[1] = Money
         return old(self,unpack(args))
         end
         return old(self,...)
@@ -310,5 +310,20 @@ if game.PlaceId == 9711536246 then
 
     MainSection:NewTextBox("Add Coins", "Press Enter After Value", function(KiaCoin)
         game.ReplicatedStorage.PointManager.AddValue:FireServer("Coin", KiaCoin)
+    end)
+end
+
+if game.PlaceId == 7034960857 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Coins", "Press Enter After Value", function(Coin)
+        local args = {
+            [1] = "JJ-DX-01-BBL-18",
+            [2] = -coin
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.BuyDragonEvent:FireServer(unpack(args))
     end)
 end
