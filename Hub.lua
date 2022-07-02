@@ -351,11 +351,9 @@ if game.PlaceId == 4325400580 then
             end
     end)
 
-    local MaxSection = Max:NewSection("Main")
-
     Players = game:GetService("Players")
 
-        MaxBasesSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(MaxBase)
+        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(MaxBase)
             print(MaxBase)
     end)
 end
