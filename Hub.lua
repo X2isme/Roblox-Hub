@@ -1,6 +1,29 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 
+local Main = Window:NewTab("All")
+local MainSection = Main:NewSection("All Servers - MIGHT BAN U")
+
+Section:NewButton("Copy Console", "Console has to be open!", function()
+    local copy = setclipboard or clipboard.set or copystring or syn.write_clipboard
+
+local str = ''
+for _,v in next, game.CoreGui.DevConsoleMaster.DevConsoleWindow.DevConsoleUI.MainView.ClientLog:children() do
+local m = v:FindFirstChild'msg'
+if(m)then
+str=str..m.Text..'\n'
+end
+end
+if(copy)then
+copy(str)
+elseif(writefile)then
+writefile("dev_logs.txt",str)
+else
+error("get a better exploit lol")
+end
+    end)
+end
+
 if game.PlaceId == 8508161757 then
     -- MAIN
     local Main = Window:NewTab("Main")
@@ -529,4 +552,26 @@ for i,v in pairs(game.Workspace.Game.Buttons:GetChildren()) do
 end
     end)
     end
+end
+
+if game.PlaceId == 2955597371 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Inf Oxygen", "Dont drown and have inf Air / Oxygen", function()
+        game:GetService("Players").LocalPlayer.Data.Passes.xInfiniteOxygen.Value=true         
+    end)
+
+    MainSection:NewButton("Catch All Fish", "Capture fish", function()
+        for i,v in pairs(game:GetService("Workspace").Animals:GetChildren())do
+            game.ReplicatedStorage.RemoteEvents.RemoteCollectFish:FireServer(v)
+            end          
+    end)
+
+    MainSection:NewButton("Auto Upgrade Tills", "Auto Upgrade Tills", function()
+        while wait(1) do
+            for i=1,4 do game.ReplicatedStorage.RemoteEvents.UpgradeTillEvent:InvokeServer("Till"..tostring(i))end    
+            end         
+    end)
 end
