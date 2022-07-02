@@ -1,29 +1,6 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 
-local Main = Window:NewTab("All")
-local MainSection = Main:NewSection("All Servers - MIGHT BAN U")
-
-Section:NewButton("Copy Console", "Console has to be open!", function()
-    local copy = setclipboard or clipboard.set or copystring or syn.write_clipboard
-
-local str = ''
-for _,v in next, game.CoreGui.DevConsoleMaster.DevConsoleWindow.DevConsoleUI.MainView.ClientLog:children() do
-local m = v:FindFirstChild'msg'
-if(m)then
-str=str..m.Text..'\n'
-end
-end
-if(copy)then
-copy(str)
-elseif(writefile)then
-writefile("dev_logs.txt",str)
-else
-error("get a better exploit lol")
-end
-    end)
-end
-
 if game.PlaceId == 8508161757 then
     -- MAIN
     local Main = Window:NewTab("Main")
