@@ -338,7 +338,7 @@ if game.PlaceId == 4325400580 then
         game:GetService("ReplicatedStorage").RE.changeSkins:FireServer(Color)
     end)
 
-    MainSection:NewButton("Kill all units", "Kill all the units", function()
+    MainSection:NewButton("Kill all enemy units", "Kill all the enemy units", function()
         for i,v in pairs(game.Workspace.Game.Units:GetChildren()) do
             if v.Name == game.Players.LocalPlayer.Name then
             else
@@ -351,9 +351,182 @@ if game.PlaceId == 4325400580 then
             end
     end)
 
-    Players = game:GetService("Players")
-
-        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(MaxBase)
-            print(MaxBase)
+    MainSection:NewButton("Rebirth Farm", "Farm rebirths", function()
+        while wait(.3) do
+            loadstring(game:HttpGet("https://pastebin.com/raw/rVrEFdtC"))()
+            wait(.15)
+            game:GetService("ReplicatedStorage").RE.rebirth:FireServer()
+        end
     end)
+
+    MainSection:NewButton("Max Base", "Max out ur base", function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/rVrEFdtC"))()
+    end)
+
+    MainSection:NewButton("Give all max base", "Give everyone in the server a max base", function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/wMDh7RcS"))()           
+    end)
+
+    MainSection:NewButton("Capture All", "Capture / Claim all bases", function()
+        for i,v in pairs(game.Workspace.Game.Base.Interactives:GetChildren()) do
+            game:GetService("ReplicatedStorage").RE.StartCapturing:FireServer(v, true)
+            end            
+    end)
+
+    Section:NewKeybind("Press E to launch nuke", "launches nuke at mouse when u press E", Enum.KeyCode.E, function()
+        local mouse = game:service'Players'.LocalPlayer:GetMouse()
+
+mouse.KeyDown:Connect(function(k)
+if k == "q" then
+game:GetService("ReplicatedStorage").RE.FireMissile:FireServer("Nuke",Vector3.new(mouse.Hit.p.X,48.6649132,mouse.Hit.p.Z))
+end
+end)
+    end)
+    
+
+    MainSection:NewButton("Lag Players", "Drops nuked to all palyers for free", function()
+        while wait() do
+            for i,v in pairs(game.Players:GetChildren()) do
+             targetPos = v.Character.HumanoidRootPart.Position
+             game.ReplicatedStorage.RE.FireMissile:FireServer("Nuke",targetPos)
+            end
+            end           
+    end)
+
+    local MaxSection = Main:NewSection("Max Base Anyone")
+
+    Players = game:GetService("Players")
+    for i, player in pairs(Players:GetPlayers()) do
+        MaxSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(Victim)
+            local chosenPlayer = Victim
+
+for i,v in pairs(game.Workspace.Game.Buttons:GetChildren()) do
+	if v.Name == chosenPlayer then
+		for i,v2 in pairs(v:GetChildren()) do
+			for i,v3 in pairs(v2:GetChildren()) do
+				if v3:IsA("ObjectValue") then
+					v3.Name = v3.Value.Name
+				end
+			end
+		end
+	end
+end
+
+
+for i,v in pairs(game.Workspace.Game.Buttons:GetChildren()) do
+	if v.Name == chosenPlayer then
+		for i,v2 in pairs(v:GetChildren()) do
+			for i,v3 in pairs(v2:GetChildren()) do
+				if v3:IsA("ObjectValue") then
+					if v3.Name == "Barracks" then
+						local Class = game.ReplicatedStorage.Game.Buildings["Barracks"]["2"];
+						local Button = v2;
+						local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+						Target:FireServer(Class, Button);
+					else
+						if v3.Name == "Greenhouse" then
+							local Class = game.ReplicatedStorage.Game.Buildings["Greenhouse"]["2"];
+							local Button = v2;
+							local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+							Target:FireServer(Class, Button);
+						else
+							if v3.Name == "Factory" then
+									local Class = game.ReplicatedStorage.Game.Buildings["Factory"]["3"];
+									local Button = v2;
+									local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+									Target:FireServer(Class, Button);
+							else
+								if v3.Name == "Oil Field" then
+										local Class = game.ReplicatedStorage.Game.Buildings["Oil Field"]["2"];
+										local Button = v2;
+										local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+										Target:FireServer(Class, Button);
+								else
+									if v3.Name == "Guard Tower" then
+										local Class = game.ReplicatedStorage.Game.Buildings["Guard Tower"]["1"];
+										local Button = v2;
+										local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+										Target:FireServer(Class, Button);
+									else
+										if v3.Name == "Wall" then
+											local Class = game.ReplicatedStorage.Game.Buildings["Wall"]["2"];
+											local Button = v2;
+											local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+											Target:FireServer(Class, Button);
+										else
+											if v3.Name == "Generator Powerplant" then
+												local Class = game.ReplicatedStorage.Game.Buildings["Generator Powerplant"]["1"];
+												local Button = v2;
+												local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+												Target:FireServer(Class, Button);
+											else
+												if v3.Name == "Missile Factory" then
+													local Class = game.ReplicatedStorage.Game.Buildings["Missile Factory"]["1"];
+													local Button = v2;
+													local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+													Target:FireServer(Class, Button);
+												else
+													if v3.Name == "Command Center" then
+														local Class = game.ReplicatedStorage.Game.Buildings["Command Center"]["2"];
+														local Button = v2;
+														local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+														Target:FireServer(Class, Button);
+													else
+														if v3.Name == "Drone Factory" then
+															local Class = game.ReplicatedStorage.Game.Buildings["Drone Factory"]["1"];
+															local Button = v2;
+															local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+															Target:FireServer(Class, Button);
+														else
+															if v3.Name == "Military" then
+																local Class = game.ReplicatedStorage.Game.Buildings.Military["Tank Factory"]["2"];
+																local Button = v2;
+																local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+																Target:FireServer(Class, Button);
+															else
+																if v3.Name == "Nuclear Powerplant" then
+																	local Class = game.ReplicatedStorage.Game.Buildings["Nuclear Powerplant"]["1"];
+																	local Button = v2;
+																	local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+																	Target:FireServer(Class, Button);
+																else
+																	if v3.Name == "Airport" then
+																		local Class = game.ReplicatedStorage.Game.Buildings["Airport"]["1"];
+																		local Button = v2;
+																		local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+																		Target:FireServer(Class, Button);
+																	else
+																		if v3.Name == "Helicopter Bay" then
+																			local Class = game.ReplicatedStorage.Game.Buildings["Helicopter Bay"]["2"];
+																			local Button = v2;
+																			local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+																			Target:FireServer(Class, Button);
+																		else
+																			if v3.Name == "Main Base" then
+																				local Class = game.ReplicatedStorage.Game.Buildings["Main Base"]["2"];
+																				local Button = v2;
+																				local Target = game:GetService("ReplicatedStorage").RE.insertBuilding;
+																				Target:FireServer(Class, Button);
+																			end
+																		end
+																	end
+																end
+															end
+														end
+													end
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+    end)
+    end
 end
