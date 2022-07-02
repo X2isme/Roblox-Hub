@@ -327,3 +327,35 @@ if game.PlaceId == 7034960857 then
         game:GetService("ReplicatedStorage").Remotes.BuyDragonEvent:FireServer(unpack(args))
     end)
 end
+
+if game.PlaceId == 4325400580 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    Section:NewDropdown("Set Color", "Color / Team gamepasses for free", {"Default", "Black", "Desert"}, function(Color)
+        local Skin_Name = "Default"
+        game:GetService("ReplicatedStorage").RE.changeSkins:FireServer(Color)
+    end)
+
+    Section:NewButton("Kill all units", "Kill all the units", function()
+        for i,v in pairs(game.Workspace.Game.Units:GetChildren()) do
+            if v.Name == game.Players.LocalPlayer.Name then
+            else
+            for i,v2 in pairs(v:GetChildren()) do
+            local Missile = "Cruise Missile"
+            local Position = v2.Torso.Position
+            game:GetService("ReplicatedStorage").RE.FireMissile:FireServer(Missile, Position)
+            end
+            end
+            end
+    end)
+
+    Players = game:GetService("Players")
+    for i, player in pairs(Players:GetPlayers()) do
+        Section:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {player.Name}, function(MaxBase)
+            print(MaxBase)
+        end)
+    end
+
+end
