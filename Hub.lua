@@ -393,11 +393,11 @@ end)
             end           
     end)
 
-    local MaxSection = Main:NewSection("Max Base Anyone")
+    local MainSection = Main:NewSection("Max Base Anyone")
 
     Players = game:GetService("Players")
     for i, player in pairs(Players:GetPlayers()) do
-        MaxSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(Victim)
+        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(Victim)
             local chosenPlayer = Victim
 
 for i,v in pairs(game.Workspace.Game.Buttons:GetChildren()) do
