@@ -351,7 +351,7 @@ if game.PlaceId == 4325400580 then
             end
     end)
 
-    local MaxBasesSection = MaxBases:NewSection("Max Base")
+    local MaxSection = Max:NewSection("Main")
 
     Players = game:GetService("Players")
 
