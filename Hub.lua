@@ -352,10 +352,8 @@ if game.PlaceId == 4325400580 then
     end)
 
     Players = game:GetService("Players")
-    for i, player in pairs(Players:GetPlayers()) do
-        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {player.Name}, function(MaxBase)
-            print(MaxBase)
-        end)
-    end
 
+        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {players}, function(MaxBase)
+            print(MaxBase)
+    end)
 end
