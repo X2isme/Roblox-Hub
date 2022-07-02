@@ -333,12 +333,12 @@ if game.PlaceId == 4325400580 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    Section:NewDropdown("Set Color", "Color / Team gamepasses for free", {"Default", "Black", "Desert"}, function(Color)
+    MainSection:NewDropdown("Set Color", "Color / Team gamepasses for free", {"Default", "Black", "Desert"}, function(Color)
         local Skin_Name = "Default"
         game:GetService("ReplicatedStorage").RE.changeSkins:FireServer(Color)
     end)
 
-    Section:NewButton("Kill all units", "Kill all the units", function()
+    MainSection:NewButton("Kill all units", "Kill all the units", function()
         for i,v in pairs(game.Workspace.Game.Units:GetChildren()) do
             if v.Name == game.Players.LocalPlayer.Name then
             else
@@ -353,7 +353,7 @@ if game.PlaceId == 4325400580 then
 
     Players = game:GetService("Players")
     for i, player in pairs(Players:GetPlayers()) do
-        Section:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {player.Name}, function(MaxBase)
+        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {player.Name}, function(MaxBase)
             print(MaxBase)
         end)
     end
