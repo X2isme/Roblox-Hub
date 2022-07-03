@@ -552,3 +552,19 @@ if game.PlaceId == 2955597371 then
             end         
     end)
 end
+
+if game.PlaceId == 6668183009 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Money", "Press Enter After Value", function(Moneraa)
+        local args = {
+            [1] = "First",
+            [2] = Moneraa
+        
+        }
+        
+        game:GetService("ReplicatedStorage").RE.ticket:FireServer(unpack(args))
+    end)
+end
