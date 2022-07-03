@@ -568,3 +568,80 @@ if game.PlaceId == 6668183009 then
         game:GetService("ReplicatedStorage").RE.ticket:FireServer(unpack(args))
     end)
 end
+
+if game.PlaceId == 6198039277 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Inf Money", "Get money very fast", function()
+        local rs = game:GetService("RunService")
+
+        game.Players.LocalPlayer.PlayerGui.OnScreen.Stats.Pstat.ChildAdded:Connect(function(v)
+            if v.Name == "PopUp" then
+                rs.RenderStepped:wait()
+                v:Destroy()
+            end
+        end)
+        
+        rs.RenderStepped:Connect(function()
+            for i = 1, 3 do
+                game.ReplicatedStorage.RE.Robbery:FireServer()
+            end
+        end)       
+    end)
+end
+
+if game.PlaceId == 2608219442 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Nice Autofarm", "Nice but laggy autofarm", function()
+        for i,v in pairs (game:GetService("Workspace").Absorbable:GetChildren()) do
+            v.CFrame = game:GetService("Players").LocalPlayer.character.HumanoidRootPart.CFrame
+            end     
+    end)
+end
+
+if game.PlaceId == 4064108474 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Monerty)
+        game.ReplicatedStorage.RE.moneychange:FireServer(Monerty)
+    end)
+
+    MainSection:NewTextBox("Add EXP", "Press Enter After Value", function(ThatEXP)
+        game.ReplicatedStorage.RE.addXP:FireServer(ThatEXP)
+    end)
+end
+
+if game.PlaceId == 3203888787 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Monertyy)
+        game.ReplicatedStorage.RE.moneychange:FireServer(Monertyy)
+    end)
+
+    MainSection:NewTextBox("Add EXP", "Press Enter After Value", function(ThatEXPP)
+        game.ReplicatedStorage.RE.addXP:FireServer(ThatEXPP)
+    end)
+end
+
+if game.PlaceId == 2848994117 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Monertyye)
+        game.ReplicatedStorage.RE.moneychange:FireServer(Monertyye)
+    end)
+
+    MainSection:NewTextBox("Add People", "Press Enter After Value", function(ppl)
+        game.ReplicatedStorage.RE.addXP:FireServer(ppl)
+    end)
+end
