@@ -1,10 +1,10 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 
-local Main = Window:NewTab("All")
-local MainSection = Main:NewSection("All Servers - MIGHT BAN U")
+local All = Window:NewTab("All")
+local AllSection = All:NewSection("All Servers - MIGHT BAN U")
 
-Section:NewButton("Copy Console", "Console has to be open!", function()
+AllSection:NewButton("Copy Console", "Console has to be open!", function()
     local copy = setclipboard or clipboard.set or copystring or syn.write_clipboard
 
 local str = ''
