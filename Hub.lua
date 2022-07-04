@@ -653,3 +653,35 @@ local AllSection = All:NewSection("All Games")
     AllSection:NewButton("Copy Console", "Console has to be open", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/console.lua",true))() 
     end)
+
+    MainSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
+        local walkSpeed = sped
+        local gmt = getrawmetatable(game)
+        setreadonly(gmt, false)
+        local oldindex = gmt.__index
+        gmt.__index = newcclosure(function(self,b)
+        if b == "WalkSpeed" then
+        return 16
+        end
+        return oldindex(self,b)
+        end)
+        game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
+    end)
+
+    MainSection:NewTextBox("Jump", "Press Enter After Value", function(jrump)
+        local Power = jrump
+        setscriptable(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",true)
+        sethiddenproperty(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",Power)
+    end)
+
+    AllSection:NewButton("Sword Reach", "mostly patched", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/Reech.lua",true))()
+    end)
+
+    AllSection:NewButton("Infinite Yeild", "hi", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source",true))()
+    end)
+
+    AllSection:NewButton("dupe", "dupe takes a bit", function()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1",true))()
+    end)
