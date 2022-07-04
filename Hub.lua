@@ -654,6 +654,18 @@ local AllSection = All:NewSection("All Games")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/console.lua",true))() 
     end)
 
+    AllSection:NewButton("Sword Reach", "mostly patched", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/Reech.lua",true))()
+    end)
+
+    AllSection:NewButton("Infinite Yeild", "hi", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source",true))()
+    end)
+
+    AllSection:NewButton("dupe", "dupe takes a bit", function()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1",true))()
+    end)
+
     AllSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
         local walkSpeed = sped
         local gmt = getrawmetatable(game)
@@ -672,16 +684,4 @@ local AllSection = All:NewSection("All Games")
         local Power = jrump
         setscriptable(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",true)
         sethiddenproperty(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",Power)
-    end)
-
-    AllSection:NewButton("Sword Reach", "mostly patched", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/Reech.lua",true))()
-    end)
-
-    AllSection:NewButton("Infinite Yeild", "hi", function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source",true))()
-    end)
-
-    AllSection:NewButton("dupe", "dupe takes a bit", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1",true))()
     end)
