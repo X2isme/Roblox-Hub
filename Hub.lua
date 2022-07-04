@@ -650,6 +650,6 @@ end
 local All = Window:NewTab("All")
 local AllSection = All:NewSection("All Games")
 
-    MainSection:NewButton("Copy Console", "Console has to be open", function()
+    AllSection:NewButton("Copy Console", "Console has to be open", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/console.lua",true))() 
     end)
