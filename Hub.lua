@@ -654,7 +654,7 @@ local AllSection = All:NewSection("All Games")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/console.lua",true))() 
     end)
 
-    MainSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
+    AllSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
         local walkSpeed = sped
         local gmt = getrawmetatable(game)
         setreadonly(gmt, false)
@@ -668,7 +668,7 @@ local AllSection = All:NewSection("All Games")
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = walkSpeed
     end)
 
-    MainSection:NewTextBox("Jump", "Press Enter After Value", function(jrump)
+    AllSection:NewTextBox("Jump", "Press Enter After Value", function(jrump)
         local Power = jrump
         setscriptable(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",true)
         sethiddenproperty(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",Power)
