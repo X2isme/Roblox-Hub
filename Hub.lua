@@ -646,6 +646,17 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 7346416636 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Scam Gui", "Gui with scam scripts, not made by me", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/scamguipopittrading.lua",true))()   
+    end)
+end
+
+-- All Games
 
 local All = Window:NewTab("All")
 local AllSection = All:NewSection("All Games")
