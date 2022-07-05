@@ -656,6 +656,16 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 6717367660 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Inf Money", "Get Inf Money", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/happyland.lua",true))()  
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
