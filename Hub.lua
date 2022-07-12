@@ -666,6 +666,16 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 6717367660 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Kick All For ", "Press Enter After Value", function(ppl)
+        game.ReplicatedStorage.RE.addXP:FireServer(ppl)
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
@@ -684,7 +694,7 @@ local AllSection = All:NewSection("All Games")
     end)
 
     AllSection:NewButton("dupe", "dupe takes a bit", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1",true))()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1.lua",true))()
     end)
 
     AllSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
@@ -705,4 +715,16 @@ local AllSection = All:NewSection("All Games")
         local Power = jrump
         setscriptable(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",true)
         sethiddenproperty(game:GetService("Players").LocalPlayer.Character.Humanoid,"JumpPower",Power)
+    end)
+
+    AllSection:NewButton("Pet Hack For Sims", "Pet Hack That Works on Some Simulators", function()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/PetHack.lua",true))()
+    end)
+
+    AllSection:NewButton("Click TP - Press t", "Click Tp, Press t To Toggle", function()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/ClickTp.lua",true))()
+    end)
+
+    AllSection:NewButton("Steal Game", "Steals Some Scripts And The Map", function()
+        saveinstance()
     end)
