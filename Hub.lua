@@ -696,6 +696,16 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 6717367660 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Pink X GUI", "open a Roblox GUI", function()
+        loadstring(game:HttpGet("https://drizzy.wtf//PinkX/Script"))()  
+    end)
+end
+
 
 
 -- All Games
