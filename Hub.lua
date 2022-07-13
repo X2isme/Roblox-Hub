@@ -666,15 +666,37 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
-if game.PlaceId == 6717367660 then
+if game.PlaceId == 7056117669 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewTextBox("Kick All For ", "Press Enter After Value", function(ppl)
-        game.ReplicatedStorage.RE.addXP:FireServer(ppl)
+    MainSection:NewTextBox("Kick Player", "Press Enter After Value", function(playertokick)
+    end)
+
+    MainSection:NewTextBox("Kick Player For ", "Press Enter After Value", function(reson)
+        local target = playertokick
+        local mess = reson
+        local repsto = game:GetService("ReplicatedStorage")
+        
+        repsto.KickPlayer:FireServer(target, mess)
+    end)
+
+    local MainSection2 = Main:NewSection("-- SEPARATE SECTIONS --")
+
+    MainSection2:NewTextBox("Kick All For ", "Press Enter After Value", function(reson)
+        local mess = reson
+        local repsto = game:GetService("ReplicatedStorage")
+
+        for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name ~= game.Players.LocalPlayer.Name then
+                repsto.KickPlayer:FireServer(v.Name, mess)
+            end
+        end
     end)
 end
+
+
 
 -- All Games
 
@@ -727,4 +749,44 @@ local AllSection = All:NewSection("All Games")
 
     AllSection:NewButton("Steal Game", "Steals Some Scripts And The Map", function()
         saveinstance()
+    end)
+    
+
+
+    -- Hubs
+
+local Hubsa = Window:NewTab("Hubs")
+local HubSection = Hubsa:NewSection("Hubs")
+
+    HubSection:NewButton("Raven Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/RavenHub.lua"))()
+    end)
+
+    HubSection:NewButton("Owl Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))()
+    end)
+
+    HubSection:NewButton("Cone Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/nonfunctable/Cone-Hub/main/Kavo-UI-Libary.lua", true))()
+    end)
+
+    HubSection:NewButton("Darth Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/sjonks/DarthHub/main/Scripts/DarthHub.lua"))()
+    end)
+
+    HubSection:NewButton("Extreme Antonis Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ExtremeAntonis/KeySystemUI/main/KeySystemUI-Obfuscated.lua"))()
+    end)
+
+    HubSection:NewButton("GodXNation Hub - see edits", "Roblox Hub - key is godxnation", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GodXNation/GodXNation/main/midnight%20racing%20hubV2%20fixed", true))()
+    end)
+
+    HubSection:NewButton("Saza Hub", "Roblox Hub", function()
+        _G.Color = Color3.fromRGB(255, 255, 255)
+        loadstring(game:HttpGet"https://rawscripts.net/raw/SAZA-HUB_496")()
+    end)
+
+    HubSection:NewButton("VG Hub", "Roblox Hub", function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
     end)
