@@ -706,6 +706,84 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 9415202048 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewDropdown("Equips item", "All items listed so far", {"BloxyCola", "Noodle", "BANG!", "Moneybag", "GravityCoil", "Tixbomb", "Railgun", "InvisibilityCape", "BlowDryer", "Darkheart", "Godly Fists"}, function(ItemDropDown)
+        local args = {
+            [1] = ItemDropDown
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.equipToolEvent:FireServer(unpack(args))
+    end)
+
+    MainSection:NewTextBox("Equipt item (More Items)", "Use if item is not listed on first 1", function(ItemText)
+        local args = {
+            [1] = ItemText
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.equipToolEvent:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 218377574 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Autofarm 1", "nice simple autofarm, rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
+            wait(0.00000000001)
+            end   
+    end)
+end
+
+if game.PlaceId == 10001513103 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Unlimited Words GUI, read desc", "just dont use more words than u have", function()
+        local library = loadstring(game:HttpGet("https://pastebin.com/raw/eKwyeQa0", true))()
+
+        local tab1 = library:CreateTab("Unlimited Words", true)
+        local box = library:MakeBox(tab1,"Enter Text Here","...",function(box)
+           local args = {
+               [1] = box.text,
+               [2] = "All"
+           }
+           game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+        end) 
+    end)
+end
+
+if game.PlaceId == 9718523719 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("autoclick noob", "rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").ClickNoob:FireServer()
+            wait(0.000001)
+            end 
+    end)
+end
+
+if game.PlaceId == 8884334497 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("OP Autoclick", "rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").Remotes.Click:InvokeServer()
+            end
+    end)
+end
 
 
 -- All Games
@@ -726,7 +804,7 @@ local AllSection = All:NewSection("All Games")
     end)
 
     AllSection:NewButton("dupe", "dupe takes a bit", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/dupe1.lua",true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/dupe1.lua",true))()
     end)
 
     AllSection:NewTextBox("Speed", "Press Enter After Value", function(sped)
@@ -750,21 +828,25 @@ local AllSection = All:NewSection("All Games")
     end)
 
     AllSection:NewButton("Pet Hack For Sims", "Pet Hack That Works on Some Simulators", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/PetHack.lua",true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/PetHack.lua",true))()
     end)
 
     AllSection:NewButton("Click TP - Press t", "Click Tp, Press t To Toggle", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/ClickTp.lua",true))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/ClickTp.lua",true))()
     end)
 
     AllSection:NewButton("Steal Game", "Steals Some Scripts And The Map", function()
         saveinstance()
     end)
 
-    AllSection:NewButton("BackDoor Executor", "Lets you run scripts on the server", function()
-        loadstring(game:HttpGet(('https://raw.githubusercontent.com/iK4oS/backdoor.exe/master/source.lua'),true))()
+    AllSection:NewButton("BackDoor Executor", "Password    Free Scripts", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/BackdoorEXE.lua",true))()
     end)
-    
+
+    AllSection:NewButton("Roblox Animations", "lets you use animations from roblox", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/AnimationEditGUI.lua",true))()
+    end)
+
 
 
     -- Hubs
@@ -773,7 +855,7 @@ local Hubsa = Window:NewTab("Hubs")
 local HubSection = Hubsa:NewSection("Hubs")
 
     HubSection:NewButton("Raven Hub", "Roblox Hub", function()
-        loadstring(game:HttpGet("https://github.com/X2isme/Roblox-Hub/blob/main/RavenHub.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/RavenHub.lua"))()
     end)
 
     HubSection:NewButton("Owl Hub", "Roblox Hub", function()
