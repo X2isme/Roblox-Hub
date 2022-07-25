@@ -785,6 +785,33 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 920587237 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("make all pets FR (Client)", "rejoin to undo", function()
+        local clientData = require(game.ReplicatedStorage.ClientModules.Core.ClientData)
+        local playerData = clientData.get_data()[tostring(game.Players.LocalPlayer)]
+        for i,v in pairs(playerData.inventory.pets) do
+        v.properties.rideable = true
+        v.properties.flyable = true
+        end
+    end)
+end
+
+if game.PlaceId == 9498006165 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("OP Autoclick", "rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").Events.Tap:FireServer()
+            wait(0.00000000000000000000000000000000000000000000000000000000000000000000001)
+        end
+    end)
+end
 
 -- All Games
 
