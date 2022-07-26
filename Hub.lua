@@ -1,5 +1,16 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
+-- Variables
+local SmallTick = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+local Tick = 0.00000000000000000000000000000000000000000000000000000000000000000000000001
+local BigTick = 0.00000001
+local TheInf = (5/0)
+local SmallBigNumber = 99999
+local VeryHugeNumber = math.pow (SmallBigNumber, 61)
+local HugerNumber = math.pow (SmallBigNumber, 29)
+local HugeNumber = math.pow (SmallBigNumber, 3)
+local MathHuge = math.huge
+--print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
 
 if game.PlaceId == 8508161757 then
     -- MAIN
@@ -808,7 +819,7 @@ local MainSection = Main:NewSection("Main")
     MainSection:NewButton("OP Autoclick", "rejoin to stop", function()
         while true do
             game:GetService("ReplicatedStorage").Events.Tap:FireServer()
-            wait(0.00000000000000000000000000000000000000000000000000000000000000000000001)
+            wait(Tick)
         end
     end)
 end
@@ -822,17 +833,17 @@ local MainSection = Main:NewSection("Main")
         while true do
             local args = {
                 [1] = "Mass",
-                [2] = 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+                [2] = VeryHugeNumber
             }
             game:GetService("ReplicatedStorage").ChangePlayerStat:FireServer(unpack(args))
-            wait(0.00000000000000000000000000000000000000000000000000000000000000000000000000000001)
+            wait(SmallTick)
         end
     end)
 
     MainSection:NewButton("Auto SuperNova", "rejoin to stop", function()
         while true do
             game:GetService("ReplicatedStorage").GoSupernova:FireServer()
-            wait(0.0000001)
+            wait(BigTick)
             end
     end)
 end
