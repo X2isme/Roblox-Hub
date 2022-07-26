@@ -1,5 +1,12 @@
+local SmallTick = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
 local Tick = 0.00000000000000000000000000000000000000000000000000000000000000000000000001
 local BigTick = 0.00000001
-local Inf = (5/0)
-local VeryHugeNumber = Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge * Math.Huge
-Local HugeNumber = math.huge
+local TheInf = (5/0)
+local SmallBigNumber = 99999
+local VeryHugeNumber = math.pow (SmallBigNumber, 61)
+local HugerNumber = math.pow (SmallBigNumber, 29)
+local HugeNumber = math.pow (SmallBigNumber, 3)
+local MathHuge = math.huge
+
+-- To View Values
+--print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
