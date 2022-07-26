@@ -813,6 +813,30 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 3686253681 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Auto Mass", "rejoin to stop", function()
+        while true do
+            local args = {
+                [1] = "Mass",
+                [2] = 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+            }
+            game:GetService("ReplicatedStorage").ChangePlayerStat:FireServer(unpack(args))
+            wait(0.00000000000000000000000000000000000000000000000000000000000000000000000000000001)
+        end
+    end)
+
+    MainSection:NewButton("Auto SuperNova", "rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").GoSupernova:FireServer()
+            wait(0.0000001)
+            end
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
