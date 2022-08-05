@@ -848,6 +848,29 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 8750997647 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Autoclick", "rejoin to stop", function()
+        while true do
+            game:GetService("ReplicatedStorage").Remotes.Tap:FireServer()
+            wait(Tick)
+        end
+    end)
+
+    MainSection:NewButton("Auto Rebirth", "rejoin to stop", function()
+        while true do
+            local args = {
+                 [1] = 1
+            }
+            game:GetService("ReplicatedStorage").Remotes.Rebirth:FireServer(unpack(args))
+            wait(BigTick)
+        end
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
