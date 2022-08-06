@@ -981,6 +981,16 @@ MainSection:NewDropdown("Get Any Badge", "OP But Not", {"PSEasyMode", "PSNormalM
     end)
 end
 
+if game.PlaceId == 8265676621 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+Players = game:GetService("Players")
+MainSection:NewDropdown("Kick Any Player", "OP But Not", {Players}, function(TheVictim)
+    game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
