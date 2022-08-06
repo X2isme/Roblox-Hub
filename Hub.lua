@@ -968,7 +968,7 @@ MainSection:NewTextBox("Add Candy", "Adds candy", function(Candy)
     end)
 end
 
-if game.PlaceId == 10439131644 then
+if game.PlaceId == 9185412259 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
