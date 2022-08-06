@@ -17,11 +17,11 @@ if game.PlaceId == 8508161757 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main Stuffs")
 
-    MainSection:NewButton("Spawn Tips Cash Bag", "Must have Tip Jar! Might Lag!", function()
+    MainSection:NewButton("Spawn Tips Cash Bag", "Must have Tip Jar!", function()
         game.ReplicatedStorage.CashBags.TipCashBag:FireServer()
     end)
 
-    MainSection:NewButton("Spawn Bath Cash Bag", "Must have Bath! Might Lag!", function()
+    MainSection:NewButton("Spawn Bath Cash Bag", "Must have Bath!", function()
         game.ReplicatedStorage.CashBags.BathCashBag:FireServer()
     end)
 end
@@ -744,11 +744,16 @@ if game.PlaceId == 218377574 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("Autofarm 1", "nice simple autofarm, rejoin to stop", function()
-        while true do
+    MainSection:NewButton("AutoLift", "nice simple AutoLift", function()
+        DoAutoLift = true
+        while DoAutoLift == true do
             game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
-            wait(0.00000000001)
+            wait(BigTick)
             end   
+    end)
+
+    MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
+        DoAutoLift = false
     end)
 end
 
@@ -789,10 +794,15 @@ if game.PlaceId == 8884334497 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("OP Autoclick", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("OP Autoclick", "Wassup im B O R E D", function()
+        DoAutoclick = true
+        while DoAutoclick == true do
             game:GetService("ReplicatedStorage").Remotes.Click:InvokeServer()
             end
+    end)
+
+    MainSection:NewButton("Stop Autoclick", "Stops OP Autoclick", function()
+        DoAutoclick = false
     end)
 end
 
@@ -816,11 +826,16 @@ if game.PlaceId == 9498006165 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("OP Autoclick", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("OP Autoclick", "S p a c e B a r", function()
+        DoAutoclick = true
+        while DoAutoclick == true do
             game:GetService("ReplicatedStorage").Events.Tap:FireServer()
             wait(Tick)
         end
+    end)
+
+    MainSection:NewButton("Stop Autoclick", "Stops OP Autoclick", function()
+        DoAutoclick = false
     end)
 end
 
@@ -829,8 +844,9 @@ if game.PlaceId == 3686253681 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("Auto Mass", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("Auto Mass", "M A S S", function()
+        DoAutoMass = true
+        while DoAutoMass == true do
             local args = {
                 [1] = "Mass",
                 [2] = VeryHugeNumber
@@ -840,11 +856,20 @@ local MainSection = Main:NewSection("Main")
         end
     end)
 
-    MainSection:NewButton("Auto SuperNova", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("Stop Auto Mass", "Stops AutoMass", function()
+        DoAutoMass = false
+    end)
+
+    MainSection:NewButton("Auto SuperNova", "Super! Nova!", function()
+        DoAutoSuperNova = true
+        while DoAutoSuperNova == true do
             game:GetService("ReplicatedStorage").GoSupernova:FireServer()
             wait(BigTick)
-            end
+        end
+    end)
+
+    MainSection:NewButton("Auto SuperNova", "Stops AutoSuperNova", function()
+        DoAutoSuperNova = false
     end)
 end
 
@@ -853,21 +878,106 @@ if game.PlaceId == 8750997647 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("Autoclick", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("Autoclick", "Be Autoclicking", function()
+        Autoclick = true
+        while Autoclick == true do
             game:GetService("ReplicatedStorage").Remotes.Tap:FireServer()
             wait(Tick)
         end
     end)
 
-    MainSection:NewButton("Auto Rebirth", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("Stop Autoclick", "Stops Autoclick", function()
+        DoAutoclick = false
+    end)
+
+    MainSection:NewButton("Auto Rebirth", "Auto Rebirths", function()
+        DoAutoRebirth = true
+        while DoAutoRebirth == true do
             local args = {
                  [1] = 1
             }
             game:GetService("ReplicatedStorage").Remotes.Rebirth:FireServer(unpack(args))
             wait(BigTick)
         end
+    end)
+
+    MainSection:NewButton("Stop Auto Rebirth", "Stops Auto Rebirth", function()
+        DoAutoRebirth = false
+        end
+    end)
+end
+
+if game.PlaceId == 10108131074 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Auto Grass - Read Desc", "your most unlocked world by numbers", function(World)
+    DoAutoGrass = true
+    while DoAutoGrass == true do
+        local args = {
+            [1] = "1"
+        }
+        game:GetService("ReplicatedStorage").Remotes.Game.ClientMowGrass:FireServer(unpack(args))
+        wait(BigTick)
+        end
+    end)
+
+MainSection:NewButton("Stop Auto Grass", "Stops AutoGrass", function()
+        DoAutoGrass = false
+    end)
+
+MainSection:NewButton("Fill Gas", "Fills up gas", function()
+
+    local args = {
+    [1] = workspace.Map.Zones:FindFirstChild("1"):FindFirstChild("1").GasStation.GasPumps,
+    [2] = true
+    }
+    game:GetService("ReplicatedStorage").Remotes.Game.ClientToggleUseGasStation:FireServer(unpack(args))
+
+    end)
+
+MainSection:NewButton("Auto Fill Gas", "Basiclly Inf Gas", function()
+    AutoGas = true
+    while AutoGas == true do
+        local args = {
+        [1] = workspace.Map.Zones:FindFirstChild("1"):FindFirstChild("1").GasStation.GasPumps,
+        [2] = true
+        }
+        game:GetService("ReplicatedStorage").Remotes.Game.ClientToggleUseGasStation:FireServer(unpack(args))
+        wait(BigTick)
+        end
+    end)
+
+MainSection:NewButton("Stop Auto Fill Gas", "Stops Auto Gas", function()
+    AutoGas = false
+    end)
+end
+
+if game.PlaceId == 10439131644 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Add Candy", "Adds candy", function(Candy)
+    local args = {
+        [1] = "JoeyMcFlowey",
+        [2] = Candy
+    }
+    game:GetService("ReplicatedStorage").Droptopla:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 10439131644 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewDropdown("Get Any Badge", "OP But Not", {"PSEasyMode", "PSNormalMode", "PSHardMode", "PSExtremeMode"}, function(Badge)
+    local args = {
+        [1] = Badge
+    }
+    game:GetService("ReplicatedStorage").Knit.Services.PlayerBadgeService.RF.rewardBadge:InvokeServer(unpack(args))
     end)
 end
 
