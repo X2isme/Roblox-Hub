@@ -1095,6 +1095,24 @@ MainSection:NewButton("Stop AutoFillMachine", "Stops AutoFillMachine", function(
     end)
 end
 
+if game.PlaceId == 9609300403 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoClick", "Autoclicks", function()
+    AutoClicks = true
+    while AutoClicks == true do
+        game:GetService("ReplicatedStorage").Communication.Click:FireServer()
+        wait(BigTick)
+        end
+    end)
+
+MainSection:NewButton("Stop AutoClick", "StopsAutoClick", function()
+    AutoClicks = false
+    end)
+end
+
 
 -- All Games
 
