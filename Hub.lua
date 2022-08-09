@@ -17,12 +17,26 @@ if game.PlaceId == 8508161757 then
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main Stuffs")
 
-    MainSection:NewButton("Spawn Tips Cash Bag", "Must have Tip Jar!", function()
-        game.ReplicatedStorage.CashBags.TipCashBag:FireServer()
+    MainSection:NewButton("AutoSpawn Tips CashBag", "Must have Tip Jar!", function()
+        AutoTipCashBag = true
+        while AutoTipCashBag == true do
+            game.ReplicatedStorage.CashBags.TipCashBag:FireServer()
+        end
     end)
 
-    MainSection:NewButton("Spawn Bath Cash Bag", "Must have Bath!", function()
-        game.ReplicatedStorage.CashBags.BathCashBag:FireServer()
+    MainSection:NewButton("Stop AutoTipFarm", "Must have Tip Jar!", function()
+        AutoTipCashBag = false
+    end)
+
+    MainSection:NewButton("AutoSpawn Bath CashBag", "Must have Bath!", function()
+        AutoBathCashBag = true
+        while AutoBathCashBag == true do
+            game.ReplicatedStorage.CashBags.BathCashBag:FireServer()
+        end
+    end)
+
+    MainSection:NewButton("Stop AutoBathFarm", "Must have Bath!", function()
+        AutoBathCashBag = false
     end)
 end
     
@@ -677,36 +691,6 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
-if game.PlaceId == 7056117669 then
-    -- MAIN
-local Main = Window:NewTab("Main")
-local MainSection = Main:NewSection("Main")
-
-    MainSection:NewTextBox("Kick Player", "Press Enter After Value", function(playertokick)
-    end)
-
-    MainSection:NewTextBox("Kick Player For ", "Press Enter After Value", function(reson)
-        local target = playertokick
-        local mess = reson
-        local repsto = game:GetService("ReplicatedStorage")
-        
-        repsto.KickPlayer:FireServer(target, mess)
-    end)
-
-    local MainSection2 = Main:NewSection("-- SEPARATE SECTIONS --")
-
-    MainSection2:NewTextBox("Kick All For ", "Press Enter After Value", function(reson)
-        local mess = reson
-        local repsto = game:GetService("ReplicatedStorage")
-
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name ~= game.Players.LocalPlayer.Name then
-                repsto.KickPlayer:FireServer(v.Name, mess)
-            end
-        end
-    end)
-end
-
 if game.PlaceId == 6717367660 then
     -- MAIN
 local Main = Window:NewTab("Main")
@@ -903,7 +887,6 @@ local MainSection = Main:NewSection("Main")
 
     MainSection:NewButton("Stop Auto Rebirth", "Stops Auto Rebirth", function()
         DoAutoRebirth = false
-        end
     end)
 end
 
@@ -985,11 +968,133 @@ if game.PlaceId == 8265676621 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
-Players = game:GetService("Players")
-MainSection:NewDropdown("Kick Any Player", "OP But Not", {Players}, function(TheVictim)
+MainSection:NewDropdown("Kick Any Player", "OP But Not", {player.Name}, function(TheVictim)
     game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
     end)
 end
+
+if game.PlaceId == 7262582142 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Paintbrush - Desc", "Max is 99", function(PaintBrushLevel)
+    local args = {
+        [1] = "Equip",
+        [2] = {
+            ["Tool"] = "T".. PaintBrushLevel
+        }
+    }
+    game:GetService("ReplicatedStorage").SpecWork.Shared.Network.ToggleTool:InvokeServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("FillPaint - Desc", "Max is 100", function(FillPaint)
+    local args = {
+        [1] = FillPaint
+    }
+
+    game:GetService("ReplicatedStorage").SpecWork.Shared.Network.RefillPaint:FireServer(unpack(args))
+    end)
+
+MainSection:NewButton("Inf Paint", "PainBrush", function()
+    InfPaint = true
+    while InfPaint == true do
+        local args = {
+            [1] = 100
+        }
+        game:GetService("ReplicatedStorage").SpecWork.Shared.Network.RefillPaint:FireServer(unpack(args))
+        wait(0.005)
+        end
+    end)
+
+MainSection:NewButton("Stop InfPaint", "Anti PainBrush", function()
+    InfPaint = false
+    end)
+end
+
+if game.PlaceId == 9846056789 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+
+Section:NewLabel("Cups Minigame")
+
+MainSection:NewTextBox("Cup1 - Desc", "Highlight a Cup 1-5", function(DiamondCup1)
+    FirstDiamondCup = DiamondCup1
+    -- Code
+    local Descendants = workspace:GetDescendants()
+    for i, value in pairs(Descendants) do
+        if value.Name == "Important" then
+            local cups = value:GetDescendants()
+            for i, e in pairs (cups) do
+                if e.Name == "Detail" then
+                    local v = e.Parent.Parent
+                    local c = v:GetChildren()
+                    for i, va in pairs(c) do
+                        local s = va.Spot
+                        va.Name = tostring(s.Value)
+                    end
+                    v[FirstDiamondCup].Detail.Color = Color3.fromRGB(0,191,255)
+                    v[FirstDiamondCup].Primary.Color = Color3.fromRGB(0,191,248)
+                end
+            end
+         end  
+    end
+    end)
+
+MainSection:NewTextBox("Cup2 - Desc", "Highlight a Cup 1-5", function(DiamondCup2)
+    SecondDiamondCup = DiamondCup2
+    -- Code
+    local Descendants = workspace:GetDescendants()
+    for i, value in pairs(Descendants) do
+        if value.Name == "Important" then
+            local cups = value:GetDescendants()
+            for i, e in pairs (cups) do
+                if e.Name == "Detail" then
+                    local v = e.Parent.Parent
+                    local c = v:GetChildren()
+                    for i, va in pairs(c) do
+                        local s = va.Spot
+                        va.Name = tostring(s.Value)
+                    end
+                    v[SecondDiamondCup].Detail.Color = Color3.fromRGB(0,191,255)
+                    v[SecondDiamondCup].Primary.Color = Color3.fromRGB(0,191,248)
+                end
+            end
+        end  
+    end
+    end)
+end
+
+if game.PlaceId == 10375377326 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("FillMachine", "Fills PopcornMachine", function()
+    local args = {
+        [1] = math.huge
+    }
+    game:GetService("ReplicatedStorage").Deposit:FireServer(unpack(args))
+    end)
+
+MainSection:NewButton("AutoFillMachine", "AutoFills PopcornMachine", function()
+    AutoFillPopcorn = true
+    while AutoFillPopcorn == true do
+    local args = {
+        [1] = math.huge
+    }
+    game:GetService("ReplicatedStorage").Deposit:FireServer(unpack(args))
+    wait(0.1)
+    end
+    end)
+
+MainSection:NewButton("Stop AutoFillMachine", "Stops AutoFillMachine", function()
+    AutoFillPopcorn = false
+    end)
+end
+
 
 -- All Games
 
