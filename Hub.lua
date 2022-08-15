@@ -739,14 +739,6 @@ local MainSection = Main:NewSection("Main")
     MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
         DoAutoLift = false
     end)
-
-    MainSection:NewDropdown("TP To World", "Tp to a world", {"StarterWorld", "RiverWorld"}, function(WorldTP)
-        if WorldTP == "StarterWorld" then
-            game:GetService("TeleportService"):Teleport(218377574, LocalPlayer)
-        elseif WorldTP == "RiverWorld" then
-                game:GetService("TeleportService"):Teleport(9739506878, LocalPlayer)
-            end
-    end)
 end
 
 if game.PlaceId == 10001513103 then
@@ -1265,6 +1257,10 @@ old = hookmetamethod(game,"__namecall",function(self,...)
    end
    return old(self,...)
 end)
+    end)
+
+    AllSection:NewButton("Universe Viewer", "lets you join any place in that game", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/AnimationEditGUI.lua",true))()
     end)
 
     -- Hubs
