@@ -723,7 +723,7 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
-if game.PlaceId == 218377574 then
+if game.PlaceId == 218377574 or 9739506878 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
@@ -732,12 +732,20 @@ local MainSection = Main:NewSection("Main")
         DoAutoLift = true
         while DoAutoLift == true do
             game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
-            wait(BigTick)
+            wait(Tick)
             end   
     end)
 
     MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
         DoAutoLift = false
+    end)
+
+    MainSection:NewDropdown("TP To World", "Tp to a world", {"StarterWorld", "RiverWorld"}, function(WorldTP)
+        if WorldTP == "StarterWorld" then
+            game:GetService("TeleportService"):Teleport(218377574, LocalPlayer)
+        elseif WorldTP == "RiverWorld" then
+                game:GetService("TeleportService"):Teleport(9739506878, LocalPlayer)
+            end
     end)
 end
 
@@ -765,11 +773,16 @@ if game.PlaceId == 9718523719 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("autoclick noob", "rejoin to stop", function()
-        while true do
+    MainSection:NewButton("autoclick noob", "NoobieClick?", function()
+        AutoClickNoob = true
+        while AutoClickNoob == true do
             game:GetService("ReplicatedStorage").ClickNoob:FireServer()
             wait(0.000001)
             end 
+    end)
+
+    MainSection:NewButton("stop autonoob", "No NoobieClick", function()
+        AutoClickNoob = false
     end)
 end
 
@@ -1113,6 +1126,54 @@ MainSection:NewButton("Stop AutoClick", "StopsAutoClick", function()
     end)
 end
 
+if game.PlaceId == 10319501620 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoCoins", "AutoCollects Coins", function()
+    AutoCoin = true
+    while AutoCoin == true do
+        local args = {
+            [1] = "(x:-13.172073364257812, y:31.68347930908203, z:-81.21162414550781)"
+        }
+        game:GetService("ReplicatedStorage").RemoteEvents.RewardCurrencyPickup:FireServer(unpack(args))
+        wait(BigTick)
+        end
+    end)
+
+MainSection:NewButton("Stop AutoCoin", "Stops AutoCoin", function()
+    AutoCoin = false
+    end)
+
+MainSection:NewButton("AllStickers", "Gets all the stickers", function()
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker1")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker2")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker3")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker4")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker5")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker6")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker7")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker8")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker9")
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker10")
+    end)
+
+MainSection:NewDropdown("Get Sticker", "Get Any Sticker", {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}, function(Sticker)
+    game:GetService("ReplicatedStorage").RemoteFunctions.PlayerCollectionAdd:InvokeServer("Stickers", "Sticker".. Sticker)
+    end)
+end
+
+if game.PlaceId == 9529019408 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Unlock Circus", "Unlocks the Circus World", function()
+    game:GetService("ReplicatedStorage").Assets.Network.GrabCircusKey:FireServer()
+    end)
+end
+
 
 -- All Games
 
@@ -1206,9 +1267,6 @@ old = hookmetamethod(game,"__namecall",function(self,...)
 end)
     end)
 
-    
-
-
     -- Hubs
 
 local Hubsa = Window:NewTab("Hubs")
@@ -1246,3 +1304,11 @@ local HubSection = Hubsa:NewSection("Hubs")
     HubSection:NewButton("VG Hub", "Roblox Hub", function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
     end)
+
+    -- Info
+
+    local Info = Window:NewTab("Info")
+    local InfoSection = Info:NewSection("Information")
+    
+        InfoSection:NewLabel("Game/Place ID")
+        InfoSection:NewLabel(game.PlaceId)
