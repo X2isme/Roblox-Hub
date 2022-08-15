@@ -740,7 +740,80 @@ local MainSection = Main:NewSection("Main")
         DoAutoLift = false
     end)
 end
+
 if game.PlaceId == 9739506878 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoLift", "nice simple AutoLift", function()
+        DoAutoLift = true
+        while DoAutoLift == true do
+            game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
+        DoAutoLift = false
+    end)
+end
+
+if game.PlaceId == 10135321551 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoLift", "nice simple AutoLift", function()
+        DoAutoLift = true
+        while DoAutoLift == true do
+            game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
+        DoAutoLift = false
+    end)
+end
+
+if game.PlaceId == 10144942022 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoLift", "nice simple AutoLift", function()
+        DoAutoLift = true
+        while DoAutoLift == true do
+            game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
+        DoAutoLift = false
+    end)
+end
+
+if game.PlaceId == 10135223315 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoLift", "nice simple AutoLift", function()
+        DoAutoLift = true
+        while DoAutoLift == true do
+            game:GetService("ReplicatedStorage").Remotes.Lift:FireServer()
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoLift", "Stops AutoLift", function()
+        DoAutoLift = false
+    end)
+end
+
+if game.PlaceId == 10135914792 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
@@ -1249,6 +1322,11 @@ local AllSection = All:NewSection("All Games")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/UniverseViewer.lua",true))()
     end)
 
+    AllSection:NewButton("Copy Game/Place ID", "Copys the Game/Place ID to ClipBoard", function()
+        setclipboard(game.PlaceId)
+        toclipboard(game.PlaceId)
+    end)
+
     AllSection:NewButton("GodMode", "Works in only some games", function()
         game.Players.LocalPlayer.Character.Humanoid.Name = 1
         local l = game.Players.LocalPlayer.Character["1"]:Clone()
@@ -1317,10 +1395,3 @@ local HubSection = Hubsa:NewSection("Hubs")
     HubSection:NewButton("VG Hub", "Roblox Hub", function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
     end)
-
-    -- Info
-
-    local Info = Window:NewTab("Info")
-    local InfoSection = Info:NewSection("Information")
-        InfoSection:NewLabel("Game/Place ID")
-        InfoSection:NewLabel(game.PlaceId)
