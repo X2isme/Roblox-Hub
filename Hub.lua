@@ -1342,6 +1342,31 @@ MainSection:NewTextBox("InviteAnyPlayer", "Invite anyone to the family you are c
     end)
 end
 
+if game.PlaceId == 9926433554 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Money", "Get how much money u want", function(MoneyGet)
+    local A_1 = {} game:GetService("ReplicatedStorage").Events.Recent.AxeEvent:FireServer(A_1, -MoneyGet)
+    end)
+
+MainSection:NewTextBox("Get/Equipt Any Pickaxe", "a lil glitchy, rejoin if not work", function(Pickaxe)
+    local args = {
+        [1] = "Pickaxe # " ..Pickaxe,
+        [2] = Pickaxe
+    }
+    game:GetService("ReplicatedStorage").Events.Recent.BuyAxe:FireServer(unpack(args))
+    wait(0.2)
+    local args = {
+        [1] = Pickaxe
+    }
+    game:GetService("ReplicatedStorage").Events.EquipPickaxe:InvokeServer(unpack(args))
+    game.Players.LocalPlayer:Kick("Rejoin")
+
+    end)
+end
+
 
 -- All Games
 
