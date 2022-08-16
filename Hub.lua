@@ -3,6 +3,7 @@ local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 -- Variables
 local SmallTick = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
 local Tick = 0.00000000000000000000000000000000000000000000000000000000000000000000000001
+local BigsmallTick = 0.00000000000000000000000001
 local BigTick = 0.00000001
 local TheInf = (5/0)
 local SmallBigNumber = 99999
@@ -1253,6 +1254,91 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("Unlock Circus", "Unlocks the Circus World", function()
     game:GetService("ReplicatedStorage").Assets.Network.GrabCircusKey:FireServer()
+    end)
+end
+
+if game.PlaceId == 5890116343 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AgeUp", "Get 1 year older", function()
+    game:GetService("ReplicatedStorage").Remotes.AgeUp:FireServer()
+    end)
+
+MainSection:NewButton("Auto AgeUp", "Get old very fast", function()
+    AutoAgeUp = true
+    while AutoAgeUp == true do
+    game:GetService("ReplicatedStorage").Remotes.AgeUp:FireServer()
+    wait(Tick)
+    end
+    end)
+
+MainSection:NewButton("Stop Auto AgeUp", "Stops Auto AgeUp", function()
+    AutoAgeUp = false
+    wait(0.5)
+    game:GetService("ReplicatedStorage").Remotes.AgeUp:FireServer()
+    wait(1)
+    game.Players.LocalPlayer:Kick("Rejoin")
+    end)
+
+MainSection:NewButton("GodMode", "a lil glitchy", function()
+    GodMode = true
+    while GodMode == true do
+        local args = {
+            [1] = true
+        }
+        game:GetService("ReplicatedStorage").Remotes.toggleSafe:FireServer(unpack(args))
+        wait(BigsmallTick)
+        end
+    end)
+
+MainSection:NewButton("Stop GodMode", '"Im No God"', function()
+    GodMode = false
+    end)
+
+MainSection:NewTextBox("Join Family", "Join any family", function(Family)
+    local args = {
+        [1] = Family
+    } 
+    game:GetService("ReplicatedStorage").Remotes.AcceptInvite:FireServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("Create Family", "Create A Family", function(FamilyName)
+    local args = {
+        [1] = FamilyName
+    }   
+    game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("KickFromFamily", "Kicks a player from their family", function(FamilyKickPlayer)
+    local function FindPlayer(playerName)
+        Players = game:GetService("Players")
+        for i, player in pairs(Players:GetPlayers()) do
+            if player.Name == playerName then
+                return player
+            end
+        end
+    end
+    
+    playerNameToKick = FamilyKickPlayer
+    playerToKick = FindPlayer(playerNameToKick)
+    game:GetService("ReplicatedStorage").Remotes.KickFromFamily:FireServer(playerToKick)
+    end)
+
+MainSection:NewTextBox("InviteAnyPlayer", "Invite anyone to the family you are currently in", function(FamilyInvitePlayer)
+    local function FindPlayer(playerName)
+        Players = game:GetService("Players")
+        for i, player in pairs(Players:GetPlayers()) do
+            if player.Name == playerName then
+                return player
+            end
+        end
+    end
+    
+    playerNameToInvite = FamilyInvitePlayer
+    playerToInvite = FindPlayer(playerNameToInvite)
+    game:GetService("ReplicatedStorage").Remotes.SendInvite:FireServer(playerToInvite)
     end)
 end
 
