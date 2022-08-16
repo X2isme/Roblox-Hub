@@ -1,6 +1,3 @@
-    Players = game:GetService("Players")
-    for i, player in pairs(Players:GetPlayers()) do
-        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(Victim)
             local chosenPlayer = Victim
 
 for i,v in pairs(game.Workspace.Game.Buttons:GetChildren()) do
