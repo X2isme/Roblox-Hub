@@ -1367,6 +1367,20 @@ MainSection:NewTextBox("Get/Equipt Any Pickaxe", "a lil glitchy, rejoin if not w
     end)
 end
 
+if game.PlaceId == 10218305738 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Unlimited Steps", "Dont Lose Steps", function()
+    local a=game.Players.LocalPlayer.Character;a.HumanoidRootPart:Destroy()local b=a.Humanoid;b.Parent=game.ServerStorage;b.Parent=a
+    end)
+
+MainSection:NewButton("Sword Reach", "OP", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/Reech.lua",true))()
+    end)
+end
+
 
 -- All Games
 
