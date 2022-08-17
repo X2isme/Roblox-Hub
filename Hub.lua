@@ -1262,6 +1262,19 @@ MainSection:NewButton("AzureHub Read Desc", "Key: Azure_crackedlol", function()
     end)
 end
 
+if game.PlaceId == 1365404657 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Join Any Flock", "Join Any Flock Without Perms", function(Flock)
+    local args = {
+        [1] = workspace.Flocks:FindFirstChild(Flock)
+    }
+    game:GetService("ReplicatedStorage").FlockEvents.JoinFlock:FireServer(unpack(args))
+    end)
+end
+
 
 -- All Games
 
