@@ -1275,6 +1275,26 @@ MainSection:NewTextBox("Join Any Flock", "Join Any Flock Without Perms", functio
     end)
 end
 
+if game.PlaceId == 5712833750 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("OP Autofarm", "VERY OP", function()
+    OPAutofarm = true
+    while OPAutofarm == true do
+        local args = {
+            [1] = workspace.Eggs.Egg1
+        }
+        game:GetService("ReplicatedStorage").EggEvent:FireServer(unpack(args))
+        wait(0.0001)
+        end  
+    end)
+
+MainSection:NewButton("Stop Autofarm", "stop dat lag", function()
+    OPAutofarm = false
+    end)
+end
 
 -- All Games
 
