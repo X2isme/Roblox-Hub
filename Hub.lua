@@ -1280,19 +1280,31 @@ if game.PlaceId == 5712833750 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewButton("OP Autofarm", "VERY OP", function()
+MainSection:NewTextBox("OP Autofarm", "VERY OP", function(delay)
     OPAutofarm = true
     while OPAutofarm == true do
         local args = {
             [1] = workspace.Eggs.Egg1
         }
         game:GetService("ReplicatedStorage").EggEvent:FireServer(unpack(args))
-        wait(0.0001)
+        wait(delay)
         end  
     end)
 
 MainSection:NewButton("Stop Autofarm", "stop dat lag", function()
     OPAutofarm = false
+    end)
+
+MainSection:NewButton("more characters", "gives a couple characters", function()
+    game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure1)
+    wait(0.1)
+    game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure2)
+    wait(0.1)
+    game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure3)
+    wait(0.1)
+    game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure4)
+    wait(0.1)
+    game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure5)
     end)
 end
 
