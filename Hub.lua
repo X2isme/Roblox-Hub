@@ -1334,7 +1334,7 @@ local AllSection = All:NewSection("All Games")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/dupe1.lua",true))()
     end)
 
-    AllSection:NewButton("dupe", "dupe takes a bit", function()
+    AllSection:NewButton("Chat Bypass GUI", "Very OP", function()
         loadstring(game:HttpGet("https://the-shed.xyz/roblox/scripts/ChatBypass", true))()
     end)
 
