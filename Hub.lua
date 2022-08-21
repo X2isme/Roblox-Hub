@@ -11,7 +11,14 @@ local VeryHugeNumber = math.pow (SmallBigNumber, 61)
 local HugerNumber = math.pow (SmallBigNumber, 29)
 local HugeNumber = math.pow (SmallBigNumber, 3)
 local MathHuge = math.huge
---print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
+-- print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
+-- AllPlayers
+Players = game:GetService("Players")
+local allPlayersName = {}
+for i, player in pairs(Players:GetPlayers()) do
+    allPlayersName[i] = player.Name
+end
+
 
 if game.PlaceId == 8508161757 then
     -- MAIN
@@ -420,13 +427,9 @@ end)
     end)
 
     local MainSection = Main:NewSection("Max Base Anyone")
-
-    Players = game:GetService("Players")
-    for i, player in pairs(Players:GetPlayers()) do
-        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", {Players}, function(Victim)
+        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", allPlayersName, function(Victim)
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/MaxBaseAnyoneArmyTycoon.lua",true))()
     end)
-    end
 end
 
 if game.PlaceId == 2955597371 then
@@ -936,7 +939,7 @@ if game.PlaceId == 8265676621 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
-MainSection:NewDropdown("Kick Any Player", "OP But Not", {player.Name}, function(TheVictim)
+MainSection:NewDropdown("Kick Any Player", "OP But Not", allPlayersName, function(TheVictim)
     game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
     end)
 end
@@ -1182,7 +1185,7 @@ MainSection:NewTextBox("Create Family", "Create A Family", function(FamilyName)
     game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(unpack(args))
     end)
 
-MainSection:NewTextBox("KickFromFamily", "Kicks a player from their family", function(FamilyKickPlayer)
+MainSection:NewDropdown("KickFromFamily", "Kicks a player from their family", allPlayersName, function(FamilyKickPlayer)
     local function FindPlayer(playerName)
         Players = game:GetService("Players")
         for i, player in pairs(Players:GetPlayers()) do
@@ -1197,7 +1200,7 @@ MainSection:NewTextBox("KickFromFamily", "Kicks a player from their family", fun
     game:GetService("ReplicatedStorage").Remotes.KickFromFamily:FireServer(playerToKick)
     end)
 
-MainSection:NewTextBox("InviteAnyPlayer", "Invite anyone to the family you are currently in", function(FamilyInvitePlayer)
+MainSection:NewDropdown("InviteAnyPlayer", "Invite anyone to the family you are currently in", allPlayersName, function(FamilyInvitePlayer)
     local function FindPlayer(playerName)
         Players = game:GetService("Players")
         for i, player in pairs(Players:GetPlayers()) do
@@ -1305,6 +1308,34 @@ MainSection:NewButton("more characters", "gives a couple characters", function()
     game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure4)
     wait(0.1)
     game:GetService("ReplicatedStorage").TreasureEvent:FireServer(workspace.Treasures.Treasure5)
+    end)
+end
+
+if game.PlaceId == 8372375635 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AFK Dream", "AutoFarm", function()
+    AFKDream = true
+    while AFKDream == true do
+        game:GetService("ReplicatedStorage").Events.Sell:FireServer()
+        local args = {
+            [1] = true
+        }
+        game:GetService("ReplicatedStorage").Events.Sleep:FireServer(unpack(args))
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.E,false,game)
+        wait(0.3)
+        end  
+    end)
+
+MainSection:NewButton("Stop AFK Dream", "Stops the Autofarm", function()
+    AFKDream = false
+    game:GetService("ReplicatedStorage").Events.Sell:FireServer()
+    local args = {
+        [1] = false
+    }
+    game:GetService("ReplicatedStorage").Events.Sleep:FireServer(unpack(args))
     end)
 end
 
