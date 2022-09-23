@@ -18,6 +18,7 @@ local allPlayersName = {}
 for i, player in pairs(Players:GetPlayers()) do
     allPlayersName[i] = player.Name
 end
+local newPlayerList = allPlayersName
 
 
 if game.PlaceId == 8508161757 then
@@ -939,7 +940,8 @@ if game.PlaceId == 8265676621 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
-MainSection:NewDropdown("Kick Any Player", "OP But Not", allPlayersName, function(TheVictim)
+
+local dropdown = MainSection:NewDropdown("Kick Any Player", "OP But Not", allPlayersName, function(TheVictim)
     game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
     end)
 end
@@ -1336,6 +1338,69 @@ MainSection:NewButton("Stop AFK Dream", "Stops the Autofarm", function()
         [1] = false
     }
     game:GetService("ReplicatedStorage").Events.Sleep:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 10429088113 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Equipt any pet", "VERY OP", function(PetToEquipt)
+    local args = {
+        [1] = PetToEquipt
+    }
+    game:GetService("ReplicatedStorage").equipPet:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 5813165034 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Max snowbar", "VERY OP", function()
+    MaxSnowbar = true
+    while MaxSnowbar == true do 
+        game:GetService("ReplicatedStorage").Remotes.SnowBar:FireServer()
+        wait(Tick)
+    end
+    end)
+
+MainSection:NewButton("Stop snowbar", "NoMoreSnow", function()
+    MaxSnowbar = false
+    end)
+end
+
+if game.PlaceId == 9662949425 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Max Bone", "gives bones", function()
+    local args = {
+        [1] = VeryHugeNumber,
+        [2] = VeryHugeNumber
+    }
+    workspace.AddBones:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 9662949425 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Win", "Very OP", function()
+    AutoWin = true
+    while AutoWin == true do
+    game:GetService("ReplicatedStorage").RemoteEvents.RewardWins:FireServer()
+    wait(0.1)
+    end
+    end)
+end
+MainSection:NewButton("Stop Win", "E", function()
+    AutoWin = false
     end)
 end
 
