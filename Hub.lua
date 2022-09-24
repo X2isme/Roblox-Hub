@@ -1386,7 +1386,7 @@ MainSection:NewButton("Max Bone", "gives bones", function()
     end)
 end
 
-if game.PlaceId == 9662949425 then
+if game.PlaceId == 10758955211 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
@@ -1398,7 +1398,7 @@ MainSection:NewButton("Auto Win", "Very OP", function()
     wait(0.1)
     end
     end)
-end
+
 MainSection:NewButton("Stop Win", "E", function()
     AutoWin = false
     end)
