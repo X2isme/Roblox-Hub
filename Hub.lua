@@ -1377,10 +1377,13 @@ if game.PlaceId == 9662949425 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewButton("Max Bone", "gives bones", function()
+MainSection:NewTextBox("Max Bone", "put the max bones in textbox", function(MaxBone)
+end)
+
+MainSection:NewButton("Do Max Bone", "put the max bones in textbox", function()
     local args = {
-        [1] = VeryHugeNumber,
-        [2] = VeryHugeNumber
+        [1] = MaxBone,
+        [2] = MaxBone
     }
     workspace.AddBones:FireServer(unpack(args))
     end)
@@ -1401,6 +1404,19 @@ MainSection:NewButton("Auto Win", "Very OP", function()
 
 MainSection:NewButton("Stop Win", "E", function()
     AutoWin = false
+    end)
+end
+
+if game.PlaceId == 8321875194 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Coins", "OP", function(Coinss)
+        local args = {
+            [1] = Coinss
+        }
+        game:GetService("ReplicatedStorage").GiveCoin:FireServer(unpack(args))    
     end)
 end
 
