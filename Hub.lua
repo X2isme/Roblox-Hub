@@ -1420,6 +1420,18 @@ MainSection:NewTextBox("Get Coins", "OP", function(Coinss)
     end)
 end
 
+if game.PlaceId == 9173489535 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Coins", "OP", function(FliCoin)
+    local args = {
+        [1] = FliCoin
+    }
+    game:GetService("ReplicatedStorage").RemoteEvents.UpdateCoins:FireServer(unpack(args))  
+    end)
+end
 -- All Games
 
 local All = Window:NewTab("All")
