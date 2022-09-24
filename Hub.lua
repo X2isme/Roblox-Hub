@@ -1432,6 +1432,30 @@ MainSection:NewTextBox("Get Coins", "OP", function(FliCoin)
     game:GetService("ReplicatedStorage").RemoteEvents.UpdateCoins:FireServer(unpack(args))  
     end)
 end
+
+if game.PlaceId == 10676523834 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Win", "Very OP", function()
+    AutoWins = true
+    while AutoWins == true do
+        local args = {
+            [1] = "CheckAdd",
+            [2] = 14,
+            [3] = 14,
+            [4] = 14
+        }
+        game:GetService("ReplicatedStorage").RemoteEvents.Star_RemoteEvent:FireServer(unpack(args))
+        wait(0.001)        
+    end
+    end)
+
+MainSection:NewButton("Stop Win", "E", function()
+    AutoWins = false
+    end)
+end
 -- All Games
 
 local All = Window:NewTab("All")
