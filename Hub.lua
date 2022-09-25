@@ -1456,6 +1456,68 @@ MainSection:NewButton("Stop Win", "E", function()
     AutoWins = false
     end)
 end
+
+if game.PlaceId == 10827143707 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Win", "Very OP", function()
+    AutoBean = true
+    while AutoBean == true do
+        local args = {
+            [1] = math.random
+        }
+        game:GetService("ReplicatedStorage").Remotes.DialogInteraction:FireServer(unpack(args))
+    wait(tick)
+    end
+    end)
+
+MainSection:NewButton("Stop Win", "E", function()
+    AutoBean = false
+    end)
+end
+
+if game.PlaceId == 7026828578 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Speed", "Very OP", function()
+    AutoRebSped = true
+    while AutoRebSped == true do
+        local args = {
+            [1] = math.huge,
+            [2] = 20
+        }
+        game:GetService("ReplicatedStorage").GlobalFunctions.AddPlayerSpeed:FireServer(unpack(args))    
+        game:GetService("ReplicatedStorage").GlobalFunctions.RebirthPlayerCallFromClient:FireServer()
+    wait(BigTick)
+    end
+    end)
+
+MainSection:NewButton("Stop Speed", "EE", function()
+    AutoRebSped = false
+    end)
+
+MainSection:NewTextBox("Add Speed", "OP", function(AddSpeed)
+    local args = {
+        [1] = AddSpeed,
+        [2] = 20
+    }
+    game:GetService("ReplicatedStorage").GlobalFunctions.AddPlayerSpeed:FireServer(unpack(args))    
+    end)
+
+MainSection:NewButton("Fix Speed", "FixesSpeed", function()
+    local args = {
+        [1] = math.huge,
+        [2] = 20
+    }
+    game:GetService("ReplicatedStorage").GlobalFunctions.AddPlayerSpeed:FireServer(unpack(args))    
+    game:GetService("ReplicatedStorage").GlobalFunctions.RebirthPlayerCallFromClient:FireServer()
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
