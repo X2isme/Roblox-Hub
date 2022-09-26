@@ -1462,7 +1462,7 @@ if game.PlaceId == 10827143707 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewButton("Auto Win", "Very OP", function()
+MainSection:NewButton("Auto Bean", "Very OP", function()
     AutoBean = true
     while AutoBean == true do
         local args = {
@@ -1473,7 +1473,7 @@ MainSection:NewButton("Auto Win", "Very OP", function()
     end
     end)
 
-MainSection:NewButton("Stop Win", "E", function()
+MainSection:NewButton("Stop Bean", "E", function()
     AutoBean = false
     end)
 end
@@ -1515,6 +1515,24 @@ MainSection:NewButton("Fix Speed", "FixesSpeed", function()
     }
     game:GetService("ReplicatedStorage").GlobalFunctions.AddPlayerSpeed:FireServer(unpack(args))    
     game:GetService("ReplicatedStorage").GlobalFunctions.RebirthPlayerCallFromClient:FireServer()
+    end)
+end
+
+if game.PlaceId == 10577425443 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Win", "Very OP", function()
+    AutoDoWin = true
+    while AutoDoWin == true do
+        game:GetService("ReplicatedStorage").RF.GetWin:InvokeServer()
+    wait(tick)
+    end
+    end)
+
+MainSection:NewButton("Stop Win", "E", function()
+    AutoDoWin = false
     end)
 end
 
