@@ -1536,6 +1536,58 @@ MainSection:NewButton("Stop Win", "E", function()
     end)
 end
 
+if game.PlaceId == 9992339729 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Points for Answer", "For TextBox Below", function(BlocksAmount)
+    BlocksError = false
+    Blocks = BlocksAmount
+    Verify = Blocks
+    Verify = Verify:gsub("-", "")
+    Verify = Verify:gsub(" ", "")
+    Verify = Verify:gsub("0", "")
+    Verify = Verify:gsub("1", "")
+    Verify = Verify:gsub("2", "")
+    Verify = Verify:gsub("3", "")
+    Verify = Verify:gsub("4", "")
+    Verify = Verify:gsub("5", "")
+    Verify = Verify:gsub("6", "")
+    Verify = Verify:gsub("7", "")
+    Verify = Verify:gsub("8", "")
+    Verify = Verify:gsub("9", "")
+    VerifyNumber = #Verify
+    if VerifyNumber == 0 then
+        Blocks = Blocks:gsub(" ", "")
+        Verify = ""
+        BlocksError = false
+    else
+        print('[Error]: String "Blocks" has a INVALID Character. Please DoubleCheck. Blocks Will be Default')
+        BlocksError = true
+        Blocks = 0
+        end
+    end)
+
+MainSection:NewTextBox("Sumbmit Answer", "ANSWER HERE", function(Answer)
+    Answer = Answer:gsub(" ", "")
+    Answer = Answer:upper(Answer)
+    if BlocksError == true then
+        local args = {
+            [1] = Answer,
+            [2] = #Answer
+        }
+        game:GetService("ReplicatedStorage").SubmittedAnswer:FireServer(unpack(args))
+    else
+        local args = {
+            [1] = Answer,
+            [2] = Blocks
+        }
+        game:GetService("ReplicatedStorage").SubmittedAnswer:FireServer(unpack(args))
+        end
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
