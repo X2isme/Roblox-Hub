@@ -1604,8 +1604,21 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 MainSection:NewTextBox("GetMone", "1 is abt 90-250", function(EggMoney)
     HalfEggMoney = EggMoney/2
+    TycoonNumber = 0
+    repeat
     local args = {
-        [1] = 4,
+        [1] = TycoonNumber,
+        [2] = {
+            ["Event"] = "BuyRate",
+            ["Props"] = {
+                ["Amount"] = HalfEggMoney
+            }
+        }
+    }
+    game:GetService("ReplicatedStorage").ReplicaRemoteEvents.Replica_ReplicaSignal:FireServer(unpack(args))
+    --FixMone
+    local args = {
+        [1] = TycoonNumber,
         [2] = {
             ["Event"] = "BuyRate",
             ["Props"] = {
@@ -1614,19 +1627,19 @@ MainSection:NewTextBox("GetMone", "1 is abt 90-250", function(EggMoney)
         }
     }
     game:GetService("ReplicatedStorage").ReplicaRemoteEvents.Replica_ReplicaSignal:FireServer(unpack(args))
-    wait(0.01)
-    --FixMone
     local args = {
-        [1] = 4,
+        [1] = TycoonNumber,
         [2] = {
             ["Event"] = "BuyRate",
             ["Props"] = {
-                ["Amount"] = HalfEggMoney
+                ["Amount"] = -HalfEggMoney
             }
         }
     }
-
     game:GetService("ReplicatedStorage").ReplicaRemoteEvents.Replica_ReplicaSignal:FireServer(unpack(args))
+    TycoonNumber = TycoonNumber + 1
+    until TycoonNumber == 9
+    TycoonNumber = 0
     end)
 end
 
