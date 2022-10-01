@@ -80,15 +80,15 @@ end
     local MiscSection = Main:NewSection("Misc")
 
     MiscSection:NewButton("GodMode", "ONLY WORKS IN SPAWN", function()
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Health", "one", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, 2)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Health", "one", HugeNumber, 2)
     end)
 
     MiscSection:NewButton("GodMode NPC", "HIT A NPC TO GIVE IT GODMODE", function()
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Strength", "one", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, 2)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Strength", "one", HugeNumber, 2)
     end)
 
     MiscSection:NewButton("Reset Gold", "KILL A NPC TO RESET GOLD", function()
-        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Loot", "one", 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999, 2)
+        game.Players.LocalPlayer.RemoteFunctions.UR_ANTIHACK:FireServer("Loot", "one", HugeNumber, 2)
     end)
 end
 
@@ -98,12 +98,12 @@ end
     local MainSection = Main:NewSection("Main")
 
     MainSection:NewTextBox("Add Money", "Press Enter After Value", function(Money)
-        MAeN = Moen/2
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -Money, "Steel")
+        MoneyDivided = Money/2
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Buy", -MoneyDivided, "Steel")
         wait(0.3)
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
-        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", Money, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MoneyDivided, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MoneyDivided, "Steel")
+        game.Players.LocalPlayer.RemoteFunctions.SwordSystem:FireServer("Sell", MoneyDivided, "Steel")
     end)
 end
 
