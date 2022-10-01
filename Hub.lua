@@ -1598,27 +1598,35 @@ MainSection:NewButton("OP Gui", "Very OP", function()
     end)
 end
 
-if game.PlaceId == 10085978574 then
+if game.PlaceId == 10868496812 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
-
-MainSection:NewButton("Auto Gem", "Vyre ohpi", function()
-    DoAutoGem = true
-    while DoAutoGem == true do
-        local args = {
-            [1] = {
-                ["Gibbon"] = ""
-            },
-            [2] = 1682383331.5429688
+MainSection:NewTextBox("GetMone", "1 is abt 90-250", function(EggMoney)
+    HalfEggMoney = EggMoney/2
+    local args = {
+        [1] = 4,
+        [2] = {
+            ["Event"] = "BuyRate",
+            ["Props"] = {
+                ["Amount"] = -HalfEggMoney
+            }
         }
-        game:GetService("ReplicatedStorage").RemoteEvents.CollectibleInteraction:FireServer(unpack(args))        
-    wait(SmallTick)
-    end
-    end)
+    }
+    game:GetService("ReplicatedStorage").ReplicaRemoteEvents.Replica_ReplicaSignal:FireServer(unpack(args))
+    wait(0.01)
+    --FixMone
+    local args = {
+        [1] = 4,
+        [2] = {
+            ["Event"] = "BuyRate",
+            ["Props"] = {
+                ["Amount"] = HalfEggMoney
+            }
+        }
+    }
 
-MainSection:NewButton("Stop Win", "E", function()
-    DoAutoGem = false
+    game:GetService("ReplicatedStorage").ReplicaRemoteEvents.Replica_ReplicaSignal:FireServer(unpack(args))
     end)
 end
 
