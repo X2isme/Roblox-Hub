@@ -1527,7 +1527,7 @@ MainSection:NewButton("Auto Win", "Very OP", function()
     AutoDoWin = true
     while AutoDoWin == true do
         game:GetService("ReplicatedStorage").RF.GetWin:InvokeServer()
-    wait(tick)
+    wait(Tick)
     end
     end)
 
@@ -1595,6 +1595,30 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("OP Gui", "Very OP", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TrixAde/Proxima-Hub/main/Main.lua"))()
+    end)
+end
+
+if game.PlaceId == 10085978574 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Gem", "Vyre ohpi", function()
+    DoAutoGem = true
+    while DoAutoGem == true do
+        local args = {
+            [1] = {
+                ["Gibbon"] = ""
+            },
+            [2] = 1682383331.5429688
+        }
+        game:GetService("ReplicatedStorage").RemoteEvents.CollectibleInteraction:FireServer(unpack(args))        
+    wait(SmallTick)
+    end
+    end)
+
+MainSection:NewButton("Stop Win", "E", function()
+    DoAutoGem = false
     end)
 end
 
