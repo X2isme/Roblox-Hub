@@ -1672,6 +1672,15 @@ MainSection:NewTextBox("EquiptUpgrade", "VERY OP", function(Upgrade)
     end)
 end
 
+if game.PlaceId == 10631181587 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("gUI", "vERY oP", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/SleeksScripts/Stone-Miner-Simulator-2-Script/main/Script'))()  
+    end)
+end
 
 -- All Games
 
