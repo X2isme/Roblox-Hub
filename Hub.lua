@@ -1643,6 +1643,35 @@ MainSection:NewTextBox("GetMone", "1 is abt 90-250", function(EggMoney)
     end)
 end
 
+if game.PlaceId == 9297410766 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("HitBall", "Hits ball with max power", function()
+    local args = {
+        [1] = "yeet",
+        [2] = 1.04,
+        [3] = "GetALifeKid"
+    }
+    game:GetService("Players").LocalPlayer.Character.Act:FireServer(unpack(args))    
+    end)
+
+MainSection:NewDropdown("UpgradeType", "Select Upgrade Type", {"Uniform", "Cleats", "Hat", "Ball"}, function(UT)
+    UpgradeType = UT
+    end)
+
+MainSection:NewTextBox("EquiptUpgrade", "VERY OP", function(Upgrade)
+    local args = {
+        [1] = "Equip",
+        [2] = UpgradeType,
+        [3] = Upgrade,
+        [4] = "GetALifeKid"
+    }
+    game:GetService("ReplicatedStorage").Action:FireServer(unpack(args))    
+    end)
+end
+
 
 -- All Games
 
