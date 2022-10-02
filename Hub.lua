@@ -1682,6 +1682,19 @@ MainSection:NewButton("gUI", "vERY oP", function()
     end)
 end
 
+if game.PlaceId == 9648883891 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Money", "VERY OP", function(GCOIN)
+    local args = {
+        [1] = GCOIN
+    }
+    game:GetService("ReplicatedStorage").RemoteObjects.DanceGameCash:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
