@@ -1828,6 +1828,90 @@ MainSection:NewButton("wINN aLL oBBY", "vERY oP", function()
     end)
 end
 
+if game.PlaceId == 10631181587 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Winn All Obby", "Ez?", function()
+setsimulationradius(1000,1000)
+    _G.test = true
+    while _G.test do
+        wait()
+    for i,v in pairs(game.Workspace.Tycoons[game.Players.LocalPlayer.Team.Name].Gumballs:GetChildren()) do
+        if v.Name == "Gumball" and isnetworkowner(v) then
+            v.CFrame = Game.Workspace.Tycoons[game.Players.LocalPlayer.Team.Name].Interact.Guminator.Converter.CFrame
+        end
+    end
+end
+end)
+end
+
+if game.PlaceId == 10859465529 then
+-- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Safe", "Save Urself. WAIT AFTER USE", function()
+    game:GetService("ReplicatedStorage").RemoteCalls.GameSpecific.Title.ReturnToTitleScreen:InvokeServer()
+    wait(5)
+    local ts = game:GetService("TeleportService")
+    local p = game:GetService("Players").LocalPlayer
+    ts:Teleport(game.PlaceId, p)
+    end)
+end
+
+if game.PlaceId == 9677464361 then
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoFarm", "Very OP", function()
+    AutoFarms = true
+    while AutoFarms == true do
+        local args = {
+            [1] = "Shoot",
+            [2] = "Green"
+        }
+        game:GetService("ReplicatedStorage").RF:InvokeServer(unpack(args))
+              
+        local args = {
+            [1] = "Made"
+        }
+        game:GetService("ReplicatedStorage").RE:FireServer(unpack(args))        
+        wait(0.1)
+    end
+    end)
+
+MainSection:NewButton("Stop Win", "E", function()
+    AutoFarms = false
+    end)
+
+    if game.PlaceId == 10462101644 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    
+MainSection:NewTextBox("ChangeHeight", ".........", function(Height)
+    local args = {
+        [1] = "ChangeHeight",
+        [2] = Height,
+        [3] = false
+    }
+    game:GetService("ReplicatedStorage").Events.Props.PropRF:InvokeServer(unpack(args))
+        end)
+    end
+
+MainSection:NewTextBox("ChangeWheight", ".........", function(Wheight)
+    local args = {
+         [1] = "ChangeWheight",
+        [2] = Wheight,
+        [3] = false
+    }
+    game:GetService("ReplicatedStorage").Events.Props.PropRF:InvokeServer(unpack(args))
+        end)
+    end
+
 -- All Games
 
 local All = Window:NewTab("All")
@@ -1937,25 +2021,6 @@ old = hookmetamethod(game,"__namecall",function(self,...)
    return old(self,...)
 end)
     end)
-
-    if game.PlaceId == 10631181587 then
-        -- MAIN
-    local Main = Window:NewTab("Main")
-    local MainSection = Main:NewSection("Main")
-    
-MainSection:NewButton("Winn All Obby", "Ez?", function()
-    setsimulationradius(1000,1000)
-        _G.test = true
-        while _G.test do
-            wait()
-        for i,v in pairs(game.Workspace.Tycoons[game.Players.LocalPlayer.Team.Name].Gumballs:GetChildren()) do
-            if v.Name == "Gumball" and isnetworkowner(v) then
-                v.CFrame = Game.Workspace.Tycoons[game.Players.LocalPlayer.Team.Name].Interact.Guminator.Converter.CFrame
-            end
-        end
-    end
-    end)
-end
 
     -- Hubs
 
