@@ -1687,11 +1687,58 @@ if game.PlaceId == 9648883891 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewTextBox("Get Money", "VERY OP", function(GCOIN)
+MainSection:NewTextBox("Get Money", "VERY OP", function(GCOIN) 
     local args = {
         [1] = GCOIN
     }
     game:GetService("ReplicatedStorage").RemoteObjects.DanceGameCash:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 10631181587 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("GetDayRewards", "VERY OP", function()
+    Day = 0
+    repeat
+    local args = {
+        [1] = "get_seven_day_reward",
+        [2] = {
+            ["1"] = Day
+        }
+    }
+    game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer(unpack(args))
+    Day = Day+1
+    until Day == 9
+    end)
+
+MainSection:NewButton("GAMEPASSES", "VERY OP", function()   
+    for x = 1, 7 do
+        local A_1 = "get_seven_day_reward"
+        local A_2 = {["1"] = x}
+        local Event = game:GetService("ReplicatedStorage").RemoteFunction
+        Event:InvokeServer(A_1, A_2)
+        wait()
+    end
+    
+    for _, v in pairs(game:GetService("Workspace").Code:GetChildren()) do
+        local A_1 = "redeem_code"
+        local A_2 = {
+            ["1"] = v.SurfaceGui.TextLabel.Text
+            }
+        local Event = game:GetService("ReplicatedStorage").RemoteFunction
+        Event:InvokeServer(A_1, A_2)
+    end
+        
+    for _, v in pairs(game:GetService("Workspace").Code2:GetChildren()) do
+        local A_1 = "redeem_code"
+        local A_2 = {
+            ["1"] = v.SurfaceGui.TextLabel.Text
+        }
+        local Event = game:GetService("ReplicatedStorage").RemoteFunction 	Event:InvokeServer(A_1, A_2)
+        end
     end)
 end
 
