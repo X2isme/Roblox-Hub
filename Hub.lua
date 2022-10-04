@@ -1912,6 +1912,76 @@ MainSection:NewTextBox("ChangeWheight", ".........", function(Wheight)
         end)
     end
 
+if game.PlaceId == 10266345621 then
+        -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    
+    MainSection:NewButton("Auto SnowBall", "Very OP", function()
+        AutoSnowBall = true
+        while AutoSnowBall == true do
+            game:GetService("ReplicatedStorage").Events.Ball.CollectSnow:FireServer()
+        wait(Tick)
+        end
+    end)
+    
+    MainSection:NewButton("Stop Snow", "E", function()
+        AutoSnowBall = false
+    end)
+end
+
+if game.PlaceId == 10266345621 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Auto SnowBall", "Very OP", function()
+        AutoSnowBall = true
+        while AutoSnowBall == true do
+        game:GetService("ReplicatedStorage").Events.CollectSnow:FireServer()
+        wait(Tick)
+        end
+    end)
+
+    MainSection:NewButton("Stop Snow", "E", function()
+        AutoSnowBall = false
+    end)
+
+    MainSection:NewButton("AntiPush", "Very OP", function()
+        AntiPush = true
+        while AntiPush == true do
+        local args = {
+            [1] = true
+        }
+        game:GetService("ReplicatedStorage").Events.JumpState:FireServer(unpack(args))
+        wait(Tick)
+        end
+    end)
+
+    MainSection:NewButton("Stop AntiPush", "E", function()
+        AntiPush = false
+    end)
+end
+
+if game.PlaceId == 8216162783 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("ID.HoldAnyItem", "Use the ID 1000+", function(TOOLID)
+        local args = {
+            [1] = "TakeTool",
+            [2] = TOOLID,
+            [3] = true
+        }
+        game:GetService("ReplicatedStorage").Events.PickAndDrop.PickAndDropRE:FireServer(unpack(args))
+        
+    end)
+
+    MainSection:NewButton("GUI", "E", function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/vhNFzwzE'))()
+    end)
+end
 -- All Games
 
 local All = Window:NewTab("All")
