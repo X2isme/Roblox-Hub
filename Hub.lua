@@ -1982,6 +1982,22 @@ local MainSection = Main:NewSection("Main")
         loadstring(game:HttpGet('https://pastebin.com/raw/vhNFzwzE'))()
     end)
 end
+
+if game.PlaceId == 10903978962 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Get wool LVL", "dont put big number!!!", function(WoolLVL)
+        local args = {
+            [1] = WoolLVL,
+            [2] = Vector3.new(348.5956726074219, 3.312828779220581, 596.522705078125)
+        }
+
+        game:GetService("ReplicatedStorage").Signals.RemoteEvents.GetWoolRemote:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
