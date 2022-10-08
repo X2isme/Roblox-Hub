@@ -2042,6 +2042,23 @@ MainSection:NewTextBox("DoTrade", "put victim", function(DoTradeVictim)
     end)
 end
 
+if game.PlaceId == 4133011719 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Auto Score", "O.P.", function()
+    AutoScore = true
+    while AutoScore == true do
+        game:GetService("ReplicatedStorage").Events.ScoreUpdate:FireServer()
+        end
+    end)
+
+MainSection:NewButton("Stop Auto Score", ".P.O", function()
+    AutoScore = false
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
