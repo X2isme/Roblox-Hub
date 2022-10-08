@@ -11,6 +11,7 @@ local VeryHugeNumber = math.pow (SmallBigNumber, 61)
 local HugerNumber = math.pow (SmallBigNumber, 29)
 local HugeNumber = math.pow (SmallBigNumber, 3)
 local MathHuge = math.huge
+local localplayer = game.Players.LocalPlayer
 -- print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
 -- AllPlayers
 Players = game:GetService("Players")
@@ -1995,6 +1996,49 @@ local MainSection = Main:NewSection("Main")
         }
 
         game:GetService("ReplicatedStorage").Signals.RemoteEvents.GetWoolRemote:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 394846350 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Get JP", "dont put big number!!!", function(JPR)
+        local args = {
+            [1] = JPR,
+            [2] = 2
+        }
+        game:GetService("ReplicatedStorage").GlobalFunctions.AddPlayerSpeed:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 9745792410 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Auto EXP Pet", "put pet", function(AutoExpPet)
+        local args = {
+            [1] = {
+                ["PetEvolution"] = "Normal",
+                ["PetName"] = AutoExpPet
+            }
+        }
+        game:GetService("ReplicatedStorage").GameClient.Events.RemoteFunction.GetGlobalPetCount:InvokeServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("DoTrade", "put victim", function(DoTradeVictim)
+        local args = {
+            [1] = DoTradeVictim,
+            [2] = "Accept"
+        }
+        game:GetService("ReplicatedStorage").GameClient.Events.RemoteEvent.AcceptDeclineTrade:FireServer(unpack(args))
+        local args = {
+            [1] = localplayer,
+            [2] = "Accept"
+        }
+        game:GetService("ReplicatedStorage").GameClient.Events.RemoteEvent.AcceptDeclineTrade:FireServer(unpack(args))
     end)
 end
 
