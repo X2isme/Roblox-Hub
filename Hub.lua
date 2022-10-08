@@ -2018,7 +2018,7 @@ if game.PlaceId == 9745792410 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewTextBox("Auto EXP Pet", "put pet", function(AutoExpPet)
+    MainSection:NewButton("Auto EXP Pet", "put pet", function()
         AutoExpPets = true
         while AutoExpPets == true do
         local args = {
@@ -2040,7 +2040,6 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("stop Auto EXP Pet", "put pet", function()
     AutoExpPets = false
-    end
 end)
 
 MainSection:NewTextBox("DoTrade", "put victim", function(DoTradeVictim)
@@ -2071,6 +2070,33 @@ MainSection:NewButton("Auto Score", "O.P.", function()
 
 MainSection:NewButton("Stop Auto Score", ".P.O", function()
     AutoScore = false
+    end)
+end
+
+if game.PlaceId == 8668673762 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Upgrade Juice", "Dosent Show On GUI", function()
+    local args = {
+        [1] = "Juice"
+    }
+        game:GetService("ReplicatedStorage").MainEvents.OpeningUpgrade:FireServer(unpack(args))
+    end)
+
+MainSection:NewButton("Upgrade Wrench", "Dosent Show On GUI", function()
+    local args = {
+        [1] = "Wrench"
+    }
+        game:GetService("ReplicatedStorage").MainEvents.OpeningUpgrade:FireServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("ArmorWithProp", "Dosent Show On GUI", function(PropLevel)
+    local args = {
+        [1] = PropLevel
+    }
+    game:GetService("ReplicatedStorage").MainEvents.ReceivingArmor:FireServer(unpack(args))
     end)
 end
 
