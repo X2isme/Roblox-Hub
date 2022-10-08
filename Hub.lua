@@ -2019,6 +2019,8 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
     MainSection:NewTextBox("Auto EXP Pet", "put pet", function(AutoExpPet)
+        AutoExpPets = true
+        while AutoExpPets == true do
         local args = {
             [1] = {
                 ["PetEvolution"] = "Normal",
@@ -2026,7 +2028,20 @@ local MainSection = Main:NewSection("Main")
             }
         }
         game:GetService("ReplicatedStorage").GameClient.Events.RemoteFunction.GetGlobalPetCount:InvokeServer(unpack(args))
+        local args = {
+            [1] = {
+                ["PetEvolution"] = "Shiny",
+                ["PetName"] = AutoExpPet
+            }
+        }
+        game:GetService("ReplicatedStorage").GameClient.Events.RemoteFunction.GetGlobalPetCount:InvokeServer(unpack(args))
+        end
     end)
+
+MainSection:NewButton("stop Auto EXP Pet", "put pet", function()
+    AutoExpPets = false
+    end
+end)
 
 MainSection:NewTextBox("DoTrade", "put victim", function(DoTradeVictim)
         local args = {
