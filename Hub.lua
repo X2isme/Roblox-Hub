@@ -2073,7 +2073,7 @@ MainSection:NewButton("Stop Auto Score", ".P.O", function()
     end)
 end
 
-if game.PlaceId == 8668673762 then
+if game.PlaceId == 9558459273 then
     -- MAIN
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
@@ -2104,6 +2104,15 @@ end
 
 local All = Window:NewTab("All")
 local AllSection = All:NewSection("All Games")
+
+
+    AllSection:NewButton("Full Bright", "Vry OP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/FullBright.lua"))()
+    end)
+
+    AllSection:NewButton("Anti Kick", "Vry OP", function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/gsxvWvnj"))()
+    end)
 
     AllSection:NewButton("Copy Console", "Console has to be open", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/console.lua",true))() 
