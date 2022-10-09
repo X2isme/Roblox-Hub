@@ -2100,6 +2100,49 @@ MainSection:NewTextBox("ArmorWithProp", "Dosent Show On GUI", function(PropLevel
     end)
 end
 
+if game.PlaceId == 2693739238 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Loot ID", "VERYOP", function(LootId)
+    local args = {
+        [1] = LootId
+    }
+    game:GetService("ReplicatedStorage").Events.Loot.RequestLoot:FireServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("FakeHold", "VERYOP", function(FakeHoldItem)
+    FakeHoldItemCaps = string.upper(FakeHoldItem)
+    local args = {
+        [1] = FakeHoldItemCaps
+    }
+    game:GetService("ReplicatedStorage").RemoteEvents.setup:FireServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("Select Gun", "VERYOP", function(SelectedGun)
+    SelectedGunAll = SelectedGun
+    end)
+
+MainSection:NewButton("Buy Gun", "VERYOP", function()
+    local args = {
+        [1] = SelectedGunAll
+    }
+    game:GetService("ReplicatedStorage").Events.GunShop.RequestBuy:FireServer(unpack(args))
+    end)
+
+MainSection:NewButton("Escape Jail", "VERYOP", function()
+    Game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1327.28125, 12.787861824035645, 31.134889602661133)
+    end)
+
+MainSection:NewButton("Sell All", "VERYOP", function()
+    local args = {
+        [1] = 3
+    }
+    game:GetService("ReplicatedStorage").Events.Shop.RequestSellAll:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
