@@ -2184,7 +2184,7 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCollectDrops", "VERYOP", function()
-    AutoCollectDrop == true
+    AutoCollectDrop = true
     if AutoCollectDrop == true then
         for i,v in pairs(game:GetService("Workspace").Debris.Pickups:GetDescendants()) do
             if v.ClassName == "Part" then
@@ -2202,7 +2202,7 @@ MainSection:NewButton("AutoCollectDrops", "VERYOP", function()
     end)
 
 MainSection:NewButton("StopCollectDrops", "VERYOP", function()
-    AutoCollectDrop == false
+    AutoCollectDrop = false
     end)
 end
 
@@ -2212,7 +2212,7 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCoin", "VERYOP", function()
-    AutoSoccerBall == true
+    AutoSoccerBall = true
     if AutoSoccerBall == true then
         game:GetService("ReplicatedStorage").BallHandler_OnKick:FireServer()
         local args = {
@@ -2242,7 +2242,7 @@ MainSection:NewButton("AutoCoin", "VERYOP", function()
     end)
 
 MainSection:NewButton("Stop AutoCoin", "VERYOP", function()
-    AutoSoccerBall == false
+    AutoSoccerBall = false
     end)
 end
 
@@ -2252,8 +2252,8 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoGrow", "VERYOP", function()
-    AutoGrow == true
-    if AutoGrow == true do
+    AutoGrow = true
+    if AutoGrow == true then
         timer = 0
         repeat
             workspace.Events.AddPoints:FireServer()
@@ -2268,7 +2268,7 @@ MainSection:NewButton("AutoGrow", "VERYOP", function()
     end)
 
 MainSection:NewButton("Stop AutoGrow", "VERYOP", function()
-    AutoGrow == false
+    AutoGrow = false
     end)
 end
 
