@@ -2159,6 +2159,93 @@ MainSection:NewTextBox("Get Trail/Item", "VERYOP", function(ItemTrail)
     end)
 end
 
+if game.PlaceId == 7476406054 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Get AdminCrystalTrail", "VERYOP", function()
+    local args = {
+        [1] = "Buy",
+        [2] = "AdminCrystal"
+    }
+    game:GetService("Players").LocalPlayer.BuyTrail:FireServer(unpack(args))
+    local args = {
+        [1] = "Equip",
+        [2] = "AdminCrystal"
+    }
+    game:GetService("Players").LocalPlayer.BuyTrail:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 6892252562 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoCollectDrops", "VERYOP", function()
+    AutoCollectDrop == true
+    if AutoCollectDrop == true then
+        for i,v in pairs(game:GetService("Workspace").Debris.Pickups:GetDescendants()) do
+            if v.ClassName == "Part" then
+                v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,100)
+            end
+        end
+        wait(.1)
+        for i,v in pairs(game:GetService("Workspace").Debris.Pickups:GetDescendants()) do
+            if v.ClassName == "Part" then
+                v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,0)
+            end
+        end
+        wait(.1)
+    end
+    end)
+
+MainSection:NewButton("StopCollectDrops", "VERYOP", function()
+    AutoCollectDrop == false
+    end)
+end
+
+if game.PlaceId == 9486506804 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoCoin", "VERYOP", function()
+    AutoSoccerBall == true
+    if AutoSoccerBall == true then
+        game:GetService("ReplicatedStorage").BallHandler_OnKick:FireServer()
+        local args = {
+            [1] = workspace.Lobby.AdventureFootball.Courses.Course3.Coins.Coin,
+            [2] = true
+        }
+        game:GetService("ReplicatedStorage").Zurich_OnCoinPickUpEvent:FireServer(unpack(args))
+        local args = {
+            [1] = workspace.Lobby.AdventureFootball.Courses.Course3.Coins.Coin,
+            [2] = true
+        }
+        game:GetService("ReplicatedStorage").Zurich_OnCoinPickUpEvent:FireServer(unpack(args))
+        local args = {
+            [1] = {
+                ["GameMode"] = "Minigolf",
+                ["Name"] = "Course1",
+                ["Position"] = Vector3.new(68.660400390625, 3.080204486846924, -340.1939697265625),
+                ["Id"] = 1,
+                ["IsLong"] = false,
+                ["Goal"] = workspace.Courses.Adventure.TriggerSpawnBall1.GoalCourse3,
+                ["Part"] = workspace.Courses.Adventure.TriggerSpawnBall1
+            }
+        }
+        game:GetService("ReplicatedStorage").Minigolf_OnScore:FireServer(unpack(args))
+        game:GetService("ReplicatedStorage").BallHandler_OnKickFinished:FireServer()
+        end
+    end)
+
+MainSection:NewButton("Stop AutoCoin", "VERYOP", function()
+    AutoSoccerBall == false
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
@@ -2167,6 +2254,16 @@ local AllSection = All:NewSection("All Games")
 
     AllSection:NewButton("Full Bright", "Vry OP", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/FullBright.lua"))()
+    end)
+
+    AllSection:NewButton("BadgeWalk Hack", "Vry OP", function()
+        for _,v in pairs(workspace:GetDescendants()) do
+            if v:IsA("TouchTransmitter") then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0) --0 is touch
+                task.wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
+            end
+        end
     end)
 
     AllSection:NewButton("Anti Kick", "Vry OP", function()
