@@ -2246,6 +2246,32 @@ MainSection:NewButton("Stop AutoCoin", "VERYOP", function()
     end)
 end
 
+if game.PlaceId == 2726456994 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoGrow", "VERYOP", function()
+    AutoGrow == true
+    if AutoGrow == true do
+        timer = 0
+        repeat
+            workspace.Events.AddPoints:FireServer()
+            workspace.Events.AddPoints:FireServer()
+            workspace.Events.AddPoints:FireServer()
+            workspace.Events.AddPoints:FireServer()
+            workspace.Events.AddPoints:FireServer()
+            timer = timer+1
+        until timer == 1000
+        wait(0.01)
+        end
+    end)
+
+MainSection:NewButton("Stop AutoGrow", "VERYOP", function()
+    AutoGrow == false
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
