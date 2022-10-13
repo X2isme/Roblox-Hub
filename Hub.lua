@@ -2143,6 +2143,22 @@ MainSection:NewButton("Sell All", "VERYOP", function()
     end)
 end
 
+if game.PlaceId == 9105971785 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Trail/Item", "VERYOP", function(ItemTrail)
+    local args = {
+        [1] = game:GetService("ReplicatedStorage").Profiles.localplayer.Inventory.Items,
+        [2] = ItemTrail,
+        [3] = false,
+        [4] = 0
+    }
+    game:GetService("ReplicatedStorage").Shared.Inventory.RewardItem:InvokeServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
