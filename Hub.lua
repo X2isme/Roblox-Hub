@@ -2185,7 +2185,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCollectDrops", "VERYOP", function()
     AutoCollectDrop = true
-    if AutoCollectDrop == true then
+    if AutoCollectDrop == true do
         for i,v in pairs(game:GetService("Workspace").Debris.Pickups:GetDescendants()) do
             if v.ClassName == "Part" then
                 v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,100)
@@ -2213,7 +2213,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCoin", "VERYOP", function()
     AutoSoccerBall = true
-    if AutoSoccerBall == true then
+    if AutoSoccerBall == true do
         game:GetService("ReplicatedStorage").BallHandler_OnKick:FireServer()
         local args = {
             [1] = workspace.Lobby.AdventureFootball.Courses.Course3.Coins.Coin,
@@ -2253,7 +2253,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoGrow", "VERYOP", function()
     AutoGrow = true
-    if AutoGrow == true then
+    if AutoGrow == true do
         timer = 0
         repeat
             workspace.Events.AddPoints:FireServer()
@@ -2269,6 +2269,44 @@ MainSection:NewButton("AutoGrow", "VERYOP", function()
 
 MainSection:NewButton("Stop AutoGrow", "VERYOP", function()
     AutoGrow = false
+    end)
+end
+
+if game.PlaceId == 9107444852 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("AutoRebirth", "VERYOP", function()
+    AutoSlapReb = true
+    if AutoSlapReb == true do
+        local args = {
+            [1] = {
+                [1] = 1
+            }
+        }
+        game:GetService("ReplicatedStorage").Fwk.RemoteEvents.Rebirth:FireServer(unpack(args))
+        wait(0.3)
+        end
+    end)
+
+MainSection:NewButton("StopRebirth", "VERYOP", function()
+    AutoSlapReb = false
+    end)
+
+MainSection:NewButton("AutoClick", "VERYOP", function()
+    AutoSlap = true
+    if AutoSlap == true do
+        local args = {
+            [1] = {}
+        }
+        game:GetService("ReplicatedStorage").Fwk.RemoteEvents.Click:FireServer(unpack(args))
+        wait(0.005)
+        end
+    end)
+    
+MainSection:NewButton("Stop AutoClick", "VERYOP", function()
+    AutoSlap = false
     end)
 end
 
