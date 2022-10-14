@@ -2185,7 +2185,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCollectDrops", "VERYOP", function()
     AutoCollectDrop = true
-    if AutoCollectDrop == true do
+    while AutoCollectDrop == true do
         for i,v in pairs(game:GetService("Workspace").Debris.Pickups:GetDescendants()) do
             if v.ClassName == "Part" then
                 v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0,0,100)
@@ -2213,7 +2213,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoCoin", "VERYOP", function()
     AutoSoccerBall = true
-    if AutoSoccerBall == true do
+    while AutoSoccerBall == true do
         game:GetService("ReplicatedStorage").BallHandler_OnKick:FireServer()
         local args = {
             [1] = workspace.Lobby.AdventureFootball.Courses.Course3.Coins.Coin,
@@ -2253,7 +2253,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoGrow", "VERYOP", function()
     AutoGrow = true
-    if AutoGrow == true do
+    while AutoGrow == true do
         timer = 0
         repeat
             workspace.Events.AddPoints:FireServer()
@@ -2279,7 +2279,7 @@ local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("AutoRebirth", "VERYOP", function()
     AutoSlapReb = true
-    if AutoSlapReb == true do
+    while AutoSlapReb == true do
         local args = {
             [1] = {
                 [1] = 1
@@ -2296,7 +2296,7 @@ MainSection:NewButton("StopRebirth", "VERYOP", function()
 
 MainSection:NewButton("AutoClick", "VERYOP", function()
     AutoSlap = true
-    if AutoSlap == true do
+    while AutoSlap == true do
         local args = {
             [1] = {}
         }
