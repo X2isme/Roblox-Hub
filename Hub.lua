@@ -31,6 +31,7 @@ if game.PlaceId == 8508161757 then
         AutoTipCashBag = true
         while AutoTipCashBag == true do
             game.ReplicatedStorage.CashBags.TipCashBag:FireServer()
+            wait(tick)
         end
     end)
 
@@ -42,6 +43,37 @@ if game.PlaceId == 8508161757 then
         AutoBathCashBag = true
         while AutoBathCashBag == true do
             game.ReplicatedStorage.CashBags.BathCashBag:FireServer()
+            wait(tick)
+        end
+    end)
+
+    MainSection:NewButton("Stop AutoBathFarm", "Must have Bath!", function()
+        AutoBathCashBag = false
+    end)
+end
+
+if game.PlaceId == 10820788503 then
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main Stuffs")
+
+    MainSection:NewButton("AutoSpawn Tips CashBag", "Must have Tip Jar!", function()
+        AutoTipCashBag = true
+        while AutoTipCashBag == true do
+            game.ReplicatedStorage.CashBags.TipCashBag:FireServer()
+            wait(tick)
+        end
+    end)
+
+    MainSection:NewButton("Stop AutoTipFarm", "Must have Tip Jar!", function()
+        AutoTipCashBag = false
+    end)
+
+    MainSection:NewButton("AutoSpawn Bath CashBag", "Must have Bath!", function()
+        AutoBathCashBag = true
+        while AutoBathCashBag == true do
+            game.ReplicatedStorage.CashBags.BathCashBag:FireServer()
+            wait(tick)
         end
     end)
 
@@ -2307,6 +2339,61 @@ MainSection:NewButton("AutoClick", "VERYOP", function()
     
 MainSection:NewButton("Stop AutoClick", "VERYOP", function()
     AutoSlap = false
+    end)
+end
+
+if game.PlaceId == 9107444852 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("SpawnCar", "EX: 110_3", function(CarSpawn)
+    local args = {
+        [1] = CarSpawn
+    }
+    game:GetService("ReplicatedStorage").RemoteFunctions.Main.SpawnVehicle:InvokeServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 10977918334 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Get wool LVL", "dont put big number!!!", function(WoolLVLS)
+        local args = {
+            [1] = WoolLVLS,
+            [2] = Vector3.new(-310.0931701660156, 5.566789627075195, 2.98732328414917)
+        }
+        game:GetService("ReplicatedStorage").Signals.RemoteEvents.GetWoolRemote:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 10779604733 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Pumkin2022", "Vry OP", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2734.9917, 148.845978, 355.287109, 0.130346656, -0, -0.99146843, 0, 1, -0, 0.99146843, 0, 0.130346656)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2723.70044, 140.232941, 515.602234, 0.631954789, -0.151853248, -0.759982765, 0.578600049, 0.744848609, 0.332298845, 0.51561147, -0.649723887, 0.558572948)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2273.19141, 159.28598, 359.098297, -0.0923259258, 0.541163802, -0.83583349, -0.140492842, 0.82394141, 0.548983037, 0.985767543, 0.168114021, -4.14848328e-05)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2922.73218, 245.187836, 347.579437, -0.0501396656, 0, -0.998742163, 0, 1, 0, 0.998742163, 0, -0.0501396656)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2083.13184, 171.586182, 543.775024, -0.711478353, 0, -0.702708066, 0, 1, 0, 0.702708066, 0, -0.711478353)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2528.88062, 100.91748, 501.91748, -0.238877892, 0.489428699, -0.838687658, -0.0249191523, 0.860317707, 0.509148836, 0.970729828, 0.14252378, -0.193314672)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2583.37793, 112.563072, 554.459229, -0.99855423, 0, 0.05375918, 0, 1, 0, -0.05375918, 0, -0.99855423)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2641.78394, 86.5, 309.783875, 0.994300961, 0.014680529, 0.105594218, -0.0134198256, 0.999830067, -0.012639788, -0.105761826, 0.0111506963, 0.994328976)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2738.94458, 135.067657, 379.401733, 0.860451758, -0.0288628861, 0.508713841, 0.110712625, 0.985131919, -0.131368786, -0.497358561, 0.169357538, 0.85085398)
+        wait(0.001)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2680.90771, 136.654449, 413.513184, 0.955782771, -0, -0.294073611, 0, 1, -0, 0.294073611, 0, 0.955782771)
     end)
 end
 
