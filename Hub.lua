@@ -1,3 +1,5 @@
+print("E")
+TestVariable = ""
 if TestVariable = true
     print("T")
 end
