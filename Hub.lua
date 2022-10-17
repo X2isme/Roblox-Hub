@@ -1,6 +1,6 @@
 print("E")
 TestVariable = ""
-if TestVariable = true
+if TestVariable == true then
     print("T")
 end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
