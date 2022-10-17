@@ -1,3 +1,6 @@
+if TestVariable = true
+    print("T")
+end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 -- Variables
