@@ -1,8 +1,3 @@
-print("E")
-TestVariable = ""
-if TestVariable == true then
-    print("T")
-end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 local Window = Library.CreateLib("Craddee's Bad Hub", "Ocean")
 -- Variables
@@ -2399,6 +2394,60 @@ local MainSection = Main:NewSection("Main")
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2738.94458, 135.067657, 379.401733, 0.860451758, -0.0288628861, 0.508713841, 0.110712625, 0.985131919, -0.131368786, -0.497358561, 0.169357538, 0.85085398)
         wait(0.001)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2680.90771, 136.654449, 413.513184, 0.955782771, -0, -0.294073611, 0, 1, -0, 0.294073611, 0, 0.955782771)
+    end)
+end
+
+if game.PlaceId == 10541365934 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewTextBox("Give Pet", "Vry OP", function(GivePett)
+    local args = {
+        [1] = GivePett
+    }
+    game:GetService("ReplicatedStorage").GivePet:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 7070810903 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoCry", "Vry OP", function()
+        autocry = true
+        while autocry == true do
+            wait(0.06)
+            timer = 0
+            repeat
+                local args = {
+                    [1] = true
+                }
+                game:GetService("ReplicatedStorage").RemoteEvents.ManageCrying:FireServer(unpack(args))
+                timer = timer + 1
+            until timer == 5
+        end
+    end)
+
+    MainSection:NewButton("AutoDrink", "Vry OP", function()
+        aurodrink = true
+        while autodrink == true do
+            wait(0.1)
+            local args = {
+                [1] = true
+            }
+            game:GetService("ReplicatedStorage").RemoteEvents.ManageCrying:FireServer(unpack(args))
+        end
+    end)
+
+    MainSection:NewButton("StopCry", "Vry OP", function()
+        autocry = false
+        end
+    end)
+
+    MainSection:NewButton("StopDRink", "Vry OP", function()
+        autodrink = false
     end)
 end
 
