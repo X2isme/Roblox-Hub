@@ -2550,6 +2550,22 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 6711562581 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+  
+    MainSection:NewTextBox("Get Money", "VRYOP", function(CarCash)
+    local args = {
+        [1] = "Sanctioned",
+        [2] = -CarCash,
+        [3] = "490256744",
+        [4] = {}
+    }
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
