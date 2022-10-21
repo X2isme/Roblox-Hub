@@ -2492,6 +2492,35 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 9524757503 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("GetAllCaptures", "VRYOP", function()
+        timer = 0
+        repeat
+            str = "Part".. timer
+            local args = {
+                [1] = str
+            }
+            
+            game:GetService("ReplicatedStorage").EvtRemoteAbsorbBeatNode:FireServer(unpack(args))
+            timer = timer + 1
+            wait(0.0001)
+        until timer == 1000
+    end)
+end
+
+if game.PlaceId == 7462526249 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("FreeUGC", "VRYOP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/2022NikeFREEUGC.lua",true))()
+    end)
+end
 -- All Games
 
 local All = Window:NewTab("All")
