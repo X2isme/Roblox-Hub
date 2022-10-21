@@ -2471,6 +2471,27 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 8230149084 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewDropdown("SelectItem", "Select a item for below", {"Nuke", "Gift", "SpeedChanger", "Reset"}, function(Item)
+        Fixitem = Item
+    end)
+    
+    MainSection:NewTextBox("Price", "(Gems) Also buys item", function(GemsPrice)
+        location = game:GetService("ReplicatedStorage").Shop[Fixitem]
+        GemsPriceAsInt = tonumber(GemsPrice)
+    local args = {
+        [1] = "Gems",
+        [2] = GemsPriceAsInt,
+        [3] = location
+    }
+    game:GetService("ReplicatedStorage").ShopEvent:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
