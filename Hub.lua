@@ -2521,6 +2521,35 @@ local MainSection = Main:NewSection("Main")
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/2022NikeFREEUGC.lua",true))()
     end)
 end
+
+if game.PlaceId == 10085978574 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoGem", "Vry OP", function()
+        AutoGems = true
+        while AutoGems == true do
+            wait(0.06)
+            timer = 0
+            repeat
+                local args = {
+                    [1] = {
+                        ["Gibbon"] = ""
+                    },
+                    [2] = 1682383331.5429688
+                }
+                game:GetService("ReplicatedStorage").RemoteEvents.CollectibleInteraction:FireServer(unpack(args))
+                timer = timer + 1
+            until timer == 35
+        end
+    end)
+
+    MainSection:NewButton("StopGem", "Vry OP", function()
+        AutoGems = false
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
