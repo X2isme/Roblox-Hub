@@ -2443,7 +2443,6 @@ local MainSection = Main:NewSection("Main")
 
     MainSection:NewButton("StopCry", "Vry OP", function()
         autocry = false
-        end
     end)
 
     MainSection:NewButton("StopDRink", "Vry OP", function()
