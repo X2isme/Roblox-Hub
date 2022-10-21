@@ -2566,6 +2566,31 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 4898339524 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("QuickCrash", "Vry OP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/RagdollSuperBreak.lua",true))()
+    end)
+end
+
+if game.PlaceId == 8188728273 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewDropdown("GetPet", "VRYOP", {"Penquin", "Puppy", "Owl", "Turtle", "Unicorn"}, function(PetToGet)
+    local args = {
+        [1] = game:GetService("Players").LocalPlayer,
+        [2] = PetToGet,
+        [3] = true
+    }
+    game:GetService("ReplicatedStorage").KeyBind:InvokeServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
