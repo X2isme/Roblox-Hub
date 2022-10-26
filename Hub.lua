@@ -2591,6 +2591,19 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
+if game.PlaceId == 7809587478 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewTextBox("Get Points", "VRYOP", function(PointsGet)
+    local args = {
+        [1] = PointsGet
+    }
+    game:GetService("ReplicatedStorage").Events.AddStats:FireServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
