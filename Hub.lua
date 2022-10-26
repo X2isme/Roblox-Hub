@@ -2604,6 +2604,16 @@ MainSection:NewTextBox("Get Points", "VRYOP", function(PointsGet)
     end)
 end
 
+if game.PlaceId == 9872472334 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Respawn", "VRYOP", function()
+    game:GetService("ReplicatedStorage").Events.Respawn:FireServer()
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
