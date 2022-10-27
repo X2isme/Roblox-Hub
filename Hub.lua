@@ -2614,6 +2614,66 @@ MainSection:NewButton("Respawn", "VRYOP", function()
     end)
 end
 
+if game.PlaceId == 4795251564 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+LightLevel = 0
+ReflectanceLevel = 0
+
+MainSection:NewTextBox("Set Light", "VRYOP", function(LightLevel)
+    local args = {
+        [1] = "light_range",
+        [2] = LightLevel
+    }
+    game:GetService("ReplicatedStorage").shared.network.network_contents.block_data_remote:InvokeServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("Set Transparency", "VRYOP", function(TransparencyLevel)
+    local args = {
+        [1] = "transparency",
+        [2] = TransparencyLevel
+    }
+    game:GetService("ReplicatedStorage").shared.network.network_contents.block_data_remote:InvokeServer(unpack(args))
+    end)
+
+MainSection:NewTextBox("Set reflectancy", "VRYOP", function(ReflectanceLevel)
+    local args = {
+        [1] = "reflectance",
+        [2] = ReflectanceLevel
+    }
+    game:GetService("ReplicatedStorage").shared.network.network_contents.block_data_remote:InvokeServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 5938183 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+LightLevel = 0
+ReflectanceLevel = 0
+
+MainSection:NewTextBox("GetCodePrize", "Enter The Code, DONT SPAM", function(CodeToUse)
+    local args = {
+        [1] = CodeToUse,
+        [2] = "set"
+    }
+
+    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
+
+    local args = {
+        [1] = CodeToUse
+    }
+    game:GetService("ReplicatedStorage").Code:InvokeServer(unpack(args))
+
+    local args = {
+        [1] = CodeToUse,
+        [2] = "check"
+    }
+    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
