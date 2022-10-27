@@ -758,6 +758,26 @@ local MainSection = Main:NewSection("Main")
            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
         end) 
     end)
+
+MainSection:NewTextBox("GetCodePrize", "Enter The Code, DONT SPAM", function(CodeToUse)
+    local args = {
+        [1] = CodeToUse,
+        [2] = "set"
+    }
+    
+    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
+    
+    local args = {
+        [1] = CodeToUse
+    }
+    game:GetService("ReplicatedStorage").Code:InvokeServer(unpack(args))
+    
+    local args = {
+        [1] = CodeToUse,
+        [2] = "check"
+    }
+    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
+    end)
 end
 
 if game.PlaceId == 9718523719 then
@@ -2643,34 +2663,6 @@ MainSection:NewTextBox("Set reflectancy", "VRYOP", function(ReflectanceLevel)
         [2] = ReflectanceLevel
     }
     game:GetService("ReplicatedStorage").shared.network.network_contents.block_data_remote:InvokeServer(unpack(args))
-    end)
-end
-
-if game.PlaceId == 5938183 then
-    -- MAIN
-local Main = Window:NewTab("Main")
-local MainSection = Main:NewSection("Main")
-LightLevel = 0
-ReflectanceLevel = 0
-
-MainSection:NewTextBox("GetCodePrize", "Enter The Code, DONT SPAM", function(CodeToUse)
-    local args = {
-        [1] = CodeToUse,
-        [2] = "set"
-    }
-
-    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
-
-    local args = {
-        [1] = CodeToUse
-    }
-    game:GetService("ReplicatedStorage").Code:InvokeServer(unpack(args))
-
-    local args = {
-        [1] = CodeToUse,
-        [2] = "check"
-    }
-    game:GetService("ReplicatedStorage").CodeCheck:InvokeServer(unpack(args))
     end)
 end
 
