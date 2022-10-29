@@ -746,19 +746,6 @@ if game.PlaceId == 10001513103 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("Unlimited Words GUI, read desc", "just dont use more words than u have", function()
-        local library = loadstring(game:HttpGet("https://pastebin.com/raw/eKwyeQa0", true))()
-
-        local tab1 = library:CreateTab("Unlimited Words", true)
-        local box = library:MakeBox(tab1,"Enter Text Here","...",function(box)
-           local args = {
-               [1] = box.text,
-               [2] = "All"
-           }
-           game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-        end) 
-    end)
-
 MainSection:NewTextBox("GetCodePrize", "Enter The Code, DONT SPAM", function(CodeToUse)
     local args = {
         [1] = CodeToUse,
@@ -2666,6 +2653,61 @@ MainSection:NewTextBox("Set reflectancy", "VRYOP", function(ReflectanceLevel)
     end)
 end
 
+if game.PlaceId == 6599894278 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoBux", "nice simple AutoBux", function()
+        AutoBux = true
+        while AutoBux == true do
+            local args = {
+                [1] = "AddBux"
+            }
+            game:GetService("ReplicatedStorage").RE:FireServer(unpack(args))
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoBux", "Stops AutoBux", function()
+        AutoBux = false
+    end)
+end
+
+if game.PlaceId == 7503115095 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("OP GUI", "VRY OP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/PopItTradingRipoffScript.lua"))()
+    end)
+end
+
+if game.PlaceId == 6875747014 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Break Game", "VRY OP", function()
+        while true do 
+            local args = {
+            [1] = false,
+            [2] = 200
+            }
+            game:GetService("ReplicatedStorage").functionsAndEvents.rollDice:InvokeServer(unpack(args))
+        end            
+    end)
+
+    MainSection:NewButton("Out Of Jail", "VRY OP", function()
+    local args = {
+        [1] = false,
+        [2] = 12
+    }
+    game:GetService("ReplicatedStorage").functionsAndEvents.doubleNotRolled:FireServer(unpack(args))           
+    end)
+end
+
 -- All Games
 
 local All = Window:NewTab("All")
@@ -2684,6 +2726,22 @@ local AllSection = All:NewSection("All Games")
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 1) -- 1 is untouch
             end
         end
+    end)
+
+    AllSection:NewButton("Reset Character", "Vry OP", function()
+        game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+    end)
+
+    AllSection:NewButton("GodMode", "Vry OP", function()
+        GodModes = true
+        while GodModes == true do 
+            game:GetService("Players").LocalPlayer.Character.Humanoid.Health = (5/0)
+            wait(0.00001)
+        end
+    end)
+
+    AllSection:NewButton("UnGodMode", "Vry OP", function()
+        GodModes = false
     end)
 
     AllSection:NewButton("Anti Kick", "Vry OP", function()
