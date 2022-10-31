@@ -2682,6 +2682,86 @@ local MainSection = Main:NewSection("Main")
     MainSection:NewButton("OP GUI", "VRY OP", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/PopItTradingRipoffScript.lua"))()
     end)
+
+    MainSection:NewButton("Alr Autofarm", "Sell the items u got", function()
+        badAutofarm = true
+        while badAutofarm == true do
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/toytradingautofarm.lua"))()
+        end
+    end)
+
+    MainSection:NewButton("StopAutofarm", "Yay :D", function()
+        badAutofarm = false
+    end)
+    
+    MainSection:NewTextBox("ID.HoldAnyItem", "Use the ID 1000+", function(TOOLID)
+        local args = {
+            [1] = "TakeTool",
+            [2] = TOOLID,
+            [3] = true
+        }
+        game:GetService("ReplicatedStorage").Events.PickAndDrop.PickAndDropRE:FireServer(unpack(args))
+        
+    end)
+
+    MainSection:NewDropdown("LimitedBuyItem", "Out Of Game", {"Mini_Pumpkin", "Pumpkin", "Pumpkin2", "Fire_Pumpkin", "Cursed_Pumpkin", "Void_Pumpkin", "Zombie_Pumpkin", "Ghost", "Ghost2", "Candy", "Spider", "Spider2", "Halloween_Bucket", "Halloween_Egg", "Halloween_Hat" "Snowman", "Snowman2", "Gingerbread_Man", "Rudolf", "Christmas_Tree", "Easter_Dominus", "Fall_Leaf", "Turkey_Leg", "Turkey"}, function(LimitedItemBuy)
+        if LimitedItemBuy == "Mini_Pumpkin" then
+            IDBUY = 10140
+        elseif LimitedItemBuy == "Candy" then
+            IDBUY = 10131 
+        elseif LimitedItemBuy == "Halloween_Bucket" then
+            IDBUY = 10132
+        elseif LimitedItemBuy == "Halloween_Egg" then
+            IDBUY = 10137
+        elseif LimitedItemBuy == "Fire_Pumpkin" then
+            IDBUY = 10130
+        elseif LimitedItemBuy == "Void_Pumpkin" then
+            IDBUY = 10129
+        elseif LimitedItemBuy == "Cursed_Pumpkin" then
+            IDBUY = 10247
+        elseif LimitedItemBuy == "Snowman" then
+            IDBUY = 10188
+        elseif LimitedItemBuy == "Snowman2" then
+            IDBUY = 10188
+        elseif LimitedItemBuy == "Gingerbread_Man" then
+            IDBUY = 10191
+        elseif LimitedItemBuy == "Rudolf" then
+            IDBUY = 10181
+        elseif LimitedItemBuy == "Christmas_Tree" then
+            IDBUY = 10172 
+        elseif LimitedItemBuy == "Easter_Dominus" then
+            IDBUY = 10231
+        elseif LimitedItemBuy == "Turkey" then
+            IDBUY = 10164
+        elseif LimitedItemBuy == "Fall_Leaf" then
+            IDBUY = 30163
+        elseif LimitedItemBuy == "Turkey_Leg" then
+            IDBUY = 10166
+        elseif LimitedItemBuy == "Halloween_Hat" then
+            IDBUY = 10138
+        elseif LimitedItemBuy == "Spider" then
+            IDBUY = 10139
+        elseif LimitedItemBuy == "Spider2" then
+            IDBUY = 10128
+        elseif LimitedItemBuy == "Pumpkin2" then
+            IDBUY = 10128
+        elseif LimitedItemBuy == "Pumpkin" then
+            IDBUY = 10246
+        elseif LimitedItemBuy == "Ghost" then
+            IDBUY = 10134
+        elseif LimitedItemBuy == "Ghost2" then
+            IDBUY = 10135
+        elseif LimitedItemBuy == "Zombie_Pumpkin" then
+            IDBUY = 10136
+        end
+        local args = {
+            [1] = "purchase",
+            [2] = IDBUY,
+            [3] = 1
+        }
+        
+        game:GetService("ReplicatedStorage").Events.Coin.CoinMarketRE:FireServer(unpack(args))
+    end)
 end
 
 if game.PlaceId == 6875747014 then
@@ -2705,6 +2785,75 @@ local MainSection = Main:NewSection("Main")
         [2] = 12
     }
     game:GetService("ReplicatedStorage").functionsAndEvents.doubleNotRolled:FireServer(unpack(args))           
+    end)
+end
+
+if game.PlaceId == 6875747014 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Coins", "VRY OP", function()
+        cointime = 0
+        repeat 
+            local args = {
+                [1] = cointime,
+                [2] = "Cozmo"
+            }
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.6").knit.Services.CoinService.RF.RequestCoin:InvokeServer(unpack(args))
+            cointime = cointime + 1
+        until cointime == 26            
+    end)
+end
+
+if game.PlaceId == 654732683 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Enter Heli", "VRY OP", function()
+        local args = {
+            [1] = "LAA",
+            [2] = true,
+            [3] = 1
+        }
+        game:GetService("ReplicatedStorage").rE.Components.Region.AllocateSeat:FireServer(unpack(args))            
+    end)
+end
+
+if game.PlaceId == 4795251564 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+LightLevel = 0
+ReflectanceLevel = 0
+
+MainSection:NewTextBox("Give Item", "VRYOP", function(GiveItem)
+    local args = {
+        [1] = GiveItem
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.TakeItem:FireServer(unpack(args))
+    end)
+
+MainSection:NewButton("Get Money", "VRYOP", function()
+    game:GetService("ReplicatedStorage").Remotes.CCo:FireServer()
+    end)
+end
+
+if game.PlaceId == 11970456 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+LightLevel = 0
+ReflectanceLevel = 0
+
+MainSection:NewButton("Ez Complete", "VRYOP", function()
+    local args = {
+        [1] = "ROUND_COMPLETED"
+    }
+    
+    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
     end)
 end
 
