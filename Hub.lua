@@ -2679,32 +2679,22 @@ if game.PlaceId == 7503115095 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-    MainSection:NewButton("OP GUI", "VRY OP", function()
+    MainSection:NewButton("GUI - 1", "VRYOP", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/PopItTradingRipoffScript.lua"))()
     end)
 
-    MainSection:NewButton("Alr Autofarm", "Sell the items u got", function()
-        badAutofarm = true
-        while badAutofarm == true do
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/toytradingautofarm.lua"))()
-        end
-    end)
-
-    MainSection:NewButton("StopAutofarm", "Yay :D", function()
-        badAutofarm = false
+    MainSection:NewButton("GUI - 2", "VRYOP", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/toytradingautofarmGui.lua"))()
     end)
 
     MainSection:NewTextBox("ID.HoldAnyItem", "Use the ID 1000+", function(TOOLID)
         local args = {
-            [1] = "TakeTool",
-            [2] = TOOLID,
-            [3] = true
+            [1] = TOOLID
         }
-        game:GetService("ReplicatedStorage").Events.PickAndDrop.PickAndDropRE:FireServer(unpack(args))
-        
+        game:GetService("ReplicatedStorage").Events.PickAndDrop.TakeToolRE:FireServer(unpack(args))
     end)
 
-    MainSection:NewDropdown("LimitedBuyItem", "Out Of Game", {"Mini_Pumpkin", "Pumpkin", "Pumpkin2", "Fire_Pumpkin", "Cursed_Pumpkin", "Void_Pumpkin", "Zombie_Pumpkin", "Ghost", "Ghost2", "Candy", "Spider", "Spider2", "Halloween_Bucket", "Halloween_Egg", "Halloween_Hat", "Snowman", "Snowman2", "Gingerbread_Man", "Rudolf", "Christmas_Tree", "Easter_Dominus", "Fall_Leaf", "Turkey_Leg", "Turkey"}, function(LimitedItemBuy)
+    MainSection:NewDropdown("LimitedBuyItem", "Out Of Game", {"Mini_Pumpkin", "Pumpkin", "Pumpkin2", "Fire_Pumpkin", "Cursed_Pumpkin", "Void_Pumpkin", "Zombie_Pumpkin", "Ghost", "Ghost2", "Candy", "Spider", "Spider2", "Halloween_Bucket", "Halloween_Egg", "Halloween_Hat", "Snowman", "Snowman2", "Gingerbread_Man", "Rudolf", "Christmas_Tree", "Easter_Dominus", "Easter_Egg", "Fall_Leaf", "Turkey_Leg", "Turkey"}, function(LimitedItemBuy)
         if LimitedItemBuy == "Mini_Pumpkin" then
             IDBUY = 10140
         elseif LimitedItemBuy == "Candy" then
@@ -2753,6 +2743,8 @@ local MainSection = Main:NewSection("Main")
             IDBUY = 10135
         elseif LimitedItemBuy == "Zombie_Pumpkin" then
             IDBUY = 10136
+        elseif LimitedItemBuy == "Easter_Egg" then
+            IDBUY = 10223
         end
         local args = {
             [1] = "purchase",
@@ -2761,6 +2753,82 @@ local MainSection = Main:NewSection("Main")
         }
         
         game:GetService("ReplicatedStorage").Events.Coin.CoinMarketRE:FireServer(unpack(args))
+    end)
+
+    MainSection:NewDropdown("SetTitle", "Out Of Game", {"_", "TradingNoob", "TradingPro", "TradingMaster", "TradingHacker", "TheGodOfTrading", "BuisnessMan", "ToyCreator", "GoldenRule", "RainbowAddict", "2021Haloween", "2021Thanksgiving", "2021Christmas", "2022Easter", "2022Halloween"}, function(TitleName)
+        if TitleName == "_" then
+            IDTITLE = 0
+        elseif TitleName == "TradingNoob" then
+            IDTITLE = 10011
+        elseif TitleName == "TradingPro" then
+            IDTITLE = 10012
+        elseif TitleName == "TradingMaster" then
+            IDTITLE = 10013
+        elseif TitleName == "TradingHacker" then
+            IDTITLE = 10014
+        elseif TitleName == "TheGodOfTrading" then
+            IDTITLE = 10015
+        elseif TitleName == "BuisnessMan" then
+            IDTITLE = 10025
+        elseif TitleName == "ToyCreator" then
+            IDTITLE = 10035
+        elseif TitleName == "GoldenRule" then
+            IDTITLE = 10045
+        elseif TitleName == "RainbowAddict" then
+            IDTITLE = 10055
+        elseif TitleName == "2021Haloween" then
+            IDTITLE = 20011
+        elseif TitleName == "2021Thanksgiving" then
+            IDTITLE = 20021
+        elseif TitleName == "2021Christmas" then
+            IDTITLE = 20031
+        elseif TitleName == "2022Easter" then
+            IDTITLE = 20041
+        elseif TitleName == "2022Haloween" then
+            IDTITLE = 20051
+        end
+        local args = {
+            [1] = "Title",
+            [2] = IDTITLE
+        }
+        game:GetService("ReplicatedStorage").Events.Equipment.EquipmentRE:FireServer(unpack(args))
+    end)
+
+    MainSection:NewButton("AutoReward", "VRYOP", function()
+        Membership = false
+        VIP = false
+        if game:GetService("Players").LocalPlayer.MembershipType == Enum.MembershipType.Premium then
+            Membership = true
+        end
+        if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game:GetService("Players").LocalPlayer.UserId,23607912) then
+            VIP = true
+        end
+        AutoReward = true
+        while AutoReward == true do
+            game:GetService("ReplicatedStorage").Events.Reward.ClaimRewardRE:FireServer("Free")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward1")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward2")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward3")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward4")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward5")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward6")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward7")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward8")
+            game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Reward9")
+            if Membership == true then
+                game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Premium")
+                wait(0.01)
+            end
+            if VIP == true then
+                game:GetService("ReplicatedStorage").Events.Reward.OnlineRewardRE:FireServer("Vip")
+                wait(0.01)
+            end
+            wait(0.3)
+        end
+    end)
+
+    MainSection:NewButton("StopReward", "VRYOP", function()
+        AutoReward = false
     end)
 end
 
@@ -2873,6 +2941,72 @@ MainSection:NewButton("collect all trash", "VRYOP", function()
         wait(0.01)
         Timer = Timer + 1
     until Timer == 100
+    end)
+end
+
+if game.PlaceId == 10526921593 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("TimeReward", "VRYOP", function()
+        local args = {
+            [1] = game:GetService("Players").LocalPlayer.Rewards.TimeReward
+        }
+        game:GetService("ReplicatedStorage").RemoteEvents.ClaimReward:InvokeServer(unpack(args))
+    end)
+
+MainSection:NewButton("WinReward", "VRYOP", function()
+        local args = {
+            [1] = game:GetService("Players").LocalPlayer.Rewards.WinReward
+        }
+        game:GetService("ReplicatedStorage").RemoteEvents.ClaimReward:InvokeServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 6824412329 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewSlider("Equipt Tool", "VRYOP", 25, 1, function(ToolIDEquipt)
+        local args = {
+            [1] = "AxeId",
+            [2] = 1000 ..ToolIDEquipt
+        }
+        game:GetService("ReplicatedStorage").Events.Equipment.EquipmentRE:FireServer(unpack(args))
+    end)
+
+MainSection:NewSlider("Equipt Back", "VRYOP", 25, 1, function(BackpackId)
+        local args = {
+            [1] = "AxeId",
+            [2] = 1100 ..ToolIDEquipt
+        }
+        game:GetService("ReplicatedStorage").Events.Equipment.EquipmentRE:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 6708991752 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("AutoBux", "nice simple AutoBux", function()
+        AutoBux = true
+        while AutoBux == true do
+            local args = {
+                [1] = game:GetService("Players").LocalPlayer.Character,
+                [2] = workspace.Tracks.NewTracks.Path.SpikesGoingDown.Coins.Coin.CoinBoundingBox,
+                [3] = "CoinCollected"
+            }
+            
+            game:GetService("ReplicatedStorage").RemoteEvents.ExecuteBehaviour:FireServer(unpack(args))            
+            wait(Tick)
+            end   
+    end)
+
+    MainSection:NewButton("Stop AutoBux", "Stops AutoBux", function()
+        AutoBux = false
     end)
 end
 
