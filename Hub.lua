@@ -2693,7 +2693,7 @@ local MainSection = Main:NewSection("Main")
     MainSection:NewButton("StopAutofarm", "Yay :D", function()
         badAutofarm = false
     end)
-    
+
     MainSection:NewTextBox("ID.HoldAnyItem", "Use the ID 1000+", function(TOOLID)
         local args = {
             [1] = "TakeTool",
@@ -2704,7 +2704,7 @@ local MainSection = Main:NewSection("Main")
         
     end)
 
-    MainSection:NewDropdown("LimitedBuyItem", "Out Of Game", {"Mini_Pumpkin", "Pumpkin", "Pumpkin2", "Fire_Pumpkin", "Cursed_Pumpkin", "Void_Pumpkin", "Zombie_Pumpkin", "Ghost", "Ghost2", "Candy", "Spider", "Spider2", "Halloween_Bucket", "Halloween_Egg", "Halloween_Hat" "Snowman", "Snowman2", "Gingerbread_Man", "Rudolf", "Christmas_Tree", "Easter_Dominus", "Fall_Leaf", "Turkey_Leg", "Turkey"}, function(LimitedItemBuy)
+    MainSection:NewDropdown("LimitedBuyItem", "Out Of Game", {"Mini_Pumpkin", "Pumpkin", "Pumpkin2", "Fire_Pumpkin", "Cursed_Pumpkin", "Void_Pumpkin", "Zombie_Pumpkin", "Ghost", "Ghost2", "Candy", "Spider", "Spider2", "Halloween_Bucket", "Halloween_Egg", "Halloween_Hat", "Snowman", "Snowman2", "Gingerbread_Man", "Rudolf", "Christmas_Tree", "Easter_Dominus", "Fall_Leaf", "Turkey_Leg", "Turkey"}, function(LimitedItemBuy)
         if LimitedItemBuy == "Mini_Pumpkin" then
             IDBUY = 10140
         elseif LimitedItemBuy == "Candy" then
