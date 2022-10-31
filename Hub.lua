@@ -2862,7 +2862,8 @@ if game.PlaceId == 6412231967 then
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-MainSection:NewButton("TrashAutofarm", "VRYOP", function()
+MainSection:NewButton("collect all trash", "VRYOP", function()
+    Timer = 0
     AutofarmMethod = "Trash_Collect"
     repeat
         local args = {
@@ -2870,18 +2871,8 @@ MainSection:NewButton("TrashAutofarm", "VRYOP", function()
         }
         game:GetService("ReplicatedStorage").Remotes.CollectTrash:FireServer(unpack(args))
         wait(0.01)
-    until 1 = 2
-    end)
-
-MainSection:NewButton("PoopAutofarm", "VRYOP", function()
-    AutofarmMethod = "Poop_Collect"
-    repeat
-        local args = {
-            [1] = workspace.AnimalEntities:FindFirstChild("AnimalEntity//VelociraptorEnclosure")
-        }
-        game:GetService("ReplicatedStorage").Remotes.CollectPoop:FireServer(unpack(args))
-        wait(0.001)
-    until AutofarmMethod ~= "Poop_Collect"
+        Timer = Timer + 1
+    until Timer == 100
     end)
 end
 
