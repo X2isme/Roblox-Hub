@@ -2831,6 +2831,17 @@ local MainSection = Main:NewSection("Main")
         AutoReward = false
     end)
 end
+if game.PlaceId == 10306321397 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+    MainSection:NewDropdown("Power", "VRYOP", {"SPD++", "STR++"}, function(Powerup2Gib)
+        local args = {
+            [1] = Powerup2Gib
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.PlayerStatService.RF.AwardPowerUpToPlayer:InvokeServer(unpack(args))
+    end)
+end
 
 if game.PlaceId == 6875747014 then
     -- MAIN
@@ -3007,6 +3018,35 @@ local MainSection = Main:NewSection("Main")
 
     MainSection:NewButton("Stop AutoBux", "Stops AutoBux", function()
         AutoBux = false
+    end)
+end
+
+if game.PlaceId == 4950724851 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+    MainSection:NewDropdown("Achievement", "VRYOP", {"Ejector Seat", "Skeeballer", "Throttle Up", "Sign Aged", "Kaboom", "Cork", "Cart Coaster", "Bounce", "I'm A Big Fan", "Beamball's Place", "Castle Crashers", "Splash", "Bullseye", "Ramp It Up", "Ace", "Whack-A-Marble!", "Wipeout Winner", "Mega Rings", "Rainbow Racers", "Pyramid Cups", "Swish Swish", "Zipper", "Beat Producer", "Ripple Effect", "Wavebreaker", "Diamond Cups", "The Hurler", "Through The Middle", "Shooting Star", "Eruption", "High Striker", "Falcon Flyer"}, function(TheAchievement)
+        local args = {
+            [1] = TheAchievement
+        }
+        game:GetService("ReplicatedStorage").shared.remotes.achievement:FireServer(unpack(args))
+    end)
+end
+
+if game.PlaceId == 11166772242 then
+    -- MAIN
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Glitch Booth Text", "OP", function()
+        repeat
+            GlitchText = GlitchText .."XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+            wait(0.0001)
+        until Timer == 100
+        local args = {
+            [1] = GlitchText
+        }
+        game:GetService("ReplicatedStorage").Edit:FireServer(unpack(args))
     end)
 end
 
