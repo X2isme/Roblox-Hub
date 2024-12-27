@@ -12,14 +12,16 @@ local HugerNumber = math.pow (SmallBigNumber, 29)
 local HugeNumber = math.pow (SmallBigNumber, 3)
 local MathHuge = math.huge
 local localplayer = game.Players.LocalPlayer
--- print("View Variable Values: ", SmallTick, Tick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
+local newPlayerList
+-- print("View Variable Values: ", SmallTick, Tick, BigsSmallTick, BigTick, TheInf, SmallBigNumber, VeryHugeNumber, HugerNumber, HugeNumber, MathHuge)
 -- AllPlayers
-Players = game:GetService("Players")
-local allPlayersName = {}
-for i, player in pairs(Players:GetPlayers()) do
-    allPlayersName[i] = player.Name
+local function RefreshPlayerList()
+    newPlayerList = {}
+    for i, player in pairs(game:GetService("Players"):GetPlayers()) do
+        newPlayerList[i] = player.Name
+    end
 end
-local newPlayerList = allPlayersName
+RefreshPlayerList()
 
 local function findFirstString(table, str)
     for index, value in ipairs(table) do
@@ -32,6 +34,7 @@ end
 
 if game.PlaceId == 8508161757 then
     -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main Stuffs")
 
@@ -62,6 +65,7 @@ end
     
     if game.PlaceId == 413053960 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local StatSection = Main:NewSection("Stats")
 
@@ -105,6 +109,7 @@ end
 
     if game.PlaceId == 60654525 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -120,6 +125,7 @@ end
 
 if game.PlaceId == 4839647441 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -129,6 +135,7 @@ if game.PlaceId == 4839647441 then
 end
 if game.PlaceId == 5775214331 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     local MainSection = Main:NewSection("GLITCHY, REJOIN TO CHANGE MULTIPLE TIMES!")
@@ -149,6 +156,7 @@ if game.PlaceId == 5775214331 then
 end
 if game.PlaceId == 2110185000 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     local MainSection = Main:NewSection("use knife each time you do this!!!")
@@ -202,6 +210,7 @@ if game.PlaceId == 2110185000 then
 end
 if game.PlaceId == 2599583795 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -212,6 +221,7 @@ end
 
 if game.PlaceId == 4301313353 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -222,6 +232,7 @@ end
 
 if game.PlaceId == 4301321281 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -232,6 +243,7 @@ end
 
 if game.PlaceId == 9461798258 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -271,6 +283,7 @@ end
 
 if game.PlaceId == 9438506890 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -281,6 +294,7 @@ end
 
 if game.PlaceId == 6668183009 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -291,6 +305,7 @@ end
 
 if game.PlaceId == 6668183009 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -350,6 +365,7 @@ end
 
 if game.PlaceId == 9711536246 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -360,6 +376,7 @@ end
 
 if game.PlaceId == 7034960857 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -375,8 +392,10 @@ end
 
 if game.PlaceId == 4325400580 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
+    rebirthFarm = false
 
     MainSection:NewDropdown("Set Color", "Color / Team gamepasses for free", {"Default", "Black", "Desert"}, function(Color)
         local Skin_Name = "Default"
@@ -396,21 +415,30 @@ if game.PlaceId == 4325400580 then
             end
     end)
 
-    MainSection:NewButton("Rebirth Farm", "Farm rebirths", function()
-        while wait(.3) do
-            loadstring(game:HttpGet("https://pastebin.com/raw/rVrEFdtC"))()
+    RebirthFarmButton = MainSection:NewButton("Rebirth Farm (off)", "Farm rebirths", function()
+        rebirthFarm = not rebirthFarm
+
+        if rebirthFarm == true then
+            RebirthFarmButton:UpdateButton("Rebirth Farm (on)")
+        else 
+            RebirthFarmButton:UpdateButton("Rebirth Farm (off)")
+        end
+
+        while rebirthFarm == true do
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/refs/heads/main/ArmyTycoon1.lua"))()
             game:GetService("ReplicatedStorage").RE.rebirth:FireServer()
             wait(.15)
-            loadstring(game:HttpGet("https://pastebin.com/raw/rVrEFdtC"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/refs/heads/main/ArmyTycoon1.lua"))()
+            wait(0.3)
         end
     end)
 
     MainSection:NewButton("Max Base", "Max out ur base", function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/rVrEFdtC"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/refs/heads/main/ArmyTycoon1.lua"))()
     end)
 
     MainSection:NewButton("Give all max base", "Give everyone in the server a max base", function()
-        loadstring(game:HttpGet("https://pastebin.com/raw/wMDh7RcS"))()           
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/refs/heads/main/MaxbaseeveryoneArmyTycoon.lua"))()           
     end)
 
     MainSection:NewButton("Capture All", "Capture / Claim all bases", function()
@@ -419,15 +447,12 @@ if game.PlaceId == 4325400580 then
             end            
     end)
 
-    Section:NewKeybind("Press E to launch nuke", "launches nuke at mouse when u press E", Enum.KeyCode.E, function()
+    MainSection:NewKeybind("Press E to launch nuke", "launches nuke at mouse when u press E", Enum.KeyCode.E, function()
         local mouse = game:service'Players'.LocalPlayer:GetMouse()
-
-mouse.KeyDown:Connect(function(k)
-if k == "q" then
-game:GetService("ReplicatedStorage").RE.FireMissile:FireServer("Nuke",Vector3.new(mouse.Hit.p.X,48.6649132,mouse.Hit.p.Z))
-end
-end)
+        mouse.KeyDown:Connect(function(k)
+        game:GetService("ReplicatedStorage").RE.FireMissile:FireServer("Nuke",Vector3.new(mouse.Hit.p.X,48.6649132,mouse.Hit.p.Z))
     end)
+        end)
     
 
     MainSection:NewButton("Lag Players", "Drops nuked to all palyers for free", function()
@@ -440,13 +465,20 @@ end)
     end)
 
     local MainSection = Main:NewSection("Max Base Anyone")
-        MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", allPlayersName, function(Victim)
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/MaxBaseAnyoneArmyTycoon.lua",true))()
+    local playerList = MainSection:NewDropdown("Max Base", "Give a MaxedOut base to anyone!", newPlayerList, function(Victim)
+        RefreshPlayerList()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/MaxBaseAnyoneArmyTycoon.lua",true))(Victim)
+    end)
+
+    MainSection:NewButton("Refresh player list", "Refreshes player list", function()
+        RefreshPlayerList()
+        playerList:Refresh(newp)
     end)
 end
 
 if game.PlaceId == 2955597371 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -469,6 +501,7 @@ end
 
 if game.PlaceId == 6668183009 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -485,6 +518,7 @@ end
 
 if game.PlaceId == 6198039277 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -508,6 +542,7 @@ end
 
 if game.PlaceId == 2608219442 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -520,6 +555,7 @@ end
 
 if game.PlaceId == 4064108474 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -534,6 +570,7 @@ end
 
 if game.PlaceId == 3203888787 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -548,6 +585,7 @@ end
 
 if game.PlaceId == 2848994117 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -562,6 +600,7 @@ end
 
 if game.PlaceId == 7346416636 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -572,6 +611,7 @@ end
 
 if game.PlaceId == 6717367660 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -582,6 +622,7 @@ end
 
 if game.PlaceId == 6717367660 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -592,6 +633,7 @@ end
 
 if game.PlaceId == 9415202048 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -614,6 +656,7 @@ end
 
 if game.PlaceId == 218377574 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -632,6 +675,7 @@ end
 
 if game.PlaceId == 9739506878 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -650,6 +694,7 @@ end
 
 if game.PlaceId == 10135321551 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -668,6 +713,7 @@ end
 
 if game.PlaceId == 10144942022 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -686,6 +732,7 @@ end
 
 if game.PlaceId == 10135223315 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -704,6 +751,7 @@ end
 
 if game.PlaceId == 10135914792 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -722,6 +770,7 @@ end
 
 if game.PlaceId == 10001513103 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -748,6 +797,7 @@ end
 
 if game.PlaceId == 9718523719 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -766,6 +816,7 @@ end
 
 if game.PlaceId == 8884334497 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -783,6 +834,7 @@ end
 
 if game.PlaceId == 920587237 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -798,6 +850,7 @@ end
 
 if game.PlaceId == 9498006165 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -816,6 +869,7 @@ end
 
 if game.PlaceId == 3686253681 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -850,6 +904,7 @@ end
 
 if game.PlaceId == 8750997647 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -883,6 +938,7 @@ end
 
 if game.PlaceId == 10108131074 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -930,6 +986,7 @@ end
 
 if game.PlaceId == 10439131644 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -944,6 +1001,7 @@ end
 
 if game.PlaceId == 9185412259 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -957,16 +1015,24 @@ end
 
 if game.PlaceId == 8265676621 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
-local dropdown = MainSection:NewDropdown("Kick Any Player", "OP But Not", allPlayersName, function(TheVictim)
-    game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
+    local dropdown = MainSection:NewDropdown("Kick Any Player", "OP But Not", newPlayerList, function(TheVictim)
+        RefreshPlayerList()
+        game.ReplicatedStorage.KickPlayer:FireServer(TheVictim)
+    end)
+
+    MainSection:NewButton("Refresh player list", "Refreshes player list", function()
+        RefreshPlayerList()
+        dropdown:Refresh(newp)
     end)
 end
 
 if game.PlaceId == 7262582142 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1006,6 +1072,7 @@ end
 
 if game.PlaceId == 9846056789 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1060,6 +1127,7 @@ end
 
 if game.PlaceId == 10375377326 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1088,6 +1156,7 @@ end
 
 if game.PlaceId == 9609300403 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1106,6 +1175,7 @@ end
 
 if game.PlaceId == 10319501620 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1144,6 +1214,7 @@ end
 
 if game.PlaceId == 9529019408 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1154,6 +1225,7 @@ end
 
 if game.PlaceId == 5890116343 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1363,11 +1435,8 @@ KickFromFam = MainSection:NewDropdown("KickFromFamily", "Kicks a player from the
     FamilyAccountsCheck() 
 end)
 
-InvitePlayer = MainSection:NewDropdown("InviteAnyPlayer", "Invite anyone to the family you are currently in", allPlayersName, function(FamilyInvitePlayer)
-    local allPlayersName = {}
-    for i, player in pairs(Players:GetPlayers()) do
-        allPlayersName[i] = player.Name
-    end
+InvitePlayer = MainSection:NewDropdown("InviteAnyPlayer", "Invite anyone to the family you are currently in", newPlayerList, function(FamilyInvitePlayer)
+    RefreshPlayerList()
     playerToInvite = FindPlayer(FamilyInvitePlayer)
     game:GetService("ReplicatedStorage").Remotes.SendInvite:FireServer(playerToInvite)
 end)
@@ -1393,14 +1462,9 @@ local function FamilyAccountsCheck()
         end
     end
 
-    Players = game:GetService("Players")
-    local allPlayersName = {}
-    for i, player in pairs(Players:GetPlayers()) do
-        allPlayersName[i] = player.Name
-    end
-    local newPlayerList = allPlayersName
+    RefreshPlayerList()
 
-    InvitePlayer:Refresh(allPlayersName)
+    InvitePlayer:Refresh(newPlayerList)
     KickFromFam:Refresh(FamilyAccounts)
     JoinFam:Refresh(Families)
     DelFam:Refresh(Families)
@@ -1414,6 +1478,7 @@ end
 
 if game.PlaceId == 9926433554 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1439,6 +1504,7 @@ end
 
 if game.PlaceId == 10218305738 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1453,6 +1519,7 @@ end
 
 if game.PlaceId == 13822889 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1463,6 +1530,7 @@ end
 
 if game.PlaceId == 1365404657 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1476,6 +1544,7 @@ end
 
 if game.PlaceId == 5712833750 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1509,6 +1578,7 @@ end
 
 if game.PlaceId == 8372375635 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1537,6 +1607,7 @@ end
 
 if game.PlaceId == 10429088113 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1550,6 +1621,7 @@ end
 
 if game.PlaceId == 5813165034 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1568,6 +1640,7 @@ end
 
 if game.PlaceId == 9662949425 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1585,6 +1658,7 @@ end
 
 if game.PlaceId == 10758955211 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1603,6 +1677,7 @@ end
 
 if game.PlaceId == 8321875194 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1616,6 +1691,7 @@ end
 
 if game.PlaceId == 9173489535 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1629,6 +1705,7 @@ end
 
 if game.PlaceId == 10676523834 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1653,6 +1730,7 @@ end
 
 if game.PlaceId == 10827143707 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1674,6 +1752,7 @@ end
 
 if game.PlaceId == 7026828578 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1714,6 +1793,7 @@ end
 
 if game.PlaceId == 10577425443 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1732,6 +1812,7 @@ end
 
 if game.PlaceId == 9992339729 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1784,6 +1865,7 @@ end
 
 if game.PlaceId == 4036494886 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1794,6 +1876,7 @@ end
 
 if game.PlaceId == 10868496812 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 MainSection:NewTextBox("GetMone", "1 is abt 90-250", function(EggMoney)
@@ -1839,6 +1922,7 @@ end
 
 if game.PlaceId == 9297410766 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1868,6 +1952,7 @@ end
 
 if game.PlaceId == 10631181587 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1878,6 +1963,7 @@ end
 
 if game.PlaceId == 9648883891 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1891,6 +1977,7 @@ end
 
 if game.PlaceId == 10631181587 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -1938,6 +2025,7 @@ end
 
 if game.PlaceId == 5740246170 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2014,6 +2102,7 @@ end
 
 if game.PlaceId == 10631181587 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2024,6 +2113,7 @@ end
 
 if game.PlaceId == 10631181587 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2043,6 +2133,7 @@ end
 
 if game.PlaceId == 10859465529 then
 -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2057,6 +2148,7 @@ end
 
 if game.PlaceId == 9677464361 then
     -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
@@ -2083,6 +2175,7 @@ MainSection:NewButton("Stop Win", "E", function()
 
     if game.PlaceId == 10462101644 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     
@@ -2108,6 +2201,7 @@ MainSection:NewTextBox("ChangeWheight", ".........", function(Wheight)
 
 if game.PlaceId == 10266345621 then
         -- MAIN
+RefreshPlayerList()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
     
@@ -2126,6 +2220,7 @@ end
 
 if game.PlaceId == 10266345621 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2159,6 +2254,7 @@ end
 
 if game.PlaceId == 8216162783 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2179,6 +2275,7 @@ end
 
 if game.PlaceId == 10903978962 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2194,6 +2291,7 @@ end
 
 if game.PlaceId == 394846350 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2208,6 +2306,7 @@ end
 
 if game.PlaceId == 9745792410 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2251,6 +2350,7 @@ end
 
 if game.PlaceId == 4133011719 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2268,6 +2368,7 @@ end
 
 if game.PlaceId == 9558459273 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2295,6 +2396,7 @@ end
 
 if game.PlaceId == 2693739238 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2338,6 +2440,7 @@ end
 
 if game.PlaceId == 9105971785 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2354,6 +2457,7 @@ end
 
 if game.PlaceId == 7476406054 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2373,6 +2477,7 @@ end
 
 if game.PlaceId == 6892252562 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2401,6 +2506,7 @@ end
 
 if game.PlaceId == 9486506804 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2441,6 +2547,7 @@ end
 
 if game.PlaceId == 2726456994 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2467,6 +2574,7 @@ end
 
 if game.PlaceId == 9107444852 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2505,6 +2613,7 @@ end
 
 if game.PlaceId == 9107444852 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2518,6 +2627,7 @@ end
 
 if game.PlaceId == 10977918334 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2532,6 +2642,7 @@ end
 
 if game.PlaceId == 10779604733 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2560,6 +2671,7 @@ end
 
 if game.PlaceId == 10541365934 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2573,6 +2685,7 @@ end
 
 if game.PlaceId == 7070810903 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2613,6 +2726,7 @@ end
 
 if game.PlaceId == 8084034728 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2634,6 +2748,7 @@ end
 
 if game.PlaceId == 8230149084 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2655,6 +2770,7 @@ end
 
 if game.PlaceId == 9524757503 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2675,6 +2791,7 @@ end
 
 if game.PlaceId == 7462526249 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2685,6 +2802,7 @@ end
 
 if game.PlaceId == 10085978574 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2713,6 +2831,7 @@ end
 
 if game.PlaceId == 6711562581 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
   
@@ -2729,6 +2848,7 @@ end
 
 if game.PlaceId == 4898339524 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2739,6 +2859,7 @@ end
 
 if game.PlaceId == 8188728273 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2754,6 +2875,7 @@ end
 
 if game.PlaceId == 7809587478 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2767,6 +2889,7 @@ end
 
 if game.PlaceId == 9872472334 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2777,6 +2900,7 @@ end
 
 if game.PlaceId == 4795251564 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 LightLevel = 0
@@ -2809,6 +2933,7 @@ end
 
 if game.PlaceId == 6599894278 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2830,6 +2955,7 @@ end
 
 if game.PlaceId == 7503115095 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -2987,6 +3113,7 @@ local MainSection = Main:NewSection("Main")
 end
 if game.PlaceId == 10306321397 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
     MainSection:NewDropdown("Power", "VRYOP", {"SPD++", "STR++"}, function(Powerup2Gib)
@@ -2999,6 +3126,7 @@ end
 
 if game.PlaceId == 6875747014 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3023,6 +3151,7 @@ end
 
 if game.PlaceId == 6875747014 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3041,6 +3170,7 @@ end
 
 if game.PlaceId == 654732683 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3056,6 +3186,7 @@ end
 
 if game.PlaceId == 4795251564 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 LightLevel = 0
@@ -3076,6 +3207,7 @@ end
 
 if game.PlaceId == 11970456 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 LightLevel = 0
@@ -3092,6 +3224,7 @@ end
 
 if game.PlaceId == 6412231967 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3111,6 +3244,7 @@ end
 
 if game.PlaceId == 10526921593 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3131,6 +3265,7 @@ end
 
 if game.PlaceId == 6824412329 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3153,6 +3288,7 @@ end
 
 if game.PlaceId == 6708991752 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3177,6 +3313,7 @@ end
 
 if game.PlaceId == 4950724851 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
     MainSection:NewDropdown("Achievement", "VRYOP", {"Ejector Seat", "Skeeballer", "Throttle Up", "Sign Aged", "Kaboom", "Cork", "Cart Coaster", "Bounce", "I'm A Big Fan", "Beamball's Place", "Castle Crashers", "Splash", "Bullseye", "Ramp It Up", "Ace", "Whack-A-Marble!", "Wipeout Winner", "Mega Rings", "Rainbow Racers", "Pyramid Cups", "Swish Swish", "Zipper", "Beat Producer", "Ripple Effect", "Wavebreaker", "Diamond Cups", "The Hurler", "Through The Middle", "Shooting Star", "Eruption", "High Striker", "Falcon Flyer"}, function(TheAchievement)
@@ -3189,6 +3326,7 @@ end
 
 if game.PlaceId == 11166772242 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3206,6 +3344,7 @@ end
 
 if game.PlaceId == 15535115259 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3254,8 +3393,9 @@ local MainSection = Main:NewSection("Main")
     end)
 end
 
-if game.PlaceId == 18408594520 then
+if game.PlaceId == 135328829400001 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3282,7 +3422,7 @@ local MainSection = Main:NewSection("Main")
     end)
 
     MainSection:NewTextBox("Daily Reward", "Get Daily Reward", function(Day)
-        game:GetService("ReplicatedStorage").Main.DailyRewards:fireServer(Day)
+        game:GetService("ReplicatedStorage").Main.DailyRewards:fireServer(tonumber(Day))
     end)
 
 
@@ -3305,17 +3445,18 @@ local PaycheckAutoFarm = false
 local PetEditorSection = Main:NewSection("PetEditor")
 
 local Filter = ""
-local Actioner = "Add Pet"
+local Actioner = "1: Add Pet"
 local PetPicker
 local PetType = 'Normal'
 local modelNames = {}
+local chosenPet
 
 local function updatePetPicker()
     PetPicker:Refresh({'Loading...'})
     
     local modelNames = {}
     
-    if Actioner == 'Add Pet' then
+    if string.sub(Actioner, 1, 1) == '1' then --Add pet
         if Filter ~= '' then
             table.insert(modelNames, Filter .." --INVALID PET--")
         end
@@ -3325,11 +3466,21 @@ local function updatePetPicker()
                 table.insert(modelNames, item.Name)
             end
         end
-    elseif Actioner == 'Delete Pet' then
+    elseif string.sub(Actioner, 1, 1) == '2' then --Delete pet
         local playerPets = game:GetService("Players").LocalPlayer.PlayerData.Pets
         for _, item in pairs(playerPets:GetChildren()) do
             if item:IsA("Configuration") and (not Filter or string.find(item.PName.Value:lower(), Filter:lower(), 1, true)) then
                 table.insert(modelNames, tostring(item.PName.Value .. " -Tags:" .. item.Name))
+            end
+        end
+    elseif string.sub(Actioner, 1, 1) == '3' then --Spoof pet
+        if Filter ~= '' then
+            table.insert(modelNames, Filter .." --INVALID PET--")
+        end
+        local petsFolder = game:GetService("ReplicatedStorage"):WaitForChild("Pets")
+        for _, item in pairs(petsFolder:GetChildren()) do
+            if item:IsA("Model") and (not Filter or string.find(item.Name:lower(), Filter:lower(), 1, true)) then
+                table.insert(modelNames, item.Name)
             end
         end
     else
@@ -3351,7 +3502,7 @@ end
         PetType = PetTypeSelected
     end)
 
-    PetEditorSection:NewDropdown("Action", "PetPicker", {'Add Pet', 'Delete Pet'}, function(chosenAction)
+    PetEditorSection:NewDropdown("Action", "PetPicker", {'1: Add Pet (PATCHED)', '2: Delete Pet', '3: Spoof Pet'}, function(chosenAction)
         Actioner = chosenAction
         updatePetPicker()
     end)
@@ -3361,10 +3512,12 @@ end
         updatePetPicker()
     end)
 
-    PetPicker = PetEditorSection:NewDropdown("PetPicker", "PetPicker", modelNames, function(chosenPet)
-        if Actioner == 'Add Pet' then
-            
+    PetPicker = PetEditorSection:NewDropdown("PetPicker", "PetPicker", modelNames, function(TheChosenPet)
+        chosenPet = TheChosenPet
+    end)
 
+    PetEditorSection:NewButton("Do Action", "does stuff", function()
+        if string.sub(Actioner, 1, 1) == '1' then --Add pet
             local args = {
                 [1] = chosenPet,
                 [2] = uuid():sub(1, -1),
@@ -3376,17 +3529,26 @@ end
             game:GetService("ReplicatedStorage").Main.PetCreate:FireServer(unpack(args))
             updatePetPicker()
 
-        elseif Actioner == 'Delete Pet' then
+        elseif string.sub(Actioner, 1, 1) == '2' then --Delete pet
             game:GetService("ReplicatedStorage").Main.PetDelete:FireServer(chosenPet:match(".*%-Tags:%s*(.*)"))
+            updatePetPicker()
+        elseif string.sub(Actioner, 1, 1) == '3' then --Spoof pet
+            if game:GetService("Players").cradde5.PlayerData.Pets:GetChildren()[1].Name ~= null then
+                print("testtt")
+                game:GetService("ReplicatedStorage").Main.PetEquip:FireServer(game:GetService("ReplicatedStorage").Pets[chosenPet], game.Players.LocalPlayer.PlayerData.Pets:GetChildren()[1].Name, PetType)
+            else
+                print("You NEED a pet to spoof pets")
+            end
             updatePetPicker()
         else
             print("ERROR - PET PICKER")
-        end
+        end      
     end)
 end
 
 if game.PlaceId == 17770934191 then
     -- MAIN
+RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
@@ -3397,6 +3559,29 @@ local MainSection = Main:NewSection("Main")
         }
         game:GetService("ReplicatedStorage").Remotes.Egg:InvokeServer(unpack(args))
     end)
+end
+
+if game.PlaceId == 9049840490 then
+    -- MAIN
+RefreshPlayerList()
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+MainSection:NewButton("Ring Farm", "Farms Rings", function()
+    RingAutoFarm = true
+    while RingAutoFarm == true do
+        for _, child in ipairs(game:GetService("Workspace"):FindFirstChild("World Currencies"):GetChildren()) do
+            local childName = child.Name
+            game:GetService("ReplicatedStorage").Knit.Services.WorldCurrencyService.RE.PickupCurrency:FireServer(childName)
+            wait(SmallTick)
+        end
+        wait(5)
+    end       
+end)
+
+MainSection:NewButton("Stop Ring Farm", "Stops Farming Rings", function()
+    RingAutoFarm = false      
+end)
 end
 
 -- All Games
@@ -3599,11 +3784,18 @@ local HubSection = Hubsa:NewSection("Hubs")
 local DTools = Window:NewTab("Dev Tools")
 local DevToolsSection = DTools:NewSection("Dev Tools")
 
-        DevToolsSection:NewButton(game.GameId, "Shows game ID", function()
+        DevToolsSection:NewButton("PID: ".. tostring(game.PlaceId), "Shows place ID", function()
+            print(game.PlaceId)
+            setclipboard(tostring(game.PlaceId))
+        end)
+
+        DevToolsSection:NewButton("GID: "..  tostring(game.GameId), "Shows game ID", function()
+            print(game.GameId)
+            setclipboard(tostring(game.GameId))
         end)
         
         DevToolsSection:NewButton("Simple Spy", "remote event spy", function()
-            loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/refs/heads/master/SimpleSpy.lua"))()
         end)
     
         DevToolsSection:NewButton("Hydroxide", "remote event spy", function()
