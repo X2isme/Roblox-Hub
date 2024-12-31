@@ -1260,6 +1260,7 @@ if game.PlaceId == 5890116343 then
     GodModeV2 = false
     AutoAgeUp = false
     AutoAgeUpSpeed = 1
+    SelectedPlayer = ""
 
     function AutoAgeFunction()
         while AutoAgeUp == true do
@@ -1343,6 +1344,8 @@ if game.PlaceId == 5890116343 then
         wait(1)
         game.Players.LocalPlayer:Kick("Rejoin")
     end)
+
+    local LevelSection = Main:NewSection("Lvl Farm - WIP")
 
     local GodModeSection = Main:NewSection("GodMode")
 
@@ -1437,9 +1440,9 @@ if game.PlaceId == 5890116343 then
     local FamilySection = Main:NewSection("Family")
 
     FamilySection:NewButton("Invite All Players", 'Cool', function()
-        for i, player in pairs(Players:GetPlayers()) do
-            game:GetService("ReplicatedStorage").Remotes.SendInvite:FireServer(player.Name)
-            wait(SmallTick)
+        for i, player in pairs(game:GetService("Players"):GetPlayers()) do
+            game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(player)
+            task.wait(SmallTick)
         end
     end)
 
@@ -1452,10 +1455,7 @@ if game.PlaceId == 5890116343 then
     end)
 
     FamilySection:NewTextBox("Create Family", "Create A Family", function(FamilyName)
-        local args = {
-            [1] = FamilyName
-        }   
-        game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(unpack(args))
+        game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(FamilyName)
     end)
 
     JoinFam = FamilySection:NewDropdown("Join Family", "Joins any family", Families, function(Family)
@@ -1514,12 +1514,6 @@ if game.PlaceId == 5890116343 then
         game:GetService("ReplicatedStorage").Remotes.SendInvite:FireServer(game:GetService("Players"):FindFirstChild(playerToInvite))
     end)
 
-    FamilySection:NewButton("Invite All", "Invite everyone to the family you are currently in", function()
-        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-            game:GetService("ReplicatedStorage").Remotes.SendInvite:FireServer(player)
-        end    
-    end)
-
     local function FamilyAccountsCheck() 
         local Families = {}
         for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
@@ -1551,6 +1545,150 @@ if game.PlaceId == 5890116343 then
 
     FamilySection:NewButton("Update All Lists", "updates eveything", function()
         FamilyAccountsCheck() 
+    end)
+
+    local SpyingTab = Window:NewTab("Spying")
+    local SpySection = SpyingTab:NewSection("Spying")
+
+    SpyUsername = SpySection:NewLabel("😀Username: ")
+    SpyDisplayName = SpySection:NewLabel("😊Display Name: ")
+    SpyUserID = SpySection:NewLabel("😨UserID: ")
+    SpyRPName = SpySection:NewLabel("😁RP Name: ")
+    SpyAge = SpySection:NewLabel("🙎‍♂️Age: ")
+    SpyLevel = SpySection:NewLabel("➕LvL: ")
+    SpyFamily = SpySection:NewLabel("👨‍👩‍👧‍👦Family: ")
+    SpyFamilyInvites = SpySection:NewLabel("📫Family Invites: ")
+    SpyAttacking = SpySection:NewLabel("⚔️Attacking: ")
+    SpySafezone = SpySection:NewLabel("🛡️Safezone: ")
+    SpyMusic = SpySection:NewLabel("🎵Music: ")
+    SpyFreezeAge = SpySection:NewLabel("🧊Freeze Age: ")
+    SpyAgeFaster = SpySection:NewLabel("👴Age Faster: ")
+    --SpyHealth = SpySection:NewLabel("🩹Health: ")
+    --SpyLocation = SpySection:NewLabel("🏳️Location: ")
+    --SpyHacking = SpySection:NewLabel("💻Hacking: ")
+
+    PlayerSelector = SpySection:NewDropdown("Select Player", "Selects A Player", newPlayerList, function(SelectedPlayerDropdown)
+        SelectedPlayer = SelectedPlayerDropdown
+        RefreshPlayerList()
+    
+        SpyUsername:UpdateLabel("😀Username: ".. SelectedPlayer)
+
+        SpyLevel:UpdateLabel("😊Display Name: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).DisplayName)
+
+        SpyUserID:UpdateLabel("😨UserID: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).UserId)
+
+        SpyRPName:UpdateLabel("😁RP Name: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).leaderstats:FindFirstChild("RP Name") and tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).leaderstats["RP Name"].Value) or "RP Name not found")
+
+        SpyAge:UpdateLabel("🙎‍♂️Age: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).PlayerGui.MainGui.AgeFrame.Frame.TextLabel.Text or string.sub(game:GetService("Workspace"):FindFirstChild(SelectedPlayer).Head.InfoGui.Frame.Age.Text, 5))
+
+        if tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).Family.Value) == "" then
+            SpyFamily:UpdateLabel("👨‍👩‍👧‍👦Family: No Family")
+        else
+            SpyFamily:UpdateLabel("👨‍👩‍👧‍👦Family: ".. tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).Family.Value))
+        end
+
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.FamilyInvites.Value == true then
+            SpyFamilyInvites:UpdateLabel("📫Family Invites: 🟢")
+        else
+            SpyFamilyInvites:UpdateLabel("📫Family Invites: 🔴")
+        end
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Attacking.Value == true then
+            SpyAttacking:UpdateLabel("⚔️Attacking: 🟢")
+        else
+            SpyAttacking:UpdateLabel("⚔️Attacking: 🔴")
+        end
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Safezone.Value == true then
+            SpySafezone:UpdateLabel("🛡️Safezone: 🟢")
+        else
+            SpySafezone:UpdateLabel("🛡️Safezone: 🔴")
+        end
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.Music.Value == true then
+            SpyMusic:UpdateLabel("🎵Music: 🟢")
+        else
+            SpyMusic:UpdateLabel("🎵Music: 🔴")
+        end
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.FreezeAge.Value == true then
+            SpyFreezeAge:UpdateLabel("🧊Freeze Age: 🟢")
+        else
+            SpyFreezeAge:UpdateLabel("🧊Freeze Age: 🔴")
+        end
+
+        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.AgeFaster.Value == true then
+            SpyAgeFaster:UpdateLabel("👴Age Faster: 🟢")
+        else
+            SpyAgeFaster:UpdateLabel("👴Freeze Age: 🔴")
+        end
+    end)  
+
+    SpySection:NewButton("Refresh Player Selector", "wooooow", function()
+        RefreshPlayerList()
+        PlayerSelector:Refresh(newPlayerList)
+    end)
+
+    local LagTab = Window:NewTab("Lag & Trolling")
+    local LagSection = LagTab:NewSection("Lag Server")
+
+    Agelag = false
+    GlobalInvitelag = false
+    SoloInvitelag = ""
+
+    LagSection:NewButton("Age Lag", "Ages Up, Glitches and resets others levels", function()
+        while true do
+            for i = 1, 1000 do
+                game:GetService("ReplicatedStorage").Remotes.AgeUp:FireServer()
+            end 
+            wait(SmallTick)
+        end
+    end)
+
+    LagSection:NewButton("Global Family Invite Lag", "Lags server with age", function()
+        local topCharacters = {
+            "😊", "😂", "🥳", "🧑‍🚀", "🌟", "🚀", "🀄", "🎉", "🤖", "👾",
+            "💖", "🐉", "🏰", "⚡", "📚", "🍕", "🎮", "💎", "🚗", "🌍"
+        }
+        local combinedString = table.concat(topCharacters)
+        local finalString = string.rep(combinedString, 70)
+        game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+        wait(1)
+        while true do
+            for i, player in pairs(game:GetService("Players"):GetPlayers()) do
+                game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(player)
+                wait(SmallTick/100)
+                game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+            end
+        end
+    end)
+
+    FamilyLagInviteSolo = LagSection:NewDropdown("Solo Family Invite Lag", "Lags server with age", {"Nobody ❌", unpack(newPlayerList)} , function(PlayerSelected)
+        RefreshPlayerList()
+        SoloInvitelag = PlayerSelected
+        if PlayerSelected == "Nobody ❌" then
+            SoloInvitelag = ""
+        else
+            local topCharacters = {
+                "😊", "😂", "🥳", "🧑‍🚀", "🌟", "🚀", "🀄", "🎉", "🤖", "👾",
+                "💖", "🐉", "🏰", "⚡", "📚", "🍕", "🎮", "💎", "🚗", "🌍"
+            }
+            local combinedString = table.concat(topCharacters)
+            local finalString = string.rep(combinedString, 70)
+            game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+            wait(1)
+            PlayerSelectedBackup = PlayerSelected
+            while SoloInvitelag == PlayerSelected do
+                game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(game:GetService("Players"):FindFirstChild(PlayerSelectedBackup))
+                wait(SmallTick/100)
+            end
+        end 
+    end)
+
+    LagSection:NewButton("Refresh Player Selector", "wooooow", function()
+        RefreshPlayerList()
+        FamilyLagInviteSolo:Refresh(newPlayerList)
     end)
 end
 
@@ -3980,6 +4118,9 @@ end
 local All = Window:NewTab("All")
 local AllSection = All:NewSection("All Games")
 
+    AllSection:NewButton("BackDoor Executor LOLAL", "Password    Free Scripts", function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Its-LALOL/LALOL-Hub/main/Backdoor-Scanner/script'))()
+    end)
 
     AllSection:NewButton("Full Bright", "Vry OP", function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/main/FullBright.lua"))()
