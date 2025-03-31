@@ -1098,7 +1098,7 @@ MainSection:NewButton("Stop InfPaint", "Anti PainBrush", function()
     end)
 end
 
-if game.PlaceId == 9846056789 then
+if game.PlaceId == 9476339275 then
     -- MAIN
 RefreshPlayerList()
 local Main = Window:NewTab("Main")
@@ -1261,9 +1261,12 @@ if game.PlaceId == 5890116343 then
     AutoAgeUp = false
     AutoAgeUpSpeed = 1
     SelectedPlayer = ""
+    LevelFarm = false
+    ShowFamilies = false
+    SavedLocation = CFrame.new(0,0,0)
 
     function AutoAgeFunction()
-        while AutoAgeUp == true do
+        while AutoAgeUp do
             for i = 1, AutoAgeUpSpeed do
                 game:GetService("ReplicatedStorage").Remotes.AgeUp:FireServer()
             end 
@@ -1272,26 +1275,6 @@ if game.PlaceId == 5890116343 then
     end
 
     AutoAgeFunction()
-
-    local Families = {}
-    for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-        table.insert(Families, child.Name)
-    end
-
-    local FamilyAccounts = {}
-    for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-        local childName = child.Name
-        for _, grandchild in ipairs(child:GetChildren()) do
-            table.insert(FamilyAccounts, grandchild.Name .. " (" .. childName .. ")")
-        end
-    end
-
-    local FamilyAccountsPlain = {}
-    for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-        for _, grandchild in ipairs(child:GetChildren()) do
-            table.insert(FamilyAccountsPlain, grandchild.Name)
-        end
-    end
 
     local GamepassSection = Main:NewSection("Gamepasses")
 
@@ -1347,6 +1330,52 @@ if game.PlaceId == 5890116343 then
 
     local LevelSection = Main:NewSection("Lvl Farm - WIP")
 
+    LevelSection:NewToggle("Level Farm", "Supa Cool", function(state)
+        if state then
+            LevelFarm = true
+            --Save Location
+            SavedLocation = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+            --Anti Move
+            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 0
+            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").JumpPower = 0
+        
+            --Noclip
+            for _, part in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+
+            --Anti AFK
+            game:GetService("Players").LocalPlayer.Idled:Connect(function()
+                if LevelFarm then
+                    game:GetService("VirtualUser"):CaptureController()
+                    game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+                end
+            end)
+        
+            while LevelFarm do
+                --lock position
+                game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = 
+                    CFrame.new(391.17994047062, 35.53553771972656, 47.28309761209691) * 
+                    game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame:ToObjectSpace(
+                        game:GetService("Players").LocalPlayer.Character:WaitForChild("LeftFoot").CFrame
+                ):Inverse()
+
+                --Spin
+                game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.Angles(0, math.rad(100 * wait()), 0)
+                --AutoPunch
+                game:GetService("ReplicatedStorage").Remotes.PunchEvent:FireServer()
+                wait(0.1)
+            end
+        else
+            LevelFarm = false
+            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = SavedLocation
+            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 16
+            game.Players.LocalPlayer.Character:WaitForChild("Humanoid").JumpPower = 50
+        end               
+    end)
+
     local GodModeSection = Main:NewSection("GodMode")
 
     GodModeV2BTN = GodModeSection:NewButton("Toggle GodMode V2 (off)", "a lil better", function()
@@ -1363,7 +1392,6 @@ if game.PlaceId == 5890116343 then
                     local connection
                     connection = game:GetService("RunService").RenderStepped:Connect(function()
                         game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):Move(Vector3.new(0, 0, 1))
-                        -- game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 16
                         connection:Disconnect()
                     end)
 
@@ -1437,7 +1465,8 @@ if game.PlaceId == 5890116343 then
         end
     end)
 
-    local FamilySection = Main:NewSection("Family")
+    local FamilyTab = Window:NewTab("Family")
+    local FamilySection = FamilyTab:NewSection("Family")
 
     FamilySection:NewButton("Invite All Players", 'Cool', function()
         for i, player in pairs(game:GetService("Players"):GetPlayers()) do
@@ -1447,26 +1476,23 @@ if game.PlaceId == 5890116343 then
     end)
 
     FamilySection:NewButton("Delete All Families", 'Cooler', function()
-        for i, player in pairs(Players:GetPlayers()) do
-            game:GetService("ReplicatedStorage").Remotes.KickFromFamily:FireServer(game:GetService("Players"):WaitForChild(Player))
+        for i, player in pairs(game:GetService("Players"):GetPlayers()) do
+            game:GetService("ReplicatedStorage").Remotes.KickFromFamily:FireServer(player)
             wait(SmallTick)
         end
         FamilyAccountsCheck() 
-    end)
+    end)    
 
     FamilySection:NewTextBox("Create Family", "Create A Family", function(FamilyName)
         game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(FamilyName)
     end)
 
-    JoinFam = FamilySection:NewDropdown("Join Family", "Joins any family", Families, function(Family)
-    local args = {
-            [1] = Family
-        } 
-        game:GetService("ReplicatedStorage").Remotes.AcceptInvite:FireServer(unpack(args))
+    JoinFam = FamilySection:NewDropdown("Join Family", "Joins any family", FamiliesAntilag, function(Family)
+        game:GetService("ReplicatedStorage").Remotes.AcceptInvite:FireServer(Family)
         FamilyAccountsCheck() 
     end)
 
-    DelFam = FamilySection:NewDropdown("Delete A Family", "Deletes any family", Families, function(Family)
+    DelFam = FamilySection:NewDropdown("Delete A Family", "Deletes any family", FamiliesAntilag, function(Family)
         print(Family)
         for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
             print(child.Name)
@@ -1484,20 +1510,7 @@ if game.PlaceId == 5890116343 then
         FamilyAccountsCheck() 
     end)
 
-    KickFromFam = FamilySection:NewDropdown("KickFromFamily", "Kicks a player from their family", FamilyAccounts, function(FamilyKickPlayer)
-        local FamilyAccounts = {}
-        for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-            local childName = child.Name
-            for _, grandchild in ipairs(child:GetChildren()) do
-                table.insert(FamilyAccounts, grandchild.Name .. " (" .. childName .. ")")
-            end
-        end
-        local FamilyAccountsPlain = {}
-        for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-            for _, grandchild in ipairs(child:GetChildren()) do
-                table.insert(FamilyAccountsPlain, grandchild.Name)
-            end
-        end
+    KickFromFam = FamilySection:NewDropdown("KickFromFamily", "Kicks a player from their family", FamilyAccountsAntilag, function(FamilyKickPlayer)
 
         local AccIndex = findFirstString(FamilyAccounts, FamilyKickPlayer)
         if AccIndex then
@@ -1515,36 +1528,62 @@ if game.PlaceId == 5890116343 then
     end)
 
     local function FamilyAccountsCheck() 
-        local Families = {}
-        for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-            table.insert(Families, child.Name)
-        end
-        
-        local FamilyAccounts = {}
-        for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-            local childName = child.Name
-            for _, grandchild in ipairs(child:GetChildren()) do
-                table.insert(FamilyAccounts, grandchild.Name .. " (" .. childName .. ")")
-            end
-        end
-        
-        local FamilyAccountsPlain = {}
-        for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
-            for _, grandchild in ipairs(child:GetChildren()) do
-                table.insert(FamilyAccountsPlain, grandchild.Name)
-            end
-        end
+        print("Running")
 
+        for _, family in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
+            if string.match(string.sub(family.Name, 1, 20), "😊") or string.match(string.sub(family.Name, 1, 20), "😂") or string.match(string.sub(family.Name, 1, 20), "🥳") or string.match(string.sub(family.Name, 1, 20), "🧑‍🚀") or
+               string.match(string.sub(family.Name, 1, 20), "🌟") or string.match(string.sub(family.Name, 1, 20), "🚀") or string.match(string.sub(family.Name, 1, 20), "🀄") or string.match(string.sub(family.Name, 1, 20), "🎉") or
+               string.match(string.sub(family.Name, 1, 20), "🤖") or string.match(string.sub(family.Name, 1, 20), "👾") or string.match(string.sub(family.Name, 1, 20), "💖") or string.match(string.sub(family.Name, 1, 20), "🐉") or
+               string.match(string.sub(family.Name, 1, 20), "🏰") or string.match(string.sub(family.Name, 1, 20), "⚡") or string.match(string.sub(family.Name, 1, 20), "📚") or string.match(string.sub(family.Name, 1, 20), "🍕") or
+               string.match(string.sub(family.Name, 1, 20), "🎮") or string.match(string.sub(family.Name, 1, 20), "💎") or string.match(string.sub(family.Name, 1, 20), "🚗") or string.match(string.sub(family.Name, 1, 20), "🌍") then
+                family:Destroy()
+            elseif string.match(family.Name, "^#") and #family.Name / 2 > #family.Name then
+                family:Destroy()
+            end
+        end 
+        print("done filtering families")
+
+        if ShowFamilies then
+            local Families = {}
+            for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
+                table.insert(Families, child.Name)
+            end
+            
+            local FamilyAccounts = {}
+            for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
+                local childName = child.Name
+                for _, grandchild in ipairs(child:GetChildren()) do
+                    table.insert(FamilyAccounts, grandchild.Name .. " (" .. childName .. ")")
+                end
+            end
+            
+            local FamilyAccountsPlain = {}
+            for _, child in ipairs(game:GetService("ReplicatedStorage"):WaitForChild("Families"):GetChildren()) do
+                for _, grandchild in ipairs(child:GetChildren()) do
+                    table.insert(FamilyAccountsPlain, grandchild.Name)
+                end
+            end
+            local FamilyAccountsAntilag = FamilyAccounts
+            local FamiliesAntilag = Families
+        else 
+            local FamilyAccountsAntilag = {}
+            local FamiliesAntilag = {}
+        end
+        print("Refreshing families")
+        JoinFam:Refresh(FamiliesAntilag)
+        DelFam:Refresh(FamiliesAntilag)
+        KickFromFam:Refresh(FamilyAccountsAntilag)
         RefreshPlayerList()
-
         InvitePlayer:Refresh(newPlayerList)
-        KickFromFam:Refresh(FamilyAccounts)
-        JoinFam:Refresh(Families)
-        DelFam:Refresh(Families)
+        print("Refreshing families DONE")
     end
 
     FamilySection:NewButton("Update All Lists", "updates eveything", function()
         FamilyAccountsCheck() 
+    end)
+
+    FamilySection:NewToggle("Show Families (CAN LAG)", "Some explpoits can lag this part", function(state)
+        ShowFamilies = state
     end)
 
     local SpyingTab = Window:NewTab("Spying")
@@ -1567,67 +1606,91 @@ if game.PlaceId == 5890116343 then
     --SpyLocation = SpySection:NewLabel("🏳️Location: ")
     --SpyHacking = SpySection:NewLabel("💻Hacking: ")
 
-    PlayerSelector = SpySection:NewDropdown("Select Player", "Selects A Player", newPlayerList, function(SelectedPlayerDropdown)
-        SelectedPlayer = SelectedPlayerDropdown
+local detectionEnabled = false
+local selectedPlayer = nil
+
+function UpdateSpy(playerName)
+    if not playerName then
+        detectionEnabled = false -- Stop detection to minimize lag
+        selectedPlayer = nil
+        return
+    end
+
+    selectedPlayer = playerName
+    detectionEnabled = true
+
+    local player = game:GetService("Players"):FindFirstChild(selectedPlayer)
+
+    -- Initial update of all labels
+    SpyUsername:UpdateLabel("😀Username: " .. selectedPlayer)
+    SpyDisplayName:UpdateLabel("😊Display Name: " .. player.DisplayName)
+    SpyUserID:UpdateLabel("😨UserID: " .. player.UserId)
+    SpyRPName:UpdateLabel("😁RP Name: " .. (player.leaderstats:FindFirstChild("RP Name") and player.leaderstats:FindFirstChild("RP Name").Value or "N/A"))
+    SpyAge:UpdateLabel("🙎‍♂️Age: " .. (string.sub(game:GetService("Workspace"):FindFirstChild(selectedPlayer).Head.InfoGui.Frame.Age.Text, 5) or string.sub(player.PlayerGui.MainGui.AgeFrame.Frame.TextLabel.Text, 5)))
+    SpyLevel:UpdateLabel("➕LvL: " .. tostring(player.leaderstats:FindFirstChild("Level") and player.leaderstats:FindFirstChild("Level").Value or "N/A"))
+
+    SpyFamily:UpdateLabel("👨‍👩‍👧‍👦Family: " .. (player:FindFirstChild("Family") and (player.Family.Value ~= "" and player.Family.Value or "No Family") or "N/A"))
+    SpyFamilyInvites:UpdateLabel("📫Family Invites: " .. (player.Settings.FamilyInvites.Value and "🟢" or "🔴"))
+    SpyAttacking:UpdateLabel("⚔️Attacking: " .. (player:FindFirstChild("Attacking") and player.Attacking.Value and "🟢" or "🔴"))
+    SpySafezone:UpdateLabel("🛡️Safezone: " .. (player:FindFirstChild("Safezone") and player.Safezone.Value and "🟢" or "🔴"))
+    SpyMusic:UpdateLabel("🎵Music: " .. (player.Settings.Music.Value and "🟢" or "🔴"))
+    SpyFreezeAge:UpdateLabel("🧊Freeze Age: " .. (player.Settings.FreezeAge.Value and "🟢" or "🔴"))
+    SpyAgeFaster:UpdateLabel("👴Age Faster: " .. (player.Settings.AgeFaster.Value and "🟢" or "🔴"))
+
+    -- Set up value change detectors
+    local function setupDetector(instance, property, updateFunc)
+        if instance and instance:FindFirstChild(property) then
+            instance[property].Changed:Connect(function()
+                if detectionEnabled and selectedPlayer == playerName then
+                    updateFunc()
+                end
+            end)
+        end
+    end
+
+    setupDetector(player.Settings, "FamilyInvites", function()
+        SpyFamilyInvites:UpdateLabel("📫Family Invites: " .. (player.Settings.FamilyInvites.Value and "🟢" or "🔴"))
+    end)
+
+    setupDetector(player, "Attacking", function()
+        SpyAttacking:UpdateLabel("⚔️Attacking: " .. (player.Attacking.Value and "🟢" or "🔴"))
+    end)
+
+    setupDetector(player, "Safezone", function()
+        SpySafezone:UpdateLabel("🛡️Safezone: " .. (player.Safezone.Value and "🟢" or "🔴"))
+    end)
+
+    setupDetector(player.Settings, "Music", function()
+        SpyMusic:UpdateLabel("🎵Music: " .. (player.Settings.Music.Value and "🟢" or "🔴"))
+    end)
+
+    setupDetector(player.Settings, "FreezeAge", function()
+        SpyFreezeAge:UpdateLabel("🧊Freeze Age: " .. (player.Settings.FreezeAge.Value and "🟢" or "🔴"))
+    end)
+
+    setupDetector(player.Settings, "AgeFaster", function()
+        SpyAgeFaster:UpdateLabel("👴Age Faster: " .. (player.Settings.AgeFaster.Value and "🟢" or "🔴"))
+    end)
+end
+
+
+    PlayerSelector = SpySection:NewDropdown("Select Player", "Selects A Player", {"Nobody ❌", unpack(newPlayerList)}, function(SelectedPlayerDropdown)
+        if SelectedPlayerDropdown ~= SelectedPlayerSpy then
+            UpdateSpy()
+            SelectedPlayerSpy = SelectedPlayerDropdown
+            UpdateSpy(SelectedPlayerDropdown)
+        else
+            if SelectedPlayerDropdown == "NOBODY ❌" then
+                UpdateSpy()
+            end
+        end
+
         RefreshPlayerList()
-    
-        SpyUsername:UpdateLabel("😀Username: ".. SelectedPlayer)
-
-        SpyLevel:UpdateLabel("😊Display Name: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).DisplayName)
-
-        SpyUserID:UpdateLabel("😨UserID: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).UserId)
-
-        SpyRPName:UpdateLabel("😁RP Name: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).leaderstats:FindFirstChild("RP Name") and tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).leaderstats["RP Name"].Value) or "RP Name not found")
-
-        SpyAge:UpdateLabel("🙎‍♂️Age: ".. game:GetService("Players"):FindFirstChild(SelectedPlayer).PlayerGui.MainGui.AgeFrame.Frame.TextLabel.Text or string.sub(game:GetService("Workspace"):FindFirstChild(SelectedPlayer).Head.InfoGui.Frame.Age.Text, 5))
-
-        if tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).Family.Value) == "" then
-            SpyFamily:UpdateLabel("👨‍👩‍👧‍👦Family: No Family")
-        else
-            SpyFamily:UpdateLabel("👨‍👩‍👧‍👦Family: ".. tostring(game:GetService("Players"):FindFirstChild(SelectedPlayer).Family.Value))
-        end
-
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.FamilyInvites.Value == true then
-            SpyFamilyInvites:UpdateLabel("📫Family Invites: 🟢")
-        else
-            SpyFamilyInvites:UpdateLabel("📫Family Invites: 🔴")
-        end
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Attacking.Value == true then
-            SpyAttacking:UpdateLabel("⚔️Attacking: 🟢")
-        else
-            SpyAttacking:UpdateLabel("⚔️Attacking: 🔴")
-        end
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Safezone.Value == true then
-            SpySafezone:UpdateLabel("🛡️Safezone: 🟢")
-        else
-            SpySafezone:UpdateLabel("🛡️Safezone: 🔴")
-        end
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.Music.Value == true then
-            SpyMusic:UpdateLabel("🎵Music: 🟢")
-        else
-            SpyMusic:UpdateLabel("🎵Music: 🔴")
-        end
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.FreezeAge.Value == true then
-            SpyFreezeAge:UpdateLabel("🧊Freeze Age: 🟢")
-        else
-            SpyFreezeAge:UpdateLabel("🧊Freeze Age: 🔴")
-        end
-
-        if game:GetService("Players"):FindFirstChild(SelectedPlayer).Settings.AgeFaster.Value == true then
-            SpyAgeFaster:UpdateLabel("👴Age Faster: 🟢")
-        else
-            SpyAgeFaster:UpdateLabel("👴Freeze Age: 🔴")
-        end
     end)  
 
     SpySection:NewButton("Refresh Player Selector", "wooooow", function()
         RefreshPlayerList()
-        PlayerSelector:Refresh(newPlayerList)
+        PlayerSelector:Refresh({"Nobody ❌", unpack(newPlayerList)})
     end)
 
     local LagTab = Window:NewTab("Lag & Trolling")
@@ -1646,20 +1709,37 @@ if game.PlaceId == 5890116343 then
         end
     end)
 
+    LagSection:NewButton("Server Overload (Takes a long time)", "Overloads server with data", function()
+        local topCharacters = {
+            "😊", "😂", "🥳", "🧑‍🚀", "🌟", "🚀", "🀄", "🎉", "🤖", "👾",
+            "💖", "🐉", "🏰", "⚡", "📚", "🍕", "🎮", "💎", "🚗", "🌍"
+        }
+        local combinedString = table.concat(topCharacters)
+        local finalString = string.rep(combinedString, 71)
+        while true do
+            for i = 1, 1000 do
+                game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+            end
+            wait(SmallTick)
+        end
+    end)
+
     LagSection:NewButton("Global Family Invite Lag", "Lags server with age", function()
         local topCharacters = {
             "😊", "😂", "🥳", "🧑‍🚀", "🌟", "🚀", "🀄", "🎉", "🤖", "👾",
             "💖", "🐉", "🏰", "⚡", "📚", "🍕", "🎮", "💎", "🚗", "🌍"
         }
         local combinedString = table.concat(topCharacters)
-        local finalString = string.rep(combinedString, 70)
+        local finalString = string.rep(combinedString, 71)
         game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
-        wait(1)
+        wait(3)
         while true do
             for i, player in pairs(game:GetService("Players"):GetPlayers()) do
-                game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(player)
-                wait(SmallTick/100)
-                game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+                for i = 1, 10 do
+                    game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(player)
+                    --game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
+                end
+                wait(SmallTick)
             end
         end
     end)
@@ -1675,20 +1755,22 @@ if game.PlaceId == 5890116343 then
                 "💖", "🐉", "🏰", "⚡", "📚", "🍕", "🎮", "💎", "🚗", "🌍"
             }
             local combinedString = table.concat(topCharacters)
-            local finalString = string.rep(combinedString, 70)
+            local finalString = string.rep(combinedString, 71)
             game:GetService("ReplicatedStorage").Remotes.CreateFamily:FireServer(finalString)
-            wait(1)
+            wait(3)
             PlayerSelectedBackup = PlayerSelected
             while SoloInvitelag == PlayerSelected do
-                game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(game:GetService("Players"):FindFirstChild(PlayerSelectedBackup))
-                wait(SmallTick/100)
+                for i = 1, 10 do
+                    game:GetService("ReplicatedStorage"):FindFirstChild("Remotes"):FindFirstChild("SendInvite"):FireServer(game:GetService("Players"):FindFirstChild(PlayerSelectedBackup))
+                end
+                wait(SmallTick)
             end
         end 
     end)
 
     LagSection:NewButton("Refresh Player Selector", "wooooow", function()
         RefreshPlayerList()
-        FamilyLagInviteSolo:Refresh(newPlayerList)
+        FamilyLagInviteSolo:Refresh({"Nobody ❌", unpack(newPlayerList)})
     end)
 end
 
@@ -2198,18 +2280,19 @@ local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
 MainSection:NewButton("GetDayRewards", "VERY OP", function()
-    Day = 0
+    local Day = 0
     repeat
-    local args = {
-        [1] = "get_seven_day_reward",
-        [2] = {
-            ["1"] = Day
+        local args = {
+            "get_seven_day_reward",
+            {
+                ["1"] = Day
+            }
         }
-    }
-    game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer(unpack(args))
-    Day = Day+1
+        game:GetService("ReplicatedStorage").RemoteFunction:InvokeServer(unpack(args))
+        Day = Day + 1
     until Day == 9
-    end)
+end)
+
 
 MainSection:NewButton("GAMEPASSES", "VERY OP", function()   
     for x = 1, 7 do
@@ -3615,6 +3698,8 @@ RefreshPlayerList()
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
+local elapsed = 0
+
     MainSection:NewButton("Delete All Pets", "Deletes all your pets", function()
         for _, item in pairs(game:GetService("Players").LocalPlayer.PlayerData.Pets:GetChildren()) do
             game:GetService("ReplicatedStorage").Main.PetDelete:FireServer(item.Name)
@@ -3635,6 +3720,18 @@ local MainSection = Main:NewSection("Main")
             player.TradingOn.Value = true
             end
         end           
+    end)
+
+    MainSection:NewButton("Frozen accept timer", "really cool", function()
+        if elapsed <= 0 or elapsed > 5 then
+            elapsed = 0
+            while elapsed < 5 do
+                game:GetService("ReplicatedStorage").GameEvents.Trades.acceptedInTrade:FireServer()
+                elapsed = elapsed + 0.001
+                task.wait(0.001)
+            end
+            elapsed = 0
+        end          
     end)
 
     MainSection:NewTextBox("Daily Reward", "Get Daily Reward", function(Day)
@@ -3699,6 +3796,26 @@ local function updatePetPicker()
                 table.insert(modelNames, item.Name)
             end
         end
+    elseif string.sub(Actioner, 1, 1) == '4' then --Buy Any Egg
+        if Filter ~= '' then
+            table.insert(modelNames, Filter .." --INVALID EGG NAME--")
+        end
+        local petsFolder = game:GetService("StarterGui").InterActionList
+        for _, item in pairs(petsFolder:GetChildren()) do
+            table.insert(modelNames, item.Name)
+        end
+    elseif string.sub(Actioner, 1, 1) == '5' then --Megafy / Neonify
+        local petsFolder = game:GetService("Players").LocalPlayer.PlayerData.Pets
+        for _, item in pairs(petsFolder:GetChildren()) do
+            if #item:GetChildren() >= 4 then
+                table.insert(modelNames, item.Nick.Value .. ", (".. item.Type.Value.. ")".. " |".. item.Name)
+            end
+        end
+    elseif string.sub(Actioner, 1, 1) == '6' then --Force Trade
+        local petsFolder = game:GetService("Players")
+        for _, item in pairs(petsFolder:GetChildren()) do
+            table.insert(modelNames, item.Name)
+        end
     else
         warn("ERROR - PET PICKER: Invalid actioner state")
         return  -- Exit function early if Actioner is invalid
@@ -3718,7 +3835,7 @@ end
         PetType = PetTypeSelected
     end)
 
-    PetEditorSection:NewDropdown("Action", "PetPicker", {'1: Add Pet (PATCHED)', '2: Delete Pet', '3: Spoof Pet'}, function(chosenAction)
+    PetEditorSection:NewDropdown("Action", "PetPicker", {'1: Add Pet (PATCHED)', '2: Delete Pet', '3: Spoof Pet', '4: Buy Any Egg', '5: Megafy or Neonify', '6: Force Trade Anyone'}, function(chosenAction)
         Actioner = chosenAction
         updatePetPicker()
     end)
@@ -3749,16 +3866,34 @@ end
             game:GetService("ReplicatedStorage").Main.PetDelete:FireServer(chosenPet:match(".*%-Tags:%s*(.*)"))
             updatePetPicker()
         elseif string.sub(Actioner, 1, 1) == '3' then --Spoof pet
-            if game:GetService("Players").cradde5.PlayerData.Pets:GetChildren()[1].Name ~= null then
-                print("testtt")
+            if game:GetService("Players").LocalPlayer.PlayerData.Pets:GetChildren()[1].Name ~= null then
                 game:GetService("ReplicatedStorage").Main.PetEquip:FireServer(game:GetService("ReplicatedStorage").Pets[chosenPet], game.Players.LocalPlayer.PlayerData.Pets:GetChildren()[1].Name, PetType)
             else
                 print("You NEED a pet to spoof pets")
             end
             updatePetPicker()
+        elseif string.sub(Actioner, 1, 1) == '4' then --Buy Any Egg
+            game:GetService("ReplicatedStorage").Main.Buy:InvokeServer(chosenPet)
+            updatePetPicker()
+        elseif string.sub(Actioner, 1, 1) == '5' then --Megafy / Neonify
+                if PetType == 'Neon' then
+                    game:GetService("ReplicatedStorage").Main.NeonMaker.Main:InvokeServer("Convert", {(chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$")})
+                elseif PetType == 'Mega' then
+                    game:GetService("ReplicatedStorage").Main.MegaNeonMaker.Main:InvokeServer("Convert", {(chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$"), (chosenPet):match(".*|([^|]+)$")})
+                else
+                    print("ERROR - MUST USE MEGA OR NEON")
+                end
+            updatePetPicker()
+        elseif string.sub(Actioner, 1, 1) == '6' then --Force Trade
+            game:GetService("ReplicatedStorage").GameEvents.Trades.Accept:FireServer(game:GetService("Players"):FindFirstChild(chosenPet))
+            updatePetPicker()
         else
             print("ERROR - PET PICKER")
         end      
+    end)
+
+    PetEditorSection:NewButton("Refresh List", "does stuff", function()
+        updatePetPicker()     
     end)
 end
 
@@ -3933,7 +4068,9 @@ end
 
 PredictionLabel = MainSection:NewLabel("Predictor (Disabled)")
 
-local function manageSpinnerPrediction(enabled)
+local targetConnection
+
+function manageSpinnerPrediction(enabled)
     local closestPart
     local closestDistance
 
@@ -3997,22 +4134,44 @@ local function manageSpinnerPrediction(enabled)
     end
 
     if enabled then
-        game.ReplicatedStorage.Remotes.Target.Changed:Connect(function()
-            local SpinnerPart = cloneSpinner().PrimaryPart;
-            local Target = game.ReplicatedStorage.Remotes.Target.Value;
+        targetConnection = game.ReplicatedStorage.Remotes.Target.Changed:Connect(function()
+            local SpinnerPart = cloneSpinner().PrimaryPart
+            local Target = game.ReplicatedStorage.Remotes.Target.Value
             if Target == 0 then
-                return;
-            end;
-            local Length = game.ReplicatedStorage.Remotes.Length.Value;
-            local OldCFrame = SpinnerPart.CFrame;
-            local finalRotation = (1 - 2.718281828459045 ^ (-6 * (Length / Length))) / 0.9975212478233336 * Target;
-            SpinnerPart.CFrame = OldCFrame * CFrame.Angles(0, math.rad(finalRotation), 0);
+                return
+            end
+            local Length = game.ReplicatedStorage.Remotes.Length.Value
+            local OldCFrame = SpinnerPart.CFrame
+            local finalRotation = (1 - 2.718281828459045 ^ (-6 * (Length / Length))) / 0.9975212478233336 * Target
+            SpinnerPart.CFrame = OldCFrame * CFrame.Angles(0, math.rad(finalRotation), 0)
             wait(0.1)
             printPlayer(SpinnerPart.Parent)
         end)
     else
+        if targetConnection then
+            targetConnection:Disconnect()
+            targetConnection = nil
+        end
     end
 end
+
+local function manageGodmode(enabled)
+    getgenv().godmode = enabled
+end
+
+game.ReplicatedStorage.Remotes.DeathEffect.OnClientEvent:Connect(function(p1, p2, p3)
+    if p3 == game.Players.LocalPlayer.Character and getgenv().godmode == true then
+        print("Godmode activated for protection.")
+        local weld = p3:FindFirstChild("SpinnerWeld")
+        local weld1 = weld:Clone()
+        weld1.Parent = p3
+        weld:Destroy()
+        wait(10)
+        weld1:Destroy()
+    end
+end)
+
+
 
     PredictorBTN = MainSection:NewButton("Predicor (off)", "cool", function()
         if PredicorStatus == false then
@@ -4037,6 +4196,19 @@ end
             GhostBTN:UpdateButton("View Ghosts (off)")
             showghosts(false)
             ViewGhosts = false
+        end
+    end)
+
+    
+    GodmodeBTN = MainSection:NewButton("Godemode (off)", "cool", function()
+        if Godmode == false then
+            GodmodeBTN:UpdateButton("Godemode (on)")
+            manageGodmode(true)
+            Godmode = true
+        else
+            GodmodeBTN:UpdateButton("Godemode (off)")
+            manageGodmode(false)
+            Godmode = false
         end
     end)
 end
@@ -4110,6 +4282,242 @@ end
 
     MainSection:NewDropdown("Add Skin (U LOSE MONEY!)", "yes" , AllCharacters ,  function(CharSelected)    
     game:GetService("ReplicatedStorage").Remotes.Events.SellCharacters:FireServer(CharSelected, SkinQuantity)             
+    end)
+end
+
+if game.PlaceId == 13157638696 then
+    -- MAIN
+    RefreshPlayerList()
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    sprintSpeed = 35
+    InfSprint = false
+    killAura = false
+
+    MainSection:NewSlider("Sprint Speed", "holy moly", 130, 35, function(s)
+        sprintSpeed = s
+        if InfSprint then
+            game:GetService("ReplicatedStorage").RemoteEvents.SprintEvent:FireServer(true, sprintSpeed)
+        else
+            game:GetService("ReplicatedStorage").RemoteEvents.SprintEvent:FireServer(false, 25)
+        end
+    end)
+    
+    MainSection:NewToggle("Sprint", "woow cool", function(state)
+        if state then
+            game:GetService("ReplicatedStorage").RemoteEvents.SprintEvent:FireServer(true, sprintSpeed)
+            InfSprint = true
+        else
+            game:GetService("ReplicatedStorage").RemoteEvents.SprintEvent:FireServer(false, 25)
+            InfSprint = false
+        end
+    end)
+
+    MainSection:NewToggle("Kill Aura", "", function(state)
+        if state then
+            killAura = true
+            while killAura do
+                for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                    pcall(function()
+                        if game:GetService("Workspace"):FindFirstChild(player.Name).Prop then
+                            for i = 1, 3 do
+                                game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("Framework"):WaitForChild("RemoteManger"):WaitForChild("SendData"):FireServer("MeleeServer", player)
+                                wait(Tick)
+                            end
+                        end
+                    end)
+                wait(Tick)
+                end
+                wait(Tick)
+            end
+        else
+            killAura = false
+        end
+    end)
+end
+
+if game.PlaceId == 96462622512177 then
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    LagServer = false
+    Autofarm = false
+    LocalPlace = 0
+
+    --Get Place Location
+    for _, place in pairs(game:GetService("Workspace").Places:GetChildren()) do
+        if place.PlayerInfo.SurfaceGui.PlayerName.Text == game:GetService("Players").LocalPlayer.Name then
+            LocalPlace = place.Name
+        end
+    end 
+
+    LagserverBTN = MainSection:NewButton("LAG (dw has clientsided antilag) [OFF]", "", function()
+        if LagServer then
+            LagserverBTN:UpdateButton("LAG (dw has clientsided antilag) [OFF]")
+            LagServer = false
+
+            --antilag
+            for _, place in pairs(game:GetService("Workspace").Places:GetChildren()) do
+                if place.PlayerInfo.SurfaceGui.PlayerName.Text ~= "" then
+                    place.Machine.CashierDesk.MoneyPlacePart.Money:ClearAllChildren()
+                end
+            end  
+        else
+            LagserverBTN:UpdateButton("LAG (dw has clientsided antilag) [ON]")
+            LagServer = true
+            while LagServer do
+                game:GetService("ReplicatedStorage").Events.Payment.OperatePaymentRE:FireServer(5, "PutCash")
+                wait(SmallTick)
+
+                --antilag
+                for _, place in pairs(game:GetService("Workspace").Places:GetChildren()) do
+                    if place.PlayerInfo.SurfaceGui.PlayerName.Text ~= "" then
+                        place.Machine.CashierDesk.MoneyPlacePart.Money:ClearAllChildren()
+                    end
+                end  
+            end
+        end
+    end)
+
+    MainSection:NewButton("Clear lag globally", "", function()
+        --antilag (Client)
+        for _, place in pairs(game:GetService("Workspace").Places:GetChildren()) do
+            if place.PlayerInfo.SurfaceGui.PlayerName.Text ~= "" then
+                place.Machine.CashierDesk.MoneyPlacePart.Money:ClearAllChildren()
+            end
+        end 
+
+        --Clears your money
+        game:GetService("ReplicatedStorage").Events.Payment.ChangeCashierStatusRE:FireServer("ChangeCashierStatus", false)
+    end)
+
+    AutofarmBTN = MainSection:NewButton("Autofarm [OFF]", "", function()
+        if Autofarm then
+            AutofarmBTN:UpdateButton("Autofarm [OFF]")
+            Autofarm = false
+            game:GetService("ReplicatedStorage").Events.Payment.ChangeCashierStatusRE:FireServer("ChangeCashierStatus", false)
+        else
+            AutofarmBTN:UpdateButton("Autofarm [ON]")
+            Autofarm = true 
+            game:GetService("ReplicatedStorage").Events.Payment.ChangeCashierStatusRE:FireServer("ChangeCashierStatus", true)
+            while Autofarm do
+                if #game:GetService("Workspace").Places:FindFirstChild(LocalPlace).Machine.CashierDesk.ActionCustomer:GetChildren() > 0 then
+                    for _, item in pairs(game:GetService("Workspace").Places:FindFirstChild(LocalPlace).Machine.CashierDesk.ProductFolder:GetChildren()) do
+                        fireclickdetector(item.PP.GoodsClickDetector)
+                    end 
+                    string.sub(game:GetService("Workspace").Places:FindFirstChild(LocalPlace).Machine.CashierDesk.Computer.ComputerScreen.ComputerSurfaceGui.ComputerFrame.GoodsInputFrame.TotalAmount.Text, 2)
+                    game:GetService("ReplicatedStorage").Events.Payment.PaymentFinishRE:FireServer("PaidFinish", 20)
+                    wait(1.5)
+                end
+                wait(BigTick)
+            end
+        end
+    end)
+end
+
+if game.PlaceId == 7606602544 then
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+    HoneycombGodmode = false
+    AntiFallFromGlass = false
+    GlassGodmodeBeenSetup = false
+
+    --Honeycomb Godmode
+    local oldHoneycombRequests
+    oldHoneycombRequests = hookmetamethod(game, "__namecall", function(self, ...)
+        local method = getnamecallmethod()
+        local args = {...}
+        if HoneycombGodmode and method == "FireServer" then
+            if self == game:GetService("ReplicatedStorage").Remotes.Events.EffectsEvent then
+                if args[2] == false then
+                    self:FireServer("Success", true)
+                    return
+                end
+            end
+        end
+
+        return oldHoneycombRequests(self, ...)
+    end)
+    
+
+    function GlassGodmodeSetup ()
+        GlassGodmodeBeenSetup = true
+        for _, model in ipairs(game:GetService("Workspace").SteppingStones.Tiles:GetChildren()) do
+            if model:IsA("Model") then
+                for _, mesh in ipairs(model:GetChildren()) do
+                    if mesh:IsA("MeshPart") then
+                        local newPart = Instance.new("Part")
+                        newPart.Size = mesh.Size
+                        newPart.CFrame = mesh.CFrame
+                        newPart.Anchored = true
+                        newPart.CanCollide = false
+                        newPart.Transparency = 1
+                        newPart.Parent = model
+                    end
+                end
+            end
+        end
+    end
+
+    HoneycombGodmodeBTN = MainSection:NewButton("Honeycomb Godmode [OFF]", "if you die on honeycomb you can sill live", function()
+        if HoneycombGodmode then
+            HoneycombGodmodeBTN:UpdateButton("Honeycomb Godmode [OFF]")
+            HoneycombGodmode = false
+        else
+            HoneycombGodmodeBTN:UpdateButton("Honeycomb Godmode [ON]")
+            HoneycombGodmode = true 
+        end
+    end)
+
+    AntiFallFromGlassBTN = MainSection:NewButton("Anti Fall From Glass [OFF]", "", function()
+        if game:GetService("Workspace").SteppingStones.Tiles then
+            if GlassGodmodeBeenSetup then
+                if AntiFallFromGlass then
+                    AntiFallFromGlass = false
+                    AntiFallFromGlassBTN:UpdateButton("Anti Fall From Glass [OFF]")
+                    for _, model in ipairs(game:GetService("Workspace").SteppingStones.Tiles:GetChildren()) do
+                        if model:IsA("Model") then
+                            for _, part in ipairs(model:GetChildren()) do
+                                part.CanCollide = false
+                            end
+                        end
+                    end
+                else
+                    AntiFallFromGlass = true
+                    AntiFallFromGlassBTN:UpdateButton("Anti Fall From Glass [ON]")
+                    for _, model in ipairs(game:GetService("Workspace").SteppingStones.Tiles:GetChildren()) do
+                        if model:IsA("Model") then
+                            for _, part in ipairs(model:GetChildren()) do
+                                part.CanCollide = true
+                            end
+                        end
+                    end
+                end
+            else
+                GlassGodmodeSetup()
+            end
+        else
+            MainSection:UpdateSection("ERR: Glassbridge NOT defined")
+        end
+    end)
+end
+
+if game.PlaceId == 8200787440 then
+    -- MAIN
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewButton("Claim Present", "", function()
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.5.1"].knit.Services.GiftService.RF.GetPresent:InvokeServer("Present")
+    end)
+
+    MainSection:NewButton("Claim Super Present", "", function()
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.5.1"].knit.Services.GiftService.RF.GetPresent:InvokeServer("SuperPresent")
+    end)
+
+    MainSection:NewTextBox("Get Skulls", "", function(Skulls)
+        game:GetService("ReplicatedStorage").Events.BuySkin:FireServer("emoji", (0 - toInt(Skulls)))
     end)
 end
 
@@ -4344,6 +4752,6 @@ local DevToolsSection = DTools:NewSection("Dev Tools")
 
                 
         DevToolsSection:NewButton("Dark Dex", "hack", function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/X2isme/Roblox-Hub/refs/heads/main/Dark%20Dex/V2-Synapse-Edition-Working.lua", true))()
         end)
     
