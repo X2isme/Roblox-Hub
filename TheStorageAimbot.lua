@@ -14,10 +14,9 @@ local AimbotLabel = Instance.new("TextLabel")
 AimbotLabel.Size = UDim2.new(0.08, 0, 0.05, 0)
 AimbotLabel.Position = UDim2.new(0.77, 0, 0.09, 0)
 AimbotLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-AimbotLabel.Scaled = true
+AimbotLabel.TextScaled = true
 AimbotLabel.Text = "Aimbot: OFF"
-AimbotLabel.BackgroundTransparency = 0
-A
+AimbotLabel.BackgroundTransparency = 1
 AimbotLabel.Parent = game:GetService("Players").LocalPlayer.PlayerGui.HUD
 
 local function Start()
