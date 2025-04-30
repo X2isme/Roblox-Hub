@@ -1,4 +1,5 @@
 local Aimbot
+local StopAimbot = false
 
 local validTools = {"AK47", "LMG", "SMG", "Shotgun", "DoubleBarrelShotgun", "Revolver"}
 
@@ -8,6 +9,13 @@ local LocalPlayer = Players.LocalPlayer
 local RemoteEvent = ReplicatedStorage:WaitForChild("RemoteEvent")
 
 local UserInputService = game:GetService("UserInputService")
+
+local AimbotLabel = Instance.new("TextLabel")
+AimbotLabel.Size = UDim2.new(0, 200, 0, 50)
+AimbotLabel.Position = UDim2.new(0.8, 0, 0.125, 0)
+AimbotLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+AimbotLabel.Text = "Aimbot: OFF"
+AimbotLabel.Parent = game:GetService("Players").LocalPlayer.PlayerGui.HUD
 
 local function Start()
     print("Aimbot started function")
@@ -83,9 +91,10 @@ local function Start()
             local action = args[1]
             local tempCFrame = args[2]
 
-            if action == "UpdateMouse" and tempCFrame ~= CurrentCFrame and Aimbot then
+            if (action == "UpdateMouse" or action == "M1D" or action == "M1U") and tempCFrame ~= CurrentCFrame and Aimbot then
                 CurrentCFrame = getCurrentCFrame()
-                RemoteEvent:FireServer("UpdateMouse", CurrentCFrame)
+                RemoteEvent:FireServer(action, CurrentCFrame)
+                print("updated event")
                 return
             end
         end
@@ -94,16 +103,6 @@ local function Start()
     end)
 
     setreadonly(mt, true)
-
-    task.spawn(function()
-        while Aimbot and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-            CurrentCFrame = getCurrentCFrame()
-            RemoteEvent:FireServer("M1D", CurrentCFrame)
-            task.wait(0.07)
-            RemoteEvent:FireServer("M1U", CurrentCFrame)
-            task.wait()
-        end
-    end)
 end
 
 UserInputService.InputBegan:Connect(function(input, isTyping)
@@ -113,6 +112,14 @@ UserInputService.InputBegan:Connect(function(input, isTyping)
             Start()
         else
             Aimbot = not Aimbot
+            if not Aimbot then
+                RemoteEvent:FireServer("M1U", CFrame.new())
+                AimbotLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                AimbotLabel.Text = "Aimbot: OFF"
+            else
+                AimbotLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                AimbotLabel.Text = "Aimbot: ON"
+            end
         end
     end
 end)
